@@ -1,28 +1,30 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Menu/>
+    <Backbutton />
+    <Title />
+    <InputRegister />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Menu from './components/menu.vue'
+import Backbutton from './components/backbutton.vue'
+import Title from './components/title.vue'
+import InputRegister from './components/InputRegister.vue'
+
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Menu,
+    Backbutton,
+    Title,
+    InputRegister
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+                                            
 </style>
