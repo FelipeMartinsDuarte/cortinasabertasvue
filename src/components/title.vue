@@ -20,7 +20,7 @@ p{
 }
 
 h1{
-    font-weight: 800;
+    font-weight: 300;
 }
 
 .container{
