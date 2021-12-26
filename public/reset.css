@@ -137,7 +137,6 @@ body {
 /* In Chrome we can't use the semilight weight of the local web font. Use web fonts instead. */
 body:not(*:root) {
   font-family: 'Segoe UI Web (West European)';
-  background-color: #ddd;
 }
 
 @font-face {
@@ -208,7 +207,7 @@ body:not(*:root) {
 }
 
 @font-face {
-    font-family: SegoeUI;
+    font-family: 'Segoe UI Web (West European)' ;
     font-display: swap;
     src:
         local("Segoe UI Bold"),
@@ -218,7 +217,7 @@ body:not(*:root) {
     font-weight: 700;
 }
 
-h1,
+/*h1,
 h2,
 h3,
 h4,
@@ -231,7 +230,7 @@ label,
 input,
 input[type=submit] {
     font-family: SegoeUI;
-}
+}*/
 
 h1 {
   font-size: 51px;
