@@ -137,7 +137,6 @@ body {
 /* In Chrome we can't use the semilight weight of the local web font. Use web fonts instead. */
 body:not(*:root) {
   font-family: 'Segoe UI Web (West European)';
-  background-color: #ddd;
 }
 
 @font-face {
@@ -216,21 +215,6 @@ body:not(*:root) {
         url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/bold/latest.woff) format("woff"),
         url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/bold/latest.ttf) format("truetype");
     font-weight: 700;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-a,
-span,
-label,
-input,
-input[type=submit] {
-    font-family: SegoeUI;
 }
 
 h1 {
