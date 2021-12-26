@@ -47,66 +47,48 @@ export default {
 
 <style>
 /*Grid*/
+
 #app{
-  height: 100vh;
-  width: 100vw;
   display: grid;
   grid-template-columns: 21% repeat(12,1fr) 21%;
   gap: 20px;
-  grid-template-areas: ". menu menu menu menu menu menu menu menu menu menu menu menu ." 
-  ". backbutton backbutton backbutton backbutton backbutton backbutton backbutton backbutton backbutton backbutton backbutton backbutton ."
-  " . title title title title title title title title title title title title ."
-  " . wrap wrap wrap wrap wrap wrap wrap wrap wrap wrap wrap wrap .";
 }
 
 header{
-  grid-area: menu;
+  grid-column: 2/15;
 }
 
-.backbutton{
-  grid-area: backbutton;
+#backbutton{
+  grid-column: 2/15;
 }
 
-#title{
-  grid-area: title;
+.title{
+  grid-column: 5/15;
 }
 
-#wrap{
-  grid-area: form;
+.wrap{
+  grid-column: 5/15;
 }
-
 
 /* Menu */
-.container {
-  height: 36px;
-}
 
 .container img {
   width: auto;
-  height: 12px;
-  padding-top: 16px;
-  padding-bottom: 16px;
+  height: 16px;
 }
 
 /* Back button */
-#backbutton {
-  padding-top: 16px;
-  padding-bottom: 32px;
-}
 
 #backbutton span {
   font-weight: 600;
   padding-left: 8px;
-}
-
-span {
   color: #006154;
   font-size: 12px;
 }
 
 /*Tittle Description */
 .title {
-  padding-bottom: 22px;
+  width: 32vmax;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -115,16 +97,11 @@ span {
 
 .title p {
   font-weight: 300;
-  padding-top: 22px;
   text-align: left;
 }
 
 
 /* Input Register */
-
-.wrap {
-  height: 36px;
-}
 
 input[type="password"] {
   font-weight: 200;
@@ -137,11 +114,13 @@ input[type="password"] {
   background-clip: padding-box; /* for IE9+, Firefox 4+, Opera, Chrome */
   border-radius: 5px;
   height: 52px;
+  width: 32vmax;
 }
 
 input[type="password"]:focus {
   color: #0d0d0d;
   border: 2px solid #16d9f2;
+
 }
 
 input[type="submit"] {
@@ -152,6 +131,8 @@ input[type="submit"] {
   background-color: #68b400;
   height: 52px;
   border-radius: 5px;
+  width: 32.5vmax;
+
 }
 
 label {
