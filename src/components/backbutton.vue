@@ -16,7 +16,6 @@ export default({
 
 #backbutton {
  padding-top: 16px;
- padding-left: 47px;
  padding-bottom: 32px;
 
 }

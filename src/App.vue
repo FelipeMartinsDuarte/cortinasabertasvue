@@ -1,9 +1,11 @@
 <template>
   <div id="app">
+    <div class="wrap">
     <Menu/>
     <Backbutton />
     <Title />
     <InputRegister />
+    </div>
   </div>
 </template>
 
@@ -26,5 +28,7 @@ export default {
 </script>
 
 <style>
+
+
                                             
 </style>

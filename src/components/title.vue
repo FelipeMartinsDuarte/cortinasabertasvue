@@ -20,13 +20,12 @@ p{
 }
 
 h1{
-    font-weight: 300;
+    font-weight: 700;
 }
 
 .container{
     padding-left: 47px;
     padding-bottom: 22px;
-    width: 296px;
     display: flex;
     flex-direction: column;
     justify-content: center;

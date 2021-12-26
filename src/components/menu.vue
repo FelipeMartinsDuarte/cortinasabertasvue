@@ -14,14 +14,8 @@ export default {
 
 <style scoped>
 
-header{
-    display: grid;
-    grid-template-columns: 37px 74px 74px 74px 74px;
-    grid-gap: 10px;
-}
 
 .container {
-  grid-column:2/4;
   width: 100vw;
   height: 36px;
 }
