@@ -26,7 +26,6 @@ h1{
 .container{
     padding-left: 47px;
     padding-bottom: 22px;
-    width: 296px;
     display: flex;
     flex-direction: column;
     justify-content: center;

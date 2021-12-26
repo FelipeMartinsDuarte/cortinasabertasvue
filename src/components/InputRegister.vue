@@ -48,7 +48,6 @@ input[type=password]{
  background-clip: padding-box; /* for IE9+, Firefox 4+, Opera, Chrome */
  border-radius: 5px;
  height: 52px;
- width: 296px;
 }
 
 input[type=password]:focus{
@@ -62,7 +61,6 @@ input[type=submit]{
  border: none;
  color: white;
  background-color:#68B400;
- width: 315px;
  height: 52px;
  border-radius: 5px;
 }
