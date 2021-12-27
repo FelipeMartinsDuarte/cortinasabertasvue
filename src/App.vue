@@ -2,7 +2,6 @@
   <div id="app">
     <header>
       <div class="menu">
-        
         <ul>
           <li><a href="#"><img src="./assets/logo.svg" alt="logomarca cortinas abertas" /></a></li>
         </ul>
@@ -17,6 +16,7 @@
           <li>Cadastro</li>
           <li>Identificação</li>
         </ul>
+
 
         </div>
     </header>
@@ -68,7 +68,7 @@ header{
 
 /* Menu */
 
-
+/*Breakline*/
 #breakline{
   -webkit-box-shadow:0px 3px 6px #8a8a8a7c;
  -moz-box-shadow:0px 3px 6px #8a8a8a7c;
@@ -93,7 +93,7 @@ header{
 
 .menu ul:nth-child(3n) {
   padding-top: 16px;
-  width: 100%;
+  width: 50%;
 }
 
 .menu ul:nth-child(3n) li{
@@ -102,7 +102,11 @@ header{
 
 /* Set basic property */
 
+
 .menu ul li a{
+  display: block;
+  width: 100%;
+  height: 100%;
   text-decoration: none;
 }
 
