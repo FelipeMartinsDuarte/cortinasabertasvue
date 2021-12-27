@@ -2,7 +2,9 @@
   <div id="app">
     <header>
       <div class="container">
+        <a href="#">
         <img src="./assets/logo.svg" alt="logomarca cortinas abertas" />
+        </a>
       </div>
     </header>
 
@@ -12,7 +14,7 @@
     </div>
 
     <div class="title">
-      <h3>CADASTRAR</h3>
+      <h1>CADASTRAR</h1>
       <p>
         Use pelo menos 8 Caracteres, incluindo letras maiúsculas e letras
         minúsculas
@@ -30,9 +32,16 @@
         <label for="confirmpassword">CONFIRMAR SENHA</label><br />
         <input name="confirmpassword" type="password" /><br /><br />
 
-        <input type="submit" value="Criar Conta" />
+        <input type="submit" value="Criar Conta" /><br />
       </form>
     </div>
+
+    <footer>
+      <hr>
+      <p>Ao fazer login ou criar uma conta você concorda com nossos <a href="#">Termos e Condições e Declaração de Privacidade</a></p>
+      <hr>
+      <p>Todos os direitos reservados Direitos autorais (2021-2021) - Cortinas Abertas.com</p>
+    </footer>
 
   </div>
 </template>
@@ -70,6 +79,10 @@ header{
   grid-column: 5/15;
 }
 
+footer{
+  grid-column: 5/11;
+}
+
 /* Menu */
 
 .container img {
@@ -77,7 +90,19 @@ header{
   height: 16px;
 }
 
+.container{
+  padding-top: 16px;
+  padding-bottom: 8px;
+}
+
 /* Back button */
+
+
+
+#backbutton{
+  padding-bottom: 32px;
+}
+
 
 #backbutton span {
   font-weight: 600;
@@ -86,9 +111,15 @@ header{
   font-size: 12px;
 }
 
+#backbutton span:hover{
+  color: #00584d;
+  cursor: pointer;
+}
+
 /*Tittle Description */
+
 .title {
-  width: 32vmax;
+  width: 26vmax;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -98,6 +129,7 @@ header{
 .title p {
   font-weight: 300;
   text-align: left;
+
 }
 
 
@@ -106,6 +138,7 @@ header{
 input[type="password"] {
   font-weight: 200;
   font-size: 16px;
+  text-indent: 8px;
   color: #707070;
   outline: none;
   border: 2px solid rgb(185, 185, 185);
@@ -114,7 +147,7 @@ input[type="password"] {
   background-clip: padding-box; /* for IE9+, Firefox 4+, Opera, Chrome */
   border-radius: 5px;
   height: 52px;
-  width: 32vmax;
+  width: 26vmax;
 }
 
 input[type="password"]:focus {
@@ -123,7 +156,7 @@ input[type="password"]:focus {
 
 }
 
-input[type="submit"] {
+.wrap input[type="submit"]{
   font-weight: 600;
   font-size: 16px;
   border: none;
@@ -131,14 +164,43 @@ input[type="submit"] {
   background-color: #68b400;
   height: 52px;
   border-radius: 5px;
-  width: 32.5vmax;
+  width: 26.5vmax;
+}
 
+.wrap input[type="submit"]:hover{
+  background-color: #549900;
+  cursor: pointer;
+   
 }
 
 label {
   font-weight: 400;
   display: block;
   font-size: 16px;
+}
+
+/*Footer*/
+
+footer{
+  font-size: 12px;
+  font-weight: 100;
+  width: 26.5vmax;
+  text-align: center;
+}
+
+footer p{
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+footer a{
+  color: #528E00;
+  cursor: pointer;
+}
+
+footer hr{
+  color: #707070;
+  opacity: 0.25;
 }
 
 
