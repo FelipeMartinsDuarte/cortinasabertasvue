@@ -1,0 +1,141 @@
+<template>
+<div id="menu-content">
+    <header>
+      <div class="menu">
+        <ul>
+          <li><a href="#"><img src="../assets/logo.svg" alt="logomarca cortinas abertas" /></a></li>
+        </ul>
+        
+        <ul class="nav">
+          <li><a href="#">Anuncie seu Lar</a></li>
+          <li><a href="#">Cadastrar-se</a></li>
+          <li><a href="#">Entrar</a></li>
+        </ul>
+
+        <ul class="page-information">
+          <li>Cadastro</li>
+          <li>Identificação</li>
+        </ul>
+
+
+        </div>
+    </header>
+</div>
+</template>
+
+<script>
+export default {
+    name:"menu"
+}
+</script>
+
+<style scoped>
+#menu-content{
+  display: grid;
+  grid-template-columns: 21% repeat(12,1fr) 21%;
+  gap: 20px;
+}
+
+header{
+  grid-column: 2/14;
+}
+
+/* Menu */
+
+/* Set main Property*/
+
+.menu{
+  padding-top: 16px;
+}
+
+.menu, ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+}
+
+/* Set Padding */
+
+.menu ul:nth-child(3n) {
+  padding-top: 16px;
+  width: 50%;
+}
+
+.menu ul:nth-child(3n) li{
+  padding-right: 16px;
+}
+
+/* Set basic property */
+
+
+.menu ul li a{
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+}
+
+.menu ul[class="page-information"] li, ul[class="nav"] li {
+  font-weight: 400;
+  font-size: 12px;
+  padding: 6px;
+  background-color: #00A28C;
+  border-radius: 5px;
+  margin-left: 8px;
+  margin-right: 8px;
+  width: 7vmax;
+  text-align: center;
+}
+
+/* Set Page information property */
+
+.menu ul[class="page-information"] li{
+  width: auto;
+  font-weight: 100;
+  background-color: #f2eeeb48;
+  border-radius: 7px;
+  margin-left: inherit;
+  padding: 4px 32px 4px 32px;
+
+}
+
+.menu ul[class="nav"] li:nth-child(1){
+  width: 8.5vmax;
+  background-color: inherit;
+  border: 1px solid #00A28C;
+}
+
+
+/* Set font colors */
+
+.menu ul[class="nav"] a{
+  color: white;
+}
+
+.menu ul[class="nav"] li:nth-child(1) a {
+  color: #00A28C;
+}
+
+/* Hover */
+
+.menu ul[class="nav"] li:nth-child(2):hover{
+  background-color: #019b86;
+}
+
+.menu ul[class="nav"] li:nth-child(3):hover{
+  background-color: #019b86;
+}
+
+
+.menu, ul:nth-child(2n){
+  justify-content: space-between;
+}
+
+/*Adjust items */
+
+.menu img {
+  width: auto;
+  height: 16px;
+}
+</style>
