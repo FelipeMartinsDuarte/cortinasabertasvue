@@ -62,17 +62,24 @@ header{
   grid-column: 5/15;
 }
 
-
-
- 
+#breakline{
+  grid-column: 1/15;
+}
 
 /* Menu */
+
+
+#breakline{
+  -webkit-box-shadow:0px 3px 6px #8a8a8a7c;
+ -moz-box-shadow:0px 3px 6px #8a8a8a7c;
+ box-shadow:0px 3px 6px #8a8a8a7c;
+  border-bottom: 1px solid transparent;
+}
 
 /* Set main Property*/
 
 .menu{
   padding-top: 16px;
-  padding-bottom: 8px;
 }
 
 .menu, ul {
@@ -85,7 +92,7 @@ header{
 /* Set Padding */
 
 .menu ul:nth-child(3n) {
-  padding-top: 32px;
+  padding-top: 16px;
   width: 100%;
 }
 
@@ -102,7 +109,7 @@ header{
 .menu ul[class="page-information"] li, ul[class="nav"] li {
   font-weight: 400;
   font-size: 12px;
-  padding: 4px;
+  padding: 6px;
   background-color: #00A28C;
   border-radius: 5px;
   margin-left: 8px;
@@ -114,10 +121,12 @@ header{
 /* Set Page information property */
 
 .menu ul[class="page-information"] li{
+  width: auto;
   font-weight: 100;
   background-color: #f2eeeb48;
   border-radius: 7px;
   margin-left: inherit;
+  padding: 4px 32px 4px 32px;
 
 }
 
