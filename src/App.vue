@@ -1,13 +1,26 @@
 <template>
   <div id="app">
     <header>
-      <div class="container">
-        <a href="#">
-        <img src="./assets/logo.svg" alt="logomarca cortinas abertas" />
-        </a>
-      </div>
-    </header>
+      <div class="menu">
+        
+        <ul>
+          <li><a href="#"><img src="./assets/logo.svg" alt="logomarca cortinas abertas" /></a></li>
+        </ul>
+        
+        <ul class="nav">
+          <li><a href="#">Anuncie seu Lar</a></li>
+          <li><a href="#">Cadastrar-se</a></li>
+          <li><a href="#">Entrar</a></li>
+        </ul>
 
+        <ul class="page-information">
+          <li>Cadastro</li>
+          <li>Identificação</li>
+        </ul>
+
+        </div>
+    </header>
+   <div id="breakline"></div>
     <div id="backbutton">
       <img src="./assets/backarrow.svg" alt="botão voltar" />
       <span>Voltar</span>
@@ -15,33 +28,7 @@
 
     <div class="title">
       <h1>CADASTRAR</h1>
-      <p>
-        Use pelo menos 8 Caracteres, incluindo letras maiúsculas e letras
-        minúsculas
-      </p>
     </div>
-
-    <div class="wrap">
-      <form id="registrar" method="post" action="/register/password">
-        <input name="name" type="hidden" :value="name" />
-        <input name="email" type="hidden" :value="email" />
-
-        <label for="password">CRIAR UMA SENHA</label><br />
-        <input name="password" type="password" /><br /><br />
-
-        <label for="confirmpassword">CONFIRMAR SENHA</label><br />
-        <input name="confirmpassword" type="password" /><br /><br />
-
-        <input type="submit" value="Criar Conta" /><br />
-      </form>
-    </div>
-
-    <footer>
-      <hr>
-      <p>Ao fazer login ou criar uma conta você concorda com nossos <a href="#">Termos e Condições e Declaração de Privacidade</a></p>
-      <hr>
-      <p>Todos os direitos reservados Direitos autorais (2021-2021) - Cortinas Abertas.com</p>
-    </footer>
 
   </div>
 </template>
@@ -64,7 +51,7 @@ export default {
 }
 
 header{
-  grid-column: 2/15;
+  grid-column: 2/14;
 }
 
 #backbutton{
@@ -75,30 +62,107 @@ header{
   grid-column: 5/15;
 }
 
-.wrap{
-  grid-column: 5/15;
-}
 
-footer{
-  grid-column: 5/11;
-}
+
+ 
 
 /* Menu */
 
-.container img {
-  width: auto;
-  height: 16px;
-}
+/* Set main Property*/
 
-.container{
+.menu{
   padding-top: 16px;
   padding-bottom: 8px;
 }
 
+.menu, ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+}
+
+/* Set Padding */
+
+.menu ul:nth-child(3n) {
+  padding-top: 32px;
+  width: 100%;
+}
+
+.menu ul:nth-child(3n) li{
+  padding-right: 16px;
+}
+
+/* Set basic property */
+
+.menu ul li a{
+  text-decoration: none;
+}
+
+.menu ul[class="page-information"] li, ul[class="nav"] li {
+  font-weight: 400;
+  font-size: 12px;
+  padding: 4px;
+  background-color: #00A28C;
+  border-radius: 5px;
+  margin-left: 8px;
+  margin-right: 8px;
+  width: 7vmax;
+  text-align: center;
+}
+
+/* Set Page information property */
+
+.menu ul[class="page-information"] li{
+  font-weight: 100;
+  background-color: #f2eeeb48;
+  border-radius: 7px;
+  margin-left: inherit;
+
+}
+
+.menu ul[class="nav"] li:nth-child(1){
+  width: 8.5vmax;
+  background-color: inherit;
+  border: 1px solid #00A28C;
+}
+
+
+/* Set font colors */
+
+.menu ul[class="nav"] a{
+  color: white;
+}
+
+.menu ul[class="nav"] li:nth-child(1) a {
+  color: #00A28C;
+}
+
+/* Hover */
+
+.menu ul[class="nav"] li:nth-child(2):hover{
+  background-color: #019b86;
+}
+
+.menu ul[class="nav"] li:nth-child(3):hover{
+  background-color: #019b86;
+}
+
+
+.menu, ul:nth-child(2n){
+  justify-content: space-between;
+}
+
+/*Adsjust items */
+
+.menu img {
+  width: auto;
+  height: 16px;
+}
+
+
+
 /* Back button */
-
-
-
 #backbutton{
   padding-bottom: 32px;
 }
@@ -126,82 +190,7 @@ footer{
   text-align: center;
 }
 
-.title p {
-  font-weight: 300;
-  text-align: left;
 
-}
-
-
-/* Input Register */
-
-input[type="password"] {
-  font-weight: 200;
-  font-size: 16px;
-  text-indent: 8px;
-  color: #707070;
-  outline: none;
-  border: 2px solid rgb(185, 185, 185);
-  border: 2px solid rgba(185, 185, 185, 0.5);
-  -webkit-background-clip: padding-box; /* for Safari */
-  background-clip: padding-box; /* for IE9+, Firefox 4+, Opera, Chrome */
-  border-radius: 5px;
-  height: 52px;
-  width: 26vmax;
-}
-
-input[type="password"]:focus {
-  color: #0d0d0d;
-  border: 2px solid #16d9f2;
-
-}
-
-.wrap input[type="submit"]{
-  font-weight: 600;
-  font-size: 16px;
-  border: none;
-  color: white;
-  background-color: #68b400;
-  height: 52px;
-  border-radius: 5px;
-  width: 26.5vmax;
-}
-
-.wrap input[type="submit"]:hover{
-  background-color: #549900;
-  cursor: pointer;
-   
-}
-
-label {
-  font-weight: 400;
-  display: block;
-  font-size: 16px;
-}
-
-/*Footer*/
-
-footer{
-  font-size: 12px;
-  font-weight: 100;
-  width: 26.5vmax;
-  text-align: center;
-}
-
-footer p{
-  padding-top: 16px;
-  padding-bottom: 16px;
-}
-
-footer a{
-  color: #528E00;
-  cursor: pointer;
-}
-
-footer hr{
-  color: #707070;
-  opacity: 0.25;
-}
 
 
 </style>
