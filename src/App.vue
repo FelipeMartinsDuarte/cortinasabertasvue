@@ -166,7 +166,7 @@ header{
   justify-content: space-between;
 }
 
-/*Adsjust items */
+/*Adjust items */
 
 .menu img {
   width: auto;
