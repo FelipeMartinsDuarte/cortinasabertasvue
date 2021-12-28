@@ -15,12 +15,22 @@
         <p>Clique e Coloque seu nome para que possamos proteger e vincular-lo a sua conta </p>
         <form >
         <input type="text" name="name" placeholder="Nome Sobrenome"><br/>
+        <a href="#card-cnpj">Continuar</a>
+        <input type="reset" value="Cancelar">
+        </form>
+      </div>
+
+      <div class="card-cnpj" id="card-cnpj">
+        <h4>Coloque CNPJ constituído ou CPF</h4>
+        <p>Coloque a documentação para garantimos a autenticidade e a legalização perante a Vigilância Sanitária</p>
+        <form >
+        <input type="text" name="name" placeholder="00.00.00/000-00"><br/>
         <a href="#">Continuar</a>
         <input type="reset" value="Cancelar">
         </form>
-        
-
       </div>
+
+      
 
     </div>
   </div>
@@ -55,10 +65,12 @@ export default {
    grid-column: 2/13;
 }
 
+.card-cnpj {
+   grid-column: 2/13;
+}
+
 /*Card-Name*/
-
-
-.card-name input[type="text"]{
+.card-name input[type="text"], .card-cnpj input[type="text"]{
   border: inherit;
   outline: none;
   border-bottom: 2px solid #0d0d0d;
@@ -76,13 +88,13 @@ export default {
   color: #00A28C;
 }
 
-.card-name{
+.card-name, .card-cnpj{
   border: 2px solid #0d0d0d31;
   border-radius: 5px;
   padding: 16px;
 }
 
-.card-name p{
+.card-name p, .card-cnpj p{
   margin-top: 8px;
   margin-bottom: 16px;
   font-weight: 200;
@@ -90,7 +102,7 @@ export default {
 }
 
 
-.card-name a, .card-name input[type="reset"]{
+.card-name a, .card-name input[type="reset"], .card-cnpj a, .card-cnpj input[type="reset"]{
   cursor:pointer;
   font-weight: 400;
   padding: 8px 16px;
@@ -106,7 +118,8 @@ export default {
   background-color: #54990007;
 }
 
-.card-name a{
+
+.card-name a, .card-cnpj a{
   text-decoration: none;
   border: inherit;
   background-color: #68B400;
@@ -116,13 +129,32 @@ export default {
   margin-right: 32px;
 }
 
-.card-name input[type="reset"]{
+.card-name input[type="reset"], .card-cnpj input[type="reset"]{
   color:#68B400 ;
   background-color: inherit;
   border-radius: 5px;
   border: 1px solid #68B400;
 
 
+}
+
+/*card-cnpj*/
+
+.card-cnpj{
+  margin-top: 48px;
+}
+
+.card-cnpj input[type="text"]:focus {
+  border-bottom: 2px solid #00A28C;
+  color: #00A28C;
+}
+
+.card-cnpj a:hover{
+  background-color: #549900;
+}
+
+.card-cnpj input[type="reset"]:hover{
+  background-color: #54990007;
 }
 
 /*Tittle Description */
