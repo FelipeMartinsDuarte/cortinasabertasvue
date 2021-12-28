@@ -15,7 +15,7 @@
         <p>Clique e Coloque seu nome para que possamos proteger e vincular-lo a sua conta </p>
         <form >
         <input type="text" name="name" placeholder="Nome Sobrenome"><br/>
-        <input type="submit" value="Continuar">
+        <a href="#">Continuar</a>
         <input type="reset" value="Cancelar">
         </form>
         
@@ -90,7 +90,7 @@ export default {
 }
 
 
-.card-name input[type="submit"], .card-name input[type="reset"]{
+.card-name a, .card-name input[type="reset"]{
   cursor:pointer;
   font-weight: 400;
   padding: 8px 16px;
@@ -98,7 +98,7 @@ export default {
   float: right;
 }
 
-.card-name input[type="submit"]:hover{
+.card-name a:hover{
   background-color: #549900;
 }
 
@@ -106,10 +106,12 @@ export default {
   background-color: #54990007;
 }
 
-.card-name input[type="submit"]{
+.card-name a{
+  text-decoration: none;
   border: inherit;
   background-color: #68B400;
   color: white;
+  padding: 10px 16px;
   border-radius: 5px;
   margin-right: 32px;
 }
