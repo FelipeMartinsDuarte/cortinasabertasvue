@@ -7,12 +7,12 @@
 
 
       <div class="title">
-        <h2>Vamos identificar sua instituição</h2>
+        <h3>Vamos identificar sua instituição</h3>
       </div>
 
       <div class="card-name">
-        <h3>Nome Completo</h3>
-        <p>Coloque seu nome para vincularmos a esta conta e garantirmos segurança</p>
+        <h4>Nome Completo</h4>
+        <p>Clique e Coloque seu nome para que possamos proteger e vincular-lo a sua conta </p>
         <form >
         <input type="text" name="name" placeholder="Nome Sobrenome"><br/>
         <input type="submit" value="Continuar">
@@ -65,10 +65,10 @@ export default {
   font-weight: 200;
   text-indent: 4px;
   padding-bottom: 4px;
-  font-size: 32px;
+  font-size: 16px;
   color: #0d0d0d;
   width: 38vmax;
-  margin-bottom: 64px;
+  margin-bottom: 32px;
 }
 
 .card-name input[type="text"]:focus {
