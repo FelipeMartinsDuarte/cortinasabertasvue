@@ -25,6 +25,21 @@
         <p>Coloque a documentação para garantimos a autenticidade e a legalização perante a Vigilância Sanitária</p>
         <form >
         <input type="text" name="name" placeholder="00.00.00/000-00"><br/>
+        <a href="#card-nursinghomename">Continuar</a>
+        <input type="reset" value="Cancelar">
+        </form>
+      </div>
+
+      <div class="card-nhn" id="card-nursinghomename">
+        <h4>Coloque o nome da instituição</h4>
+        <p>Coloque o nome cujo a instituição será mostrada pelo site ao cliente</p>
+        <form >
+        <input type="text" name="name" placeholder="Nome da Clinica" maxlength="30" v-on:keyup="countdown"
+        v-model="message"><br/>
+        <div id="the-count">
+          <span id="current" v-bind:class="{'text-danger': hasError }">{{remainingCount}}</span>
+          <span id="maximum">/ 30</span>
+        </div>
         <a href="#">Continuar</a>
         <input type="reset" value="Cancelar">
         </form>
@@ -46,6 +61,20 @@ export default {
     Menu,
     Breakline
   },
+  data (){
+    return{
+    maxCount: 30,
+    remainingCount: 30,
+    message: '',
+    hasError: false
+    }
+  },
+  methods:{
+      countdown: function() {
+      this.remainingCount = this.maxCount - this.message.length;
+      this.hasError = this.remainingCount < 0;
+    }
+  }
 };
 </script>
 
@@ -68,9 +97,13 @@ export default {
 .card-cnpj {
    grid-column: 2/13;
 }
+.card-nhn {
+   grid-column: 2/13;
+
+}
 
 /*Card-Name*/
-.card-name input[type="text"], .card-cnpj input[type="text"]{
+.card-name input[type="text"], .card-cnpj input[type="text"], .card-nhn input[type="text"]{
   border: inherit;
   outline: none;
   border-bottom: 2px solid #0d0d0d;
@@ -88,13 +121,13 @@ export default {
   color: #00A28C;
 }
 
-.card-name, .card-cnpj{
+.card-name, .card-cnpj, .card-nhn{
   border: 2px solid #0d0d0d31;
   border-radius: 5px;
   padding: 16px;
 }
 
-.card-name p, .card-cnpj p{
+.card-name p, .card-cnpj p, .card-nhn p:first-of-type{
   margin-top: 8px;
   margin-bottom: 16px;
   font-weight: 200;
@@ -102,7 +135,7 @@ export default {
 }
 
 
-.card-name a, .card-name input[type="reset"], .card-cnpj a, .card-cnpj input[type="reset"]{
+.card-name a, .card-name input[type="reset"], .card-cnpj a, .card-cnpj input[type="reset"],.card-nhn a, .card-nhn input[type="reset"]{
   cursor:pointer;
   font-weight: 400;
   padding: 8px 16px;
@@ -119,7 +152,7 @@ export default {
 }
 
 
-.card-name a, .card-cnpj a{
+.card-name a, .card-cnpj a, .card-nhn a{
   text-decoration: none;
   border: inherit;
   background-color: #68B400;
@@ -129,7 +162,7 @@ export default {
   margin-right: 32px;
 }
 
-.card-name input[type="reset"], .card-cnpj input[type="reset"]{
+.card-name input[type="reset"], .card-cnpj input[type="reset"], .card-nhn input[type="reset"]{
   color:#68B400 ;
   background-color: inherit;
   border-radius: 5px;
@@ -155,6 +188,40 @@ export default {
 
 .card-cnpj input[type="reset"]:hover{
   background-color: #54990007;
+}
+
+/*Card nursing home name */
+
+.card-nhn{
+  margin-top: 48px;
+}
+
+.card-nhn input[type="text"]:focus {
+  border-bottom: 2px solid #00A28C;
+  color: #00A28C;
+}
+
+.card-nhn a:hover{
+  background-color: #549900;
+}
+
+.card-nhn input[type="reset"]:hover{
+  background-color: #54990007;
+}
+
+.card-nhn #the-count {
+  width:38vmax ;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 0.1rem 0 0 0;
+  margin-right: 19%;
+  font-size: 0.875rem;
+  margin-bottom: 32px;
+}
+
+.card-nhn input[type="text"]{
+  margin-bottom: 4px;
 }
 
 /*Tittle Description */
