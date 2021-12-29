@@ -100,6 +100,7 @@
           <label for="estado">
           <span>Estado</span>
           <select name="estado" id="estado">
+          <option selected disabled></option>
           <option value="ac">AC</option>
           <option value="al">AL</option>
           <option value="ap">AP</option>
@@ -226,7 +227,8 @@ export default {
 .card-name,
 .card-cnpj,
 .card-nhn,
-.card-cep {
+.card-cep,
+.card-endereco {
   border: 2px solid #0d0d0d31;
   border-radius: 5px;
   padding: 16px;
@@ -235,7 +237,8 @@ export default {
 .card-name p,
 .card-cnpj p,
 .card-nhn p:first-of-type,
-.card-cep p {
+.card-cep p,
+.card-endereco p {
   margin-top: 8px;
   margin-bottom: 16px;
   font-weight: 200;
@@ -249,7 +252,9 @@ export default {
 .card-nhn a,
 .card-nhn input[type="reset"],
 .card-cep a,
-.card-cep input[type="reset"]{
+.card-cep input[type="reset"],
+.card-endereco a,
+.card-endereco input[type="reset"]{
   cursor: pointer;
   font-weight: 400;
   padding: 8px 16px;
@@ -268,7 +273,8 @@ export default {
 .card-name a,
 .card-cnpj a,
 .card-nhn a,
-.card-cep a{
+.card-cep a,
+.card-endereco a{
   text-decoration: none;
   border: inherit;
   background-color: #68b400;
@@ -281,7 +287,8 @@ export default {
 .card-name input[type="reset"],
 .card-cnpj input[type="reset"],
 .card-nhn input[type="reset"], 
-.card-cep input[type="reset"]{
+.card-cep input[type="reset"],
+.card-endereco input[type="reset"] {
   color: #68b400;
   background-color: inherit;
   border-radius: 5px;
@@ -390,6 +397,23 @@ export default {
 
 .card-endereco input[type="number"], .card-endereco select{
   width: 5vmax;
+}
+
+.card-endereco {
+  margin-top: 48px;
+}
+
+.card-endereco input[type="text"]:focus {
+  border-bottom: 2px solid #00a28c;
+  color: #00a28c;
+}
+
+.card-endereco a:hover {
+  background-color: #549900;
+}
+
+.card-endereco input[type="reset"]:hover {
+  background-color: #54990007;
 }
 
 
