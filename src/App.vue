@@ -364,6 +364,7 @@ export default {
 
 .card-endereco span{
   display: block;
+  margin-bottom: 8px;
 }
 
 .card-endereco .wrap{
@@ -371,6 +372,28 @@ export default {
   flex-direction: row;
   flex-wrap: wrap;
 }
+
+.card-endereco input[type="text"], .card-endereco input[type="number"], .card-endereco select{
+  background-color: inherit;
+  margin-right: 8px;
+  border: inherit;
+  outline: none;
+  border-bottom: 2px solid #0d0d0d;
+  font-weight: 200;
+  text-indent: 4px;
+  padding-bottom: 4px;
+  font-size: 16px;
+  color: #0d0d0d;
+  width: 33vmax;
+  margin-bottom: 32px;
+}
+
+.card-endereco input[type="number"], .card-endereco select{
+  width: 5vmax;
+}
+
+
+
 
 
 /*Tittle Description */
