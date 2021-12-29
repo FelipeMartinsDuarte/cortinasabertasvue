@@ -60,9 +60,10 @@
       </div>
 
       <div class="card-cep" id="card-cep">
-        <h4>Digite o CEP </h4>
+        <h4>Digite o CEP</h4>
         <p>
-          Coloque o CEP no qual a intuição está estabelecida para localizarmos o endereço
+          Coloque o CEP no qual a intuição está estabelecida para localizarmos o
+          endereço
         </p>
         <form>
           <input type="text" name="name" placeholder="00000-000" /><br />
@@ -72,118 +73,113 @@
       </div>
 
       <div class="card-endereco" id="card-endereco">
-        <h4>Digite o CEP </h4>
+        <h4>Digite o CEP</h4>
         <p>
-          Coloque o CEP no qual a intuição está estabelecida para localizarmos o endereço
+          Coloque o CEP no qual a intuição está estabelecida para localizarmos o
+          endereço
         </p>
         <form>
           <div class="wrap">
-          <div class="column1">
-          <label for="rua">
-          <span>Endereço</span>
-          <input type="text" id="rua" name="rua" placeholder="Rua aires neto" />
-          </label>
-          </div>
-          <div class="column2">
-          <label for="num">
-          <span>Número</span>
-          <input type="number" id="num" name="number" placeholder="21"><br />
-          </label>
-          </div>
-          <div class="column3">
-          <label for="bairro">
-          <span>Bairro</span>
-          <input type="text" id="bairro" name="bairro" placeholder="Jardim Cantareira" />
-          </label>
-          </div>
-          <div class="column4">
-          <label for="estado">
-          <span>Estado</span>
-          <select name="estado" id="estado">
-          <option selected disabled></option>
-          <option value="ac">AC</option>
-          <option value="al">AL</option>
-          <option value="ap">AP</option>
-          <option value="am">AM</option>
-          <option value="ce">CE</option>
-          <option value="df">DF</option>
-          <option value="es">ES</option>
-          <option value="go">GO</option>
-          <option value="ma">MA</option>
-          <option value="mt">MT</option>
-          <option value="ms">MS</option>
-          <option value="mg">MG</option>
-          <option value="pa">PA</option>
-          <option value="pb">PB</option>
-          <option value="pr">PR</option>
-          <option value="pe">PE</option>
-          <option value="pi">PI</option>
-          <option value="rj">RJ</option>
-          <option value="rn">RN</option>
-          <option value="rs">RS</option>
-          <option value="ro">RO</option>
-          <option value="rr">RR</option>
-          <option value="sc">SC</option>
-          <option value="sp">SP</option>
-          <option value="se">SE</option>
-          <option value="to">TO</option>
-          </select>
-          </label>
-          </div>
-          <div class="column5">
-          <label for="municipio">
-          <span>Municipio</span>
-          <input type="text" id="municipio" name="municipio" placeholder="São Paulo" />
-          </label>
-          </div>
+            <div class="column1">
+              <label for="rua">
+                <span>Endereço</span>
+                <input
+                  type="text"
+                  id="rua"
+                  name="rua"
+                  placeholder="Rua aires neto"
+                />
+              </label>
+            </div>
+            <div class="column2">
+              <label for="num">
+                <span>Número</span>
+                <input
+                  type="number"
+                  id="num"
+                  name="number"
+                  placeholder="21"
+                /><br />
+              </label>
+            </div>
+            <div class="column3">
+              <label for="bairro">
+                <span>Bairro</span>
+                <input
+                  type="text"
+                  id="bairro"
+                  name="bairro"
+                  placeholder="Jardim Cantareira"
+                />
+              </label>
+            </div>
+            <div class="column4">
+              <label for="estado">
+                <span>Estado</span>
+                <select name="estado" id="estado">
+                  <option selected disabled></option>
+                  <option value="ac">AC</option>
+                  <option value="al">AL</option>
+                  <option value="ap">AP</option>
+                  <option value="am">AM</option>
+                  <option value="ce">CE</option>
+                  <option value="df">DF</option>
+                  <option value="es">ES</option>
+                  <option value="go">GO</option>
+                  <option value="ma">MA</option>
+                  <option value="mt">MT</option>
+                  <option value="ms">MS</option>
+                  <option value="mg">MG</option>
+                  <option value="pa">PA</option>
+                  <option value="pb">PB</option>
+                  <option value="pr">PR</option>
+                  <option value="pe">PE</option>
+                  <option value="pi">PI</option>
+                  <option value="rj">RJ</option>
+                  <option value="rn">RN</option>
+                  <option value="rs">RS</option>
+                  <option value="ro">RO</option>
+                  <option value="rr">RR</option>
+                  <option value="sc">SC</option>
+                  <option value="sp">SP</option>
+                  <option value="se">SE</option>
+                  <option value="to">TO</option>
+                </select>
+              </label>
+            </div>
+            <div class="column5">
+              <label for="municipio">
+                <span>Municipio</span>
+                <input
+                  type="text"
+                  id="municipio"
+                  name="municipio"
+                  placeholder="São Paulo"
+                />
+              </label>
+            </div>
           </div>
           <br />
           <a href="#">Continuar</a>
           <input type="reset" value="Cancelar" />
         </form>
-
-
       </div>
-      <div class="account-details">
-          <div class="top-footer">
-            <ul>
-              <li><a href="#">Sua Conta</a></li>
-              <li><a href="#">Contate-nos</a></li>
-            </ul>
-          </div>
-          </div>
-
-          <footer>
-          <div class="button-footer">
-            <ul>
-              <li><a href="#">Sobre nós</a></li>
-              <li><a href="#">Bairros</a></li>
-              <li><a href="#">Politica</a></li>
-              <li><a href="#">Contate-nos</a></li>
-              <li><a href="#">Ajuda</a></li>
-              <li><a href="#">Regiões</a></li>
-              <li><a href="#">Privacidade</a></li>
-              <li><a href="#">Pagamentos</a></li>
-              <li><a href="#">Favoritos</a></li>
-              <li><a href="#">Notificação</a></li>
-              <li><a href="#">Configurações</a></li>
-              <li><a href="#">Dúvidas</a></li>
-            </ul>
-          </div>
-        </footer>
     </div>
+    <Footer/>
   </div>
 </template>
 
 <script>
 import Menu from "./components/menu.vue";
 import Breakline from "./components/breakline.vue";
+import Footer from "./components/footer.vue";
 
 export default {
   name: "App",
   components: {
     Menu,
     Breakline,
+    Footer,
   },
   data() {
     return {
@@ -229,70 +225,12 @@ export default {
 .card-endereco {
   grid-column: 2/13;
 }
-.account-details{
-  grid-column: 1/16;
-}
-footer{
-  grid-column: 1/15;
-}
 
-/*Footer */
-footer{
-  margin: -20px;
-  padding: 16px;
-  background-color: #0D0D0D;
-  display: grid;
-  grid-template-columns: 21% repeat(12, 1fr) 21%;
-  gap: 20px;
-}
-
-.account-details{
-  padding: 16px 0px;
-  background-color: #E1E3E2;
-  display: grid;
-  grid-template-columns: 21% repeat(12, 1fr) 21%;
-  gap: 20px;
-}
-
-.account-details .top-footer{
-  grid-column: 2/15;
-}
-
-footer .button-footer{
-  grid-column: 2/15;
-}
-
-footer .button-footer ul, .account-details .top-footer ul {
-  width: 24vmax;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-
-footer .button-footer ul li, .account-details .top-footer ul li {
-  margin-right: 16px;
-}
-
-
-footer .button-footer ul li{
-  margin-top: 8px;
-}
-
-footer a{
-  color: white;
-  font-weight: 200;
-} 
-
-.top-footer a {
-  color: #006154;
-  font-weight: 200;
-
-}
 /*Card-Name*/
 .card-name input[type="text"],
 .card-cnpj input[type="text"],
 .card-nhn input[type="text"],
-.card-cep input[type="text"]{
+.card-cep input[type="text"] {
   border: inherit;
   outline: none;
   border-bottom: 2px solid #0d0d0d;
@@ -340,7 +278,7 @@ footer a{
 .card-cep a,
 .card-cep input[type="reset"],
 .card-endereco a,
-.card-endereco input[type="reset"]{
+.card-endereco input[type="reset"] {
   cursor: pointer;
   font-weight: 400;
   padding: 8px 16px;
@@ -360,7 +298,7 @@ footer a{
 .card-cnpj a,
 .card-nhn a,
 .card-cep a,
-.card-endereco a{
+.card-endereco a {
   text-decoration: none;
   border: inherit;
   background-color: #68b400;
@@ -372,7 +310,7 @@ footer a{
 
 .card-name input[type="reset"],
 .card-cnpj input[type="reset"],
-.card-nhn input[type="reset"], 
+.card-nhn input[type="reset"],
 .card-cep input[type="reset"],
 .card-endereco input[type="reset"] {
   color: #68b400;
@@ -455,18 +393,20 @@ footer a{
 
 /*CARD-ENDERECO */
 
-.card-endereco span{
+.card-endereco span {
   display: block;
   margin-bottom: 8px;
 }
 
-.card-endereco .wrap{
+.card-endereco .wrap {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
 
-.card-endereco input[type="text"], .card-endereco input[type="number"], .card-endereco select{
+.card-endereco input[type="text"],
+.card-endereco input[type="number"],
+.card-endereco select {
   background-color: inherit;
   margin-right: 8px;
   border: inherit;
@@ -481,12 +421,14 @@ footer a{
   margin-bottom: 32px;
 }
 
-.card-endereco input[type="number"], .card-endereco select{
+.card-endereco input[type="number"],
+.card-endereco select {
   width: 5vmax;
 }
 
 .card-endereco {
   margin-top: 48px;
+  margin-bottom: 128px;
 }
 
 .card-endereco input[type="text"]:focus {
@@ -501,10 +443,6 @@ footer a{
 .card-endereco input[type="reset"]:hover {
   background-color: #54990007;
 }
-
-
-
-
 
 /*Tittle Description */
 .title {
