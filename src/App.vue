@@ -129,6 +129,12 @@
           </select>
           </label>
           </div>
+          <div class="column5">
+          <label for="municipio">
+          <span>Municipio</span>
+          <input type="text" id="municipio" name="municipio" placeholder="São Paulo" />
+          </label>
+          </div>
           </div>
           <br />
           <a href="#">Continuar</a>
