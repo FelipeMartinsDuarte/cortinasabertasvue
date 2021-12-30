@@ -108,10 +108,10 @@
 
 
             <div class="image-input" style="{'background-image':
-            `url(${imageData})`}">
+            `url(${imageData})`}" @click="chooseImage">
 
 
-            <div class="placeholder" v-if="!imageData">
+            <div class="placeholder">
 
             <img src="./assets/imageicon.svg" alt="icon arquivo de imagem">
 
@@ -120,7 +120,7 @@
             </div>
 
 
-            <input method="post" type="file" name="images" id="images" multiple>
+            <input method="post" type="file" name="images" id="images" ref="ImagesArray" multiple>
           
 
           </div>
@@ -143,11 +143,11 @@
 
           <div class="logo-unique">
 
-            <div class="image-input" style="{'background-image':
-            `url(${imageData})`}">
 
-            <div class="placeholder" v-if="!imageData">
+            <div class="logo-input" style="{'background-image':
+            `url(${imageData})`}" @click="chooseLogo">
 
+            <div class="placeholder">
             <img src="./assets/logoicon.svg" alt="icon arquivo de imagem">
 
             <span>Selecione ou Arraste aqui</span>
@@ -155,7 +155,7 @@
 
             </div>
 
-            <input method="post" type="file" name="images" id="logo">
+            <input method="post" type="file" name="logo" id="logo" ref="ImagesLogo">
             
             </div>
 
@@ -203,6 +203,15 @@ export default {
     Menu,
     Breakline,
     Footer
+  },
+  methods:{
+    chooseImage(){
+      this.$refs.ImagesArray.click()
+    },
+    chooseLogo(){
+      this.$refs.ImagesLogo.click()
+    }
+
   }
 }
 </script>
@@ -231,16 +240,11 @@ export default {
 /*Card-Image */
 
 
-
-
-
-
 .card-image .images hr{
   margin-top: 32px;
   margin-bottom: 24px;
   opacity: 0.25;
 }
-
 
 
 .card-image{
@@ -308,7 +312,6 @@ export default {
   display: none;
 }
 
-
 /*Logo*/
 
 .card-image .logo-unique span{
@@ -316,8 +319,7 @@ export default {
   width: 6rem;
 }
 
-.card-image .logo-unique .image-input{
-  display: block;
+.card-image .logo .logo-unique .placeholder{
   width: 128px;
   height: 128px;
   cursor: pointer;
@@ -325,6 +327,7 @@ export default {
 
 .card-image .logo-unique .placeholder{
   background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23528E00FF' stroke-width='4' stroke-dasharray='7%2c 7' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+  border-radius: 5px;
   width: 100%;
   height: 100%;
   display: flex;
