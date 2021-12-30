@@ -88,9 +88,10 @@
           </div>
         </form>
 
-        <hr/>
+        
 
-        <form id="send">
+        <form class="send">
+          <hr/>
           <a href="#card-cnpj">Continuar</a>
           <input type="reset" value="Cancelar" />
         </form>
@@ -103,14 +104,86 @@
           <p>
             Coloque uma ou mais Imagens sobre a estrutura qual queira mostrar ao visitante, com no mínimo 640x360 Pixels
           </p>
+          <div class="image-multiple">
+
+
+            <div class="image-input" style="{'background-image':
+            `url(${imageData})`}">
+
+
+            <div class="placeholder" v-if="!imageData">
+
+            <img src="./assets/imageicon.svg" alt="icon arquivo de imagem">
+
+            <span>Clique e Selecione ou Arraste Aqui uma ou Mais Imagens</span>
+
+            </div>
+
+
+            <input method="post" type="file" name="images" id="images" multiple>
+          
+
+          </div>
+
+          <hr/>
+
+        </div>
+
+        
+
         </div>
         <div class="logo">
           <h4>Possui uma Logo?</h4>
           <p>
             Coloque a sua logo em fundo transparente ou branco, caso não possua uma ou não esteja com o arquivo basta avançar para próxima etapa, você poderá adicionar futuramente
           </p>
+
+
+
+
+          <div class="logo-unique">
+
+            <div class="image-input" style="{'background-image':
+            `url(${imageData})`}">
+
+            <div class="placeholder" v-if="!imageData">
+
+            <img src="./assets/logoicon.svg" alt="icon arquivo de imagem">
+
+            <span>Selecione ou Arraste aqui</span>
+
+
+            </div>
+
+            <input method="post" type="file" name="images" id="logo">
+            
+            </div>
+
+            <div class="requisitos-minimos">
+              <ul>
+                <li>Formato: Png ou Jpeg</li>
+                <li>Tamanho de 64x64 á 512x512 pixels </li>
+              </ul>
+            </div>
+
+          </div>
+
+          
+
+        <form class="send">
+          <hr/>
+          <a href="#card-cnpj">Continuar</a>
+          <input type="reset" value="Cancelar" />
+        </form>
+
       </div>
-      </div>
+
+
+
+
+
+
+    </div>
 
 
       
@@ -156,11 +229,46 @@ export default {
 
 
 /*Card-Image */
+
+
+
+
+
+
+.card-image .images hr{
+  margin-top: 32px;
+  margin-bottom: 24px;
+  opacity: 0.25;
+}
+
+
+
 .card-image{
   margin-bottom: 128px;
   border: 2px solid #0d0d0d31;
   border-radius: 5px;
   padding: 16px;
+}
+
+
+.card-image .logo-unique{
+  display: flex;
+  flex-direction: row;
+}
+.card-image .logo-unique .requisitos-minimos ul li{
+  list-style: disc;
+  margin-bottom: 4px;
+  font-weight: 200;
+  color: #830039;
+}
+
+.card-image .logo-unique .requisitos-minimos {
+  margin-left: 32px;
+}
+
+
+.card-image .logo{
+  margin-top: 16px;
 }
 
 .card-image p{
@@ -169,6 +277,69 @@ export default {
   font-weight: 200;
   font-size: 12px;
 }
+
+.card-image .image-multiple .image-input{
+  display: block;
+  width: 100%;
+  height: 25vmin;
+  cursor: pointer;
+}
+
+
+.card-image .image-multiple .placeholder{
+  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23528E00FF' stroke-width='4' stroke-dasharray='7%2c 7' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  color: #68B400;
+  font-weight: 200;
+}
+
+.card-image .image-multiple .placeholder span{
+  margin-top: 8px;
+  width: 22vmax;
+}
+
+.card-image input[type="file"]{
+  display: none;
+}
+
+
+/*Logo*/
+
+.card-image .logo-unique span{
+  margin-top: 8px;
+  width: 6rem;
+}
+
+.card-image .logo-unique .image-input{
+  display: block;
+  width: 128px;
+  height: 128px;
+  cursor: pointer;
+}
+
+.card-image .logo-unique .placeholder{
+  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23528E00FF' stroke-width='4' stroke-dasharray='7%2c 7' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  color: #68B400;
+  font-weight: 200;
+}
+
+
+
+
+
 
 
 /*Card-Name*/
@@ -232,17 +403,17 @@ export default {
 
 /*Reset & Input Send*/
 
-.card-profile form[id="send"]{
-  margin-top: 32px;
-}
-
-.card-profile hr{
+form[class="send"]{
   margin-top: 16px;
-  opacity: 0.5;
 }
 
-.card-profile form[id="send"] a,
-.card-profile form[id="send"] input[type="reset"] {
+form[class="send"] hr{
+  opacity: 0.5;
+  margin-bottom: 16px;
+}
+
+form[class="send"] a,
+form[class="send"] input[type="reset"] {
   cursor: pointer;
   font-weight: 400;
   padding: 8px 16px;
@@ -250,15 +421,15 @@ export default {
   float: right;
 }
 
-.card-profile form[id="send"] a:hover {
+form[class="send"] a:hover {
   background-color: #549900;
 }
 
-.card-profile input[type="reset"]:hover {
+form[class="send"] input[type="reset"]:hover {
   background-color: #54990007;
 }
 
-.card-profile form[id="send"] a {
+form[class="send"] a {
   text-decoration: none;
   border: inherit;
   background-color: #68b400;
@@ -268,18 +439,18 @@ export default {
   margin-right: 32px;
 }
 
-.card-profile input[type="reset"] {
+form[class="send"] input[type="reset"] {
   color: #68b400;
   background-color: inherit;
   border-radius: 5px;
   border: 1px solid #68b400;
 }
 
-.card-profile input[type="send"] a:hover {
+form[class="send"] input[type="send"] a:hover {
   background-color: #549900;
 }
 
-.card-profile input[type="reset"]:hover {
+form[class="send"] input[type="reset"]:hover {
   background-color: #54990007;
 }
 
