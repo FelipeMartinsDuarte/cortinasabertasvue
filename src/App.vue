@@ -104,11 +104,10 @@
           <p>
             Coloque uma ou mais Imagens sobre a estrutura qual queira mostrar ao visitante, com no mínimo 640x360 Pixels
           </p>
-          <div class="image-multiple">
+          <div class="image-multiple" >
 
 
-            <div class="image-input" style="{'background-image':
-            `url(${imageData})`}" @click="chooseImage">
+            <div class="image-input">
 
 
             <div class="placeholder">
@@ -120,7 +119,7 @@
             </div>
 
 
-            <input method="post" type="file" name="images" id="images" ref="ImagesArray" multiple>
+            <input type="file" name="images" ref="ImagesArray" multiple>
           
 
           </div>
@@ -139,18 +138,15 @@
           </p>
 
 
+          <div class="logo-unique" >
 
 
-          <div class="logo-unique">
-
-
-            <div class="logo-input" style="{'background-image':
-            `url(${imageData})`}" @click="chooseLogo">
+            <div class="logo-input">
 
             <div class="placeholder">
             <img src="./assets/logoicon.svg" alt="icon arquivo de imagem">
 
-            <span>Selecione ou Arraste aqui</span>
+            <span >Selecione ou Arraste aqui</span>
 
 
             </div>
@@ -199,18 +195,24 @@ import Footer from "./components/footer.vue";
 
 export default {
   name: "App",
+  delimiters: ['${', '}'],
   components: {
     Menu,
     Breakline,
     Footer
   },
+  data(){
+    return{
+      filelist: []
+    }
+  },
   methods:{
-    chooseImage(){
+    chooseImages(){
       this.$refs.ImagesArray.click()
     },
     chooseLogo(){
       this.$refs.ImagesLogo.click()
-    }
+    },
 
   }
 }
@@ -238,6 +240,10 @@ export default {
 
 
 /*Card-Image */
+
+.image-input .placeholder img, .image-input .placeholder span {
+  visibility: hidden;
+}
 
 
 .card-image .images hr{
@@ -309,7 +315,7 @@ export default {
 }
 
 .card-image input[type="file"]{
-  display: none;
+  /*display: none;*/
 }
 
 /*Logo*/
