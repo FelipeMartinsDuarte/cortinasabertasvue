@@ -11,7 +11,7 @@ export default {
     props:{
         name: String,
         type: String,
-        Base64: String
+        Base64: String,
     }
 }
 </script>

@@ -11,12 +11,12 @@
   <div class="select-team">
     <div class="search-bar">
       <label for="search-bar-team"></label>
-      <input type="search" id="search-bar-team" placeholder="Ex: Nutricionista">
-      <a><img src="./assets/searchicon.svg" alt="Search button"></a>
+      <input type="search" id="search-bar-team" placeholder="Ex: Nutricionista" v-model="search">
+      <button><img src="./assets/searchicon.svg" alt="Search button"></button>
     </div>
     <p>Adicione os profissionais clicando em qualquer lugar do item</p>
     <div class="teamlist">
-      <div v-for="(item,index) in teamlist" :key="index" class="teamitems">
+      <div v-for="(item,index) in SearchResults" :key="index" class="teamitems">
         <Teamitem :name="item.name" :type="item.icon.contentType" :Base64="item.icon.imageBase64" />
         <img src="./assets/selecticon.svg"/>
       </div>
@@ -32,6 +32,7 @@
 import Menu from "./components/menu.vue";
 import Breakline from "./components/breakline.vue";
 import Teamitem from "./components/teamitem.vue";
+import slugify from "slugify";
 import axios from 'axios';
 
 
@@ -44,7 +45,8 @@ export default {
   },
   data(){
     return{
-      teamlist:[]
+      teamlist:[],
+      search: ''
     }
   },
   created: function(){
@@ -53,6 +55,17 @@ export default {
       console.log(str);
       this.teamlist = str;
     }).catch(err=>{if(err){console.log(err)}})
+  },
+  computed:{
+    SearchResults: function(){
+      if(this.search == '' || this.search == ' '){
+        return this.teamlist
+      } else {
+        const Capitalized = this.search.charAt(0).toUpperCase() + this.search.slice(1);
+        const slug = slugify(Capitalized);
+        return this.teamlist.filter(item => item.slug.includes(slug));
+      }
+    }
   }
 };
 </script>
@@ -104,6 +117,10 @@ export default {
 }
 
 .select-team .search-bar input[type="search"]{
+  text-transform: capitalize;
+}
+
+.select-team .search-bar input[type="search"]{
   width: 85%;
   height: 28.5px;
   outline: none;
@@ -117,13 +134,14 @@ export default {
   border: 1px solid #16d9f2;
 }
 
-.select-team .search-bar a{
+.select-team .search-bar button{
   cursor: pointer;
   background-color: #007C6B;
   padding: 4px 8px;
+  border: inherit;
 }
 
-.select-team .search-bar a:hover{
+.select-team .search-bar button:hover{
   background-color: #01685a;
 }
 
