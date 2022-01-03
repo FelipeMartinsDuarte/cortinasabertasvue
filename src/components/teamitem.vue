@@ -1,7 +1,7 @@
 <template>
     <div>
          <img v-bind:src="'data:image/png;base64,'+Base64">
-         <h4>{{name}}</h4>
+         <span>{{name}}</span>
     </div>
 </template>
 
@@ -17,5 +17,19 @@ export default {
 </script>
 
 <style scoped>
+
+
+div{
+    font-weight: 100;
+    color: #006154;
+    display: flex;
+    flex-direction: row;
+    font-weight: 100;
+    align-items: center;
+}
+
+div img{
+    padding-right: 8px;
+}
 
 </style>
