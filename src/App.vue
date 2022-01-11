@@ -17,8 +17,15 @@
           </p>
           <div id="image-content">
             <div class="image-preview" v-if="imagelenght > 0">
-              <div v-for="(url,index) in imageArray" :key="index">
-                <img :src="url">
+              
+              <div v-for="(item,index) in imageArray" :key="index">
+                <div class="imgs">
+                <div class="meta-data">
+                <img src="./assets/bin.svg" alt="remove image" @click="removeImage(item)">
+                <span>{{item.filename}}</span>
+                </div>
+                <img :src="item.url">
+                </div>
               </div>
             </div>
             <div class="add-image" v-if="imagelenght == 0">
@@ -26,7 +33,7 @@
               <span><a href="#" v-on:click="imageSelect">Clique e selecione</a> ou Arraste aqui uma ou mais Imagens</span>
             </div>
 
-          <input type="file" ref="imageInput" @input="previewImage" multiple>
+          <input type="file" ref="imageInput" @input="verificateImage" multiple>
           </div>
 
 
@@ -69,25 +76,57 @@ export default {
   data() {
     return {
       imageArray:[],
+      imageItem:[],
       imagelenght:0,
     };
   },
   methods:{
+    removeImage: function(item){
+      var position = this.imageItem.indexOf(item.filename);
+      this.imagelenght -= 1;
+      this.imageArray.splice(position, 1);
+      this.imageItem.splice(position, 1);
+    },
     imageSelect: function (){
       this.$refs.imageInput.click()
     },
-    previewImage: function(){
+    verificateImage: function(){
+      //Define rules
+      const av = ["image/jpeg","image/jpg","image/png","image/webp"];
+      const maxsize = 3000000; //3Mb to Bytes
+      //Import Files
       const imageInput = this.$refs.imageInput;
       let Images = [...imageInput.files];
+      //Check item by item comply with the rule
       for(var item of Images){
         let url = URL.createObjectURL(item);
-        this.imageArray.push(url);
+        //Booleans
+        var rtype = av.includes(item.type);
+        var rsize = item.size < maxsize;
+        //Check Requirements
+        if(!rtype){
+          console.log("Tipo de Arquivo não é uma imagem");
+          continue;
+        }
+        if(!rsize){
+          console.log("Arquivo muito grande envie no máximo 3mb")
+        }
+        this.previewImage(item, url);
+      }
+    },
+    previewImage: function(item,url){
+        let imageObj = new Object;
+        imageObj.url = url;
+        imageObj.filename = item.name;
+        imageObj.filetype = item.type;
+        this.imageArray.push(imageObj);
+        this.imageItem.push(imageObj.filename);
         this.imagelenght +=1;
       }
 
     }
   }
-};
+
 </script>
 
 <style>
@@ -129,17 +168,48 @@ export default {
 .image-preview{
   position: relative;
   height: 12.8vmax;
-  width: 47vmax;
+  width: 99%;
   display: flex;
   flex-direction: row;
   align-items: center;
   overflow-x: auto;
 }
 
-.image-preview img{
-  height: 8.8vmax;
-  width: auto;
-  margin-left: 8px;
+.image-preview .imgs .meta-data img{
+  width: 16px;
+  cursor: pointer;
+  height: auto;
+  margin-right: 8px;
+}
+
+.image-preview .meta-data{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.image-preview .imgs{
+ display: flex;
+ flex-direction: column;
+ margin-left: 16px;
+}
+
+.image-preview .imgs .meta-data span{
+  width: 8vw;
+  text-align: right;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.image-preview .imgs img:nth-child(2n){
+  height: 5vmax;
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 0.8vmax 0;
+  width: 10vw;
 }
 
 
