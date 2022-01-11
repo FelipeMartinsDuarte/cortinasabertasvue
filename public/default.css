@@ -1,3 +1,5 @@
+@import 'cropperjs/dist/cropper.css';
+
 :root{
 --prim-color-blue: #16D9F2;
 --prim-color-green: #84F547;
