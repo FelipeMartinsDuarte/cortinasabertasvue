@@ -16,37 +16,24 @@
             ao visitante, com no mínimo 640x360 Pixels
           </p>
           <div id="image-content" @dragover.prevent @drop.stop.prevent="ondrop">
-
             <div class="image-preview" >
                 <div class="border add">
                   <img src="./assets/imageicon.svg"/>
                   <span><a href="#" v-on:click="imageSelect">Clique e selecione</a> ou Arraste aqui</span>
                 </div>
               </div>
-
               <div v-for="(item,index) in imageArray" :key="index" class="image-preview">
                   <div id="top-bar">
                     <img src="./assets/bin.svg" alt="remove image" @click="removeImage(item)">
                     <span>{{item.filename}}</span>
                   </div>
-                   
                   <div class="border image">
                     <img :src="item.url">
                   </div>
               </div>
-
-              
-
           <input type="file" ref="imageInput" @input="onselect" multiple>
           </div>
-
-
-
         </div>
-
-
-
-        
         <div id="logo">
           <h4>Possui uma Logo?</h4>
           <p>
@@ -60,7 +47,6 @@
             <div class="add-logo" @click="logoSelect" v-if="logolenght == 0">
             <img src="./assets/logoicon.svg">
             </div>
-
             <div class="row navlogo" v-if="logolenght > 0">
               <div class="edit">
                 <img src="./assets/crop.svg">
@@ -69,21 +55,32 @@
                 <img src="./assets/bin.svg">
               </div>
             </div>
-
             <input type="file" ref="logoInput" @input="onlogoselect">
           </div>
-  
-
         </div>
-
-  
-
         <form class="sendreset">
           <hr />
           <a href="#">Continuar</a>
           <input type="reset" value="Cancelar" />
         </form>
 
+      </div>
+
+      <div class="card spot">
+        <div id="accessibility">
+          <h4>Adicione detalhes sobre a acessibilidade na estrutura</h4>
+          <p>Clique e adicione e adicione detalhes sobre qual acessibilidade a estrutura disponibiliza</p>
+        </div>
+        <div id="spot">
+          <h4>Espaço</h4>
+          <p>Adicione detalhes sobre a acomodação da instituição, se possui salas de esperas, jardins e adicione imagens se quiser para mostrarmos aos visitantes</p>
+        </div>
+
+        <form class="sendreset">
+          <hr />
+          <a href="#">Continuar</a>
+          <input type="reset" value="Cancelar" />
+        </form>
       </div>
 
     </div>
@@ -95,7 +92,6 @@
 <script>
 import Menu from "./components/menu.vue";
 import Breakline from "./components/breakline.vue";
-import Cropper from 'cropperjs';
 
 export default {
   name: "App",
@@ -218,9 +214,18 @@ export default {
   grid-column: 2/13;
 }
 
+.spot {
+  grid-column: 2/13;
+}
+
 /*Image-Card*/
 
 /*Logo*/
+
+#logo{
+  margin-top: 16px;
+}
+
 .row{
   display: flex;
   flex-direction: row;
