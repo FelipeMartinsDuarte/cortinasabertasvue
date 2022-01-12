@@ -17,7 +17,7 @@
           </p>
           <div id="image-content" @dragover.prevent @drop.stop.prevent="ondrop">
             <div class="image-preview" >
-                <div class="border add">
+                <div class="border addimg">
                   <img src="./assets/imageicon.svg"/>
                   <span><a href="#" v-on:click="imageSelect">Clique e selecione</a> ou Arraste aqui</span>
                 </div>
@@ -70,10 +70,145 @@
         <div id="accessibility">
           <h4>Adicione detalhes sobre a acessibilidade na estrutura</h4>
           <p>Clique e adicione e adicione detalhes sobre qual acessibilidade a estrutura disponibiliza</p>
+          <div class="addwrap acess">
+            <!--Add items added to array-->
+            <div
+              v-for="(item, index) in acessitems"
+              :key="index"
+              class="itemarray"
+            >
+              <a v-on:click="onRemovedAcess(item)"
+                ><img src="./assets/bin.svg" alt="remove"
+              /></a>
+              <Teamadd
+                :name="item.name"
+                :slug="item.slug"
+                :icon="item.icon.contentType"
+                :Base64="item.icon.imageBase64"
+              />
+            </div>
+
+            <!--Add something, button and list-->
+            <div class="add-content">
+              <!--Add button-->
+              <div class="add" v-if="acesslenght < 12" v-on:click="onClickedAcess">
+                <img src="./assets/add.svg" />
+              </div>
+              <!--Clickoutside-->
+              <div class="outside" v-if="showacess" v-on:click="onClosedAcess"></div>
+              <!--Searchbar-->
+              <div class="selectbar acess" v-show="showacess">
+                <div class="search-bar">
+                  <label for="search-bar-acess"></label>
+                  <input
+                    type="search"
+                    id="search-bar-acess"
+                    placeholder="Ex: Móveis planejados"
+                    v-model="search"
+                  />
+                  <button>
+                    <img src="./assets/searchicon.svg" alt="Search button" />
+                  </button>
+                </div>
+                <p>
+                  Adicione detalhes sobre a acessibilidade clicando em qualquer lugar do item
+                </p>
+                <!--Rendering all team options-->
+                <div class="list acess">
+                  <div
+                    v-for="(item, index) in SearchResultsAcess"
+                    :key="index"
+                    class="items acess"
+                  >
+                    <div v-on:click="onAddedAcess(item)">
+                      <Teamitem
+                        :name="item.name"
+                        :type="item.icon.contentType"
+                        :Base64="item.icon.imageBase64"
+                      />
+                      <img src="./assets/selecticon.svg" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+
         <div id="spot">
           <h4>Espaço</h4>
-          <p>Adicione detalhes sobre a acomodação da instituição, se possui salas de esperas, jardins e adicione imagens se quiser para mostrarmos aos visitantes</p>
+          <p>
+          Adicione detalhes sobre a acomodação da instituição, se possui salas de esperas, jardins e adicione imagens se quiser 
+          para mostrarmos aos visitantes
+          </p>
+          <div class="addwrap spot">
+            <!--Add items added to array-->
+            <div
+              v-for="(item, index) in spotitems"
+              :key="index"
+              class="itemarray"
+            >
+              <a v-on:click="onRemovedSpot(item)"
+                ><img src="./assets/bin.svg" alt="remove"
+              /></a>
+              <Spotadd
+                :slug="item.slug"
+                :icon="item.icon.contentType"
+                :Base64="item.icon.imageBase64"
+              />
+
+              <div class="lateral-img">
+                <span>{{item.name}}</span>
+                <a>Adicionar imagem</a>
+              </div>
+            </div>
+
+
+            <!--Add something, button and list-->
+            <div class="add-content">
+              <!--Add button-->
+              <div class="add add-spot" v-if="spotlenght < 12" v-on:click="onClickedSpot">
+                <img src="./assets/add.svg" />
+              </div>
+              <!--Clickoutside-->
+              <div class="outside" v-if="showspot" v-on:click="onClosedSpot"></div>
+              <!--Searchbar-->
+              <div class="selectbar spot" v-show="showspot">
+                <div class="search-bar">
+                  <label for="search-bar-spot"></label>
+                  <input
+                    type="search"
+                    id="search-bar-spot"
+                    placeholder="Ex: Jardim"
+                    v-model="search"
+                  />
+                  <button>
+                    <img src="./assets/searchicon.svg" alt="Search button" />
+                  </button>
+                </div>
+                <p>
+                  Adicione detalhes sobre o Espaço qual compõe a clinica clicando em qualquer lugar do item
+                </p>
+                <!--Rendering all team options-->
+                <div class="list spot">
+                  <div
+                    v-for="(item, index) in SearchResultsSpot"
+                    :key="index"
+                    class="items spot"
+                  >
+                    <div v-on:click="onAddedSpot(item)">
+                      <Teamitem
+                        :name="item.name"
+                        :type="item.icon.contentType"
+                        :Base64="item.icon.imageBase64"
+                      />
+                      <img src="./assets/selecticon.svg" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <form class="sendreset">
@@ -92,23 +227,143 @@
 <script>
 import Menu from "./components/menu.vue";
 import Breakline from "./components/breakline.vue";
+import Teamitem from "./components/teamitem.vue";
+import Teamadd from "./components/teamadd.vue";
+import Spotadd from "./components/spotadd.vue";
+import slugify from "slugify";
+import axios from "axios";
 
 export default {
   name: "App",
   components: {
     Menu,
     Breakline,
+    Teamadd,
+    Teamitem,
+    Spotadd,
   },
   data() {
     return {
+      //Main
+      search: "",
+
+      //Image-Logo card
       imageArray:[],
       imageItem:[],
       imagelenght:0,
       logoItem:[],
       logolenght:0,
+
+      //Select acess
+      acesslist: [],
+      showacess: false,
+      acessitems: [],
+      acessslug: [],
+      acesslenght: 0,
+
+      //Select spot
+      spotlist: [],
+      showspot: false,
+      spotitems: [],
+      spotslug: [],
+      spotlenght: 0,
     };
   },
+  created: function () {
+    axios
+      .get("/api/acessibilidade")
+      .then((res) => {
+        let str = JSON.parse(JSON.stringify(res.data));
+        this.acesslist = str;
+      })
+      .catch((err) => {
+        if (err) {
+          console.log(err);
+        }
+      })
+
+    axios
+      .get("/api/lugar")
+      .then((res) => {
+        let str = JSON.parse(JSON.stringify(res.data));
+        this.spotlist = str;
+      })
+      .catch((err) => {
+        if (err) {
+          console.log(err);
+        }
+      })
+  },
   methods:{
+
+    //Add
+
+    //Spot
+    onRemovedSpot: function (item) {
+      var str = JSON.parse(JSON.stringify(item));
+      var position = this.spotslug.indexOf(str.slug);
+      this.spotlenght -= 1;
+      this.spotitems.splice(position, 1);
+      this.spotslug.splice(position, 1);
+    },
+    onClosedSpot: function () {
+      this.showspot = false;
+    },
+    onClickedSpot: function () {
+      this.showspot = true;
+    },
+    onAddedSpot: function (item) {
+      console.log(item)
+      let str = JSON.parse(JSON.stringify(item));
+      if (this.spotslug.includes(str.slug)) {
+        this.onErrorSpot();
+      } else {
+        this.onRightSpot(str);
+      }
+    },
+    onErrorSpot: function () {},
+    onRightSpot: function (item) {
+      this.spotitems.push(item);
+      this.spotslug.push(item.slug);
+      this.showspot = false;
+      this.spotlenght += 1;
+    },
+
+    //Spot ends here
+
+    //Acess
+    onRemovedAcess: function (item) {
+      var str = JSON.parse(JSON.stringify(item));
+      var position = this.acessslug.indexOf(str.slug);
+      this.acesslenght -= 1;
+      this.acessitems.splice(position, 1);
+      this.acessslug.splice(position, 1);
+    },
+    onClosedAcess: function () {
+      this.showacess = false;
+    },
+    onClickedAcess: function () {
+      this.showacess = true;
+    },
+    onAddedAcess: function (item) {
+      let str = JSON.parse(JSON.stringify(item));
+      if (this.acessslug.includes(str.slug)) {
+        this.onErrorAcess();
+      } else {
+        this.onRightAcess(str);
+      }
+    },
+    onErrorAcess: function () {},
+    onRightAcess: function (item) {
+      this.acessitems.push(item);
+      this.acessslug.push(item.slug);
+      this.showacess = false;
+      this.acesslenght += 1;
+    },
+    //Acess ends here
+    //Add ends here
+
+    //Image starts here
     ondrop: function(event){
         let limit = 13;
         let Images = [...event.dataTransfer.files];
@@ -165,14 +420,12 @@ export default {
         this.imagelenght +=1;
         console.log(this.logoItem)
       },
+    //Image End
 
-      //Image End
-      //Logo 
-
+    //Logo 
       logoSelect: function (){
       this.$refs.logoInput.click()
-    },
-
+      },
       onlogoselect: function(){
         const logoInput = this.$refs.logoInput;
         let Logo = logoInput.files[0];
@@ -192,8 +445,36 @@ export default {
         this.logolenght = 0;
         this.logoItem.splice(0,1);
       }
+    //Logo Ends
+
+
+    },
+    computed: {
+    SearchResultsAcess: function () {
+      if (this.search == "" || this.search == " ") {
+        return this.acesslist;
+      } else {
+        const Capitalized =
+          this.search.charAt(0).toUpperCase() + this.search.slice(1);
+        const slug = slugify(Capitalized);
+        return this.acesslist.filter((item) => item.slug.includes(slug));
+      }
+    },
+
+    SearchResultsSpot: function () {
+      if (this.search == "" || this.search == " ") {
+        return this.spotlist;
+      } else {
+        const Capitalized =
+          this.search.charAt(0).toUpperCase() + this.search.slice(1);
+        const slug = slugify(Capitalized);
+        return this.spotlist.filter((item) => item.slug.includes(slug));
+      }
+    },
 
     }
+
+
   }
 
 </script>
@@ -337,7 +618,7 @@ export default {
   text-overflow: ellipsis;
 }
 
-#image-content .add{
+#image-content .addimg{
  border: inherit;
  background-color: #e7e7e7e7;
  display: flex;
@@ -348,13 +629,13 @@ export default {
  margin-top: 24px;
 }
 
-#image-content .add span{
+#image-content .addimg span{
   margin-top: 4px;
   text-align: center;
   width: 99%;
 }
 
-#image-content .add span a{
+#image-content .addimg span a{
   color: #00a28c;
 }
 
@@ -384,6 +665,156 @@ export default {
 
 
 /*Main */
+
+/*Add*/
+
+.lateral-img{
+  margin-top: 4px;
+  height: 78%;
+  justify-self: baseline;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-weight: 100;
+  color: #006154;
+}
+
+.lateral-img a{
+  cursor:pointer;
+  margin-top: 4px;
+  text-decoration: underline;
+  font-size: 12px;
+  color:#68B400;
+}
+
+.lateral-img a:hover, .lateral-img a:active{
+  color:#5a9b00;
+}
+
+.itemarray {
+  display: flex;
+}
+
+.itemarray img[alt="remove"] {
+  cursor: pointer;
+}
+
+.outside {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.add {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #00a28c;
+  border-radius: 5px;
+  height: 47px;
+  width: 47px;
+  margin-left: 13px;
+}
+
+.addwrap {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 12vmax;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+/* Select Item */
+
+/*Main*/
+
+.selectbar {
+  z-index: 32;
+  position: absolute;
+  overflow-y: scroll;
+  cursor: auto;
+  width: 220px;
+  height: 256px;
+  padding: 8px;
+  border-radius: 5px;
+  background-color: white;
+  border: 2px solid rgba(0, 0, 0, 0.39);
+}
+
+.selectbar p:first-of-type {
+  font-weight: 200;
+  opacity: 0.5;
+}
+
+/*SearchBar*/
+.selectbar .search-bar {
+  font-family: "Segoe UI Local";
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.selectbar .search-bar ::placeholder {
+  opacity: 0.25;
+}
+
+.selectbar .search-bar input[type="search"] {
+  text-transform: capitalize;
+}
+
+.selectbar .search-bar input[type="search"] {
+  width: 85%;
+  height: 28.5px;
+  outline: none;
+  font-weight: 600;
+  font-size: 12px;
+  text-indent: 4px;
+  border: 1px solid #707070;
+}
+
+.selectbar .search-bar input[type="search"]:focus {
+  border: 1px solid #16d9f2;
+}
+
+.selectbar .search-bar button {
+  cursor: pointer;
+  background-color: #007c6b;
+  padding: 4px 8px;
+  border: inherit;
+}
+
+.selectbar .search-bar button:hover {
+  background-color: #01685a;
+}
+
+/*TeamList */
+.list {
+  margin-top: 16px;
+}
+
+/*TeamItem */
+
+.items {
+  border-top: 2px solid hsla(0, 0%, 0%, 0.25);
+}
+
+.items div {
+  padding: 4px 0px 4px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/*Add-ends here*/
 
 .image input[type="file"]{
   display: none;
