@@ -159,8 +159,10 @@
 
               <div class="lateral-img">
                 <span>{{item.name}}</span>
-                <a @click="selectSpot(index)">Adicionar imagem</a> //Pass values into indirect way
-                <a @click="removeCreateSpot(index)">Remover imagem</a> //Its direct value 
+                <!--Pass values into indirect way-->
+                <a @click="selectSpot(index)">Adicionar imagem</a> 
+                <!--Its direct value-->
+                <a @click="removeCreateSpot(index)">Remover imagem</a> 
               </div>
 
             </div>
@@ -842,7 +844,7 @@ export default {
 
 /*Add-ends here*/
 
-.image input[type="file"]{
+.image input[type="file"], #spot .addwrap input[type="file"]{
   display: none;
 }
 
