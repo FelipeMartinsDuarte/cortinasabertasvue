@@ -148,7 +148,7 @@
               :key="index"
               class="itemarray"
             >
-              <a v-on:click="onRemovedSpot(item)"
+              <a v-on:click="onRemovedSpot(item,index)"
                 ><img src="./assets/bin.svg" alt="remove"
               /></a>
               <Spotadd
@@ -159,10 +159,13 @@
 
               <div class="lateral-img">
                 <span>{{item.name}}</span>
-                <a>Adicionar imagem</a>
+                <a @click="selectSpot(index)">Adicionar imagem</a> //Pass values into indirect way
+                <a @click="removeCreateSpot(index)">Remover imagem</a> //Its direct value 
               </div>
+
             </div>
 
+            <input type="file" ref="spotInput" @input="createSpot">
 
             <!--Add something, button and list-->
             <div class="add-content">
@@ -267,6 +270,9 @@ export default {
       spotitems: [],
       spotslug: [],
       spotlenght: 0,
+
+      spotslc:0,
+      spotfiles:[0,0,0,0,0,0,0,0,0,0,0,0,0]
     };
   },
   created: function () {
@@ -299,12 +305,18 @@ export default {
     //Add
 
     //Spot
-    onRemovedSpot: function (item) {
+    onRemovedSpot: function (item,index) {
       var str = JSON.parse(JSON.stringify(item));
       var position = this.spotslug.indexOf(str.slug);
       this.spotlenght -= 1;
       this.spotitems.splice(position, 1);
       this.spotslug.splice(position, 1);
+      //Fix item slug index decresing and files interlaced index keep the same
+      let i;
+      for(i = index + 1; i <= 12; i++){ //Garantee it catch from the next value until the end
+        this.spotfiles.splice(i - 1, 1, this.spotfiles[i]); //Catch previous value of index number
+        this.spotfiles.splice(i, 1, 0);
+      }
     },
     onClosedSpot: function () {
       this.showspot = false;
@@ -313,7 +325,6 @@ export default {
       this.showspot = true;
     },
     onAddedSpot: function (item) {
-      console.log(item)
       let str = JSON.parse(JSON.stringify(item));
       if (this.spotslug.includes(str.slug)) {
         this.onErrorSpot();
@@ -327,6 +338,21 @@ export default {
       this.spotslug.push(item.slug);
       this.showspot = false;
       this.spotlenght += 1;
+    },
+    selectSpot: function(index){
+      this.spotslc = index; //Pass selected value toa variable so it can be used to interlace the file to the slug
+      this.$refs.spotInput.click()
+    },
+    createSpot: function(){
+      const spotInput = this.$refs.spotInput; //Import the files
+      let spotadd = spotInput.files[0];
+      this.rightCreateSpot(spotadd); //Pass to the filter that pass to the right
+    },
+    rightCreateSpot: function(spotadd){
+      this.spotfiles.splice(this.spotslc,1,spotadd.name) //Catch the selected index and replace by the image name
+    },
+    removeCreateSpot:function(index){
+      this.spotfiles.splice(index,1,0) //Catch the sent item index and delete it
     },
 
     //Spot ends here
