@@ -365,7 +365,7 @@ export default {
       //Check Requirements
       let img = new Image;
       img.onload = () =>{
-        let min = 500;
+        let min = 600;
         let width = img.width;
         let height = img.height;
         if(!rtype){
