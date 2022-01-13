@@ -634,6 +634,7 @@ export default {
 #logo-content {
   position: relative;
   border: 1px solid black;
+  background-color: lavenderblush;
   border-radius: 4px;
   width: 16vmax;
   height: 16vmax;
@@ -657,6 +658,7 @@ export default {
 #logo-content .preview-logo{
   height: 100%;
   width: 100%;
+
 }
 
 #logo-content .preview-logo img{
@@ -673,6 +675,7 @@ export default {
   align-items:center;
   width: 100%;
   height: 12vmax;
+  background-color: lavenderblush;
   overflow-x: auto;
 }
 
@@ -829,6 +832,7 @@ export default {
   height: 12vmax;
   width: 100%;
   margin-bottom: 16px;
+  background-color: lavenderblush;
 }
 
 /* Select Item */
@@ -924,6 +928,7 @@ export default {
 
 .card {
   border: 2px solid #0d0d0d31;
+  width: 100%;
   border-radius: 5px;
   padding: 16px;
 }
