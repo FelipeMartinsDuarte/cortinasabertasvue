@@ -1,10 +1,10 @@
 <template>
     <div>
         <div class="wrap">
-         <img v-bind:src="'data:image/png;base64,'+Base64" :alt="name">
+         <img v-if="imgUrl == 0" v-bind:src="'data:image/png;base64,'+Base64" :alt="name">
+         <img v-if="imgUrl != 0" v-bind:src="imgUrl" :alt="name" class="uploadimage">
+         <img src="" alt="" srcset="">
         </div>
-
-
          
     </div>
 </template>
@@ -16,6 +16,7 @@ export default {
         name: String,
         type: String,
         Base64: String,
+        imgUrl: [String,Number],
     }
 }
 </script>
@@ -43,5 +44,13 @@ div .wrap {
     margin-right: 8px;
     margin-bottom: 8px;
 }
+
+div .wrap img[class="uploadimage"]{
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+}
+
+
 
 </style>

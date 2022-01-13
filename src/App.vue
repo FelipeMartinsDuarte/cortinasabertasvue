@@ -155,13 +155,18 @@
                 :slug="item.slug"
                 :icon="item.icon.contentType"
                 :Base64="item.icon.imageBase64"
+                :imgUrl="spotfiles[index]"
               />
 
-              <div class="lateral-img">
+              <div class="lateral-img" v-if="spotfiles[index] == 0">
                 <span>{{item.name}}</span>
                 <!--Pass values into indirect way-->
                 <a @click="selectSpot(index)">Adicionar imagem</a> 
-                <!--Its direct value-->
+              </div>
+
+              <div class="lateral-img" v-if="spotfiles[index] != 0">
+                <span>{{item.name}}</span>
+                <!--Pass values into indirect way-->
                 <a @click="removeCreateSpot(index)">Remover imagem</a> 
               </div>
 
@@ -304,8 +309,6 @@ export default {
   },
   methods:{
 
-    //Add
-
     //Spot
     onRemovedSpot: function (item,index) {
       var str = JSON.parse(JSON.stringify(item));
@@ -348,10 +351,40 @@ export default {
     createSpot: function(){
       const spotInput = this.$refs.spotInput; //Import the files
       let spotadd = spotInput.files[0];
-      this.rightCreateSpot(spotadd); //Pass to the filter that pass to the right
+      this.verificateSpotImage(spotadd); //Pass to the filter that pass to the right
     },
-    rightCreateSpot: function(spotadd){
-      this.spotfiles.splice(this.spotslc,1,spotadd.name) //Catch the selected index and replace by the image name
+    verificateSpotImage: function(Images){
+      //Define rules
+      const av = ["image/jpeg","image/jpg","image/png","image/webp"];
+      const maxsize = 3000000; //3Mb to Bytes
+      //Check item by item comply with the rule
+      let url = URL.createObjectURL(Images);
+      //Booleans
+      var rtype = av.includes(Images.type);
+      var rsize = Images.size < maxsize;
+      //Check Requirements
+      let img = new Image;
+      img.onload = () =>{
+        let min = 500;
+        let width = img.width;
+        let height = img.height;
+        if(!rtype){
+          console.log("Tipo de Arquivo não é uma imagem");
+        } else if(!rsize){
+          console.log("Arquivo muito grande envie no máximo 3mb")
+        } else if(width < min && height < min){
+          console.log(`A Imagem precisa ter ${min}px em um dos lados`)
+        } else if(width > 1920 || height > 1080){
+          console.log("Imagem muito grande precisa ser menor do que 1920x1080")
+        } else{
+          this.rightCreateSpot(url);
+        }
+      }
+
+      img.src = url
+    },
+    rightCreateSpot: function(url){
+      this.spotfiles.splice(this.spotslc,1,url) //Catch the selected index and replace by the image name
     },
     removeCreateSpot:function(index){
       this.spotfiles.splice(index,1,0) //Catch the sent item index and delete it
@@ -389,7 +422,6 @@ export default {
       this.acesslenght += 1;
     },
     //Acess ends here
-    //Add ends here
 
     //Image starts here
     ondrop: function(event){
@@ -427,15 +459,25 @@ export default {
         var rtype = av.includes(item.type);
         var rsize = item.size < maxsize;
         //Check Requirements
-        if(!rtype){
-          console.log("Tipo de Arquivo não é uma imagem");
-          continue;
+        var img = new Image;
+        img.onload = ()=>{
+          let minsize = 600;
+          let width = img.width;
+          let height = img.height;
+          if(!rtype){
+          console.log("Tipo de Arquivo não é uma imagem"); //Check if it's an image
+          } else if(!rsize){ //Check image size exceed 3mb
+            console.log("Arquivo muito grande envie no máximo 3mb")
+          } else if(width < minsize && height < minsize){ //Check the dimensions are atach the min size
+            console.log(`A Imagem precisa ter ${minsize}px em um dos lados`)
+          } else if(width > 1920 || height > 1080){ //Check if the dimensions exceed the max size
+            console.log("A Imagem é muito grande precisa ser menor do que 1920x1080")
+          } else{
+            this.previewImage(item, url); //So it can be displayed
+          }
         }
-        if(!rsize){
-          console.log("Arquivo muito grande envie no máximo 3mb")
-          continue;
-        }
-        this.previewImage(item, url);
+        img.src = url;
+        
       }
     },
     previewImage: function(item,url){
@@ -450,17 +492,49 @@ export default {
       },
     //Image End
 
+
     //Logo 
-      logoSelect: function (){
+    logoSelect: function (){
       this.$refs.logoInput.click()
-      },
-      onlogoselect: function(){
+    },
+    onlogoselect: function(){
         const logoInput = this.$refs.logoInput;
         let Logo = logoInput.files[0];
-        let url = URL.createObjectURL(Logo);
-        this.onlogopreview(Logo,url);
-      },
-      onlogopreview: function(item,url){
+        this.verificateLogoImage(Logo);
+    },
+
+    verificateLogoImage: function(Logo){
+      //Define rules
+      const av = ["image/jpeg","image/jpg","image/png","image/webp"];
+      const maxsize = 3000000; //3Mb to Bytes
+      //Check item by item comply with the rule
+      let url = URL.createObjectURL(Logo);
+      //Booleans
+      var rtype = av.includes(Logo.type);
+      var rsize = Logo.size < maxsize;
+      //Check Requirements
+      let img = new Image();
+      img.onload = () => {
+        let minsize = 64;
+        let width = img.width;
+        let height = img.height;
+        if(!rtype){
+          console.log("Tipo de Arquivo não é uma imagem");
+        } else if(!rsize){
+          console.log("Arquivo muito grande envie no máximo 3mb")
+        } else if(width < minsize || height < minsize){
+          console.log("Este arquivo é muito pequeno precisa ter 64px nos dois lados")
+        } else if(width > 512 || height > 512){
+          console.log("Logo muito grande precisa ser menor do que 512")
+        } else{
+          this.onlogopreview(Logo,url);
+        }
+      }
+
+      img.src = url;
+    },
+
+    onlogopreview: function(item,url){
         console.log(url);
         let Logo = new Object;
         Logo.url = url;
@@ -468,11 +542,11 @@ export default {
         Logo.filetype = item.type;
         this.logoItem.push(Logo);
         this.logolenght +=1;
-      },
-      removeLogo: function(){
+    },
+    removeLogo: function(){
         this.logolenght = 0;
         this.logoItem.splice(0,1);
-      }
+    }
     //Logo Ends
 
 
