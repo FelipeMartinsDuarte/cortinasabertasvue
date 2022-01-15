@@ -1,20 +1,23 @@
+
 <template>
   <div id="app">
-    <Menu />
+    <menuHeader/>
     <Breakline />
+    
+    <main id="content-wrap">
+      <header class="title">
+        <p>Etapa 1 de 2</p>
+        <h1>Criação do website</h1>
+      </header>
 
-    <div id="content-wrap">
-      <div class="title">
-        <h3>Criação do website</h3>
-      </div>
-
-      <div class="card image">
-        <div id="image">
-          <h4>Coloque Imagens</h4>
+      <section class="card image">
+        <article id="image">
+          <header>
+          <h2>Adicione fotos</h2>
           <p>
-            Coloque uma ou mais Imagens sobre a estrutura qual queira mostrar 
-            ao visitante, com no mínimo 640x360 Pixels
+            Coloque uma ou mais fotos sobre a estrutura, com no mínimo 600 Pixels
           </p>
+          </header>
           <div id="image-content" @dragover.prevent @drop.stop.prevent="ondrop">
             <div class="image-preview" >
                 <div class="border addimg">
@@ -33,43 +36,47 @@
               </div>
           <input type="file" ref="imageInput" @input="onselect" multiple>
           </div>
-        </div>
-        <div id="logo">
-          <h4>Possui uma Logo?</h4>
+        </article>
+
+        <article id="logo">
+          <header>
+          <h2>Possui uma Logo?</h2>
           <p>
-            Coloque a sua logo em fundo transparente ou branco, caso não possua uma ou não esteja 
-            com o arquivo basta avançar para próxima etapa, você poderá adicionar futuramente
+            Coloque a sua logo em fundo transparente ou branco. Você poderá adicionar futuramente!
           </p>
-          <div id="logo-content">
-            <div class="preview-logo" v-for="(item,index) in logoItem" :key="index">
-              <img :src="item.url">
-            </div>
-            <div class="add-logo" @click="logoSelect" v-if="logolenght == 0">
-            <img src="./assets/logoicon.svg">
-            </div>
-            <div class="row navlogo" v-if="logolenght > 0">
+          </header>
+          <aside id="logo-content">
+            <nav class="row navlogo" v-if="logolenght > 0">
               <div class="edit">
-                <img src="./assets/crop.svg">
+                <img src="./assets/crop.svg" alt="cortar imagem">
               </div>
               <div class="remove" @click="removeLogo">
-                <img src="./assets/bin.svg">
+                <img src="./assets/bin.svg" alt="excluir imagem">
               </div>
-            </div>
+            </nav>
+            <figure class="preview-logo" v-for="(item,index) in logoItem" :key="index">
+              <img :src="item.url" alt="visualisação da sua logomarca">
+            </figure>
+            <figure class="add-logo" @click="logoSelect" v-if="logolenght == 0">
+             <img src="./assets/logoicon.svg" alt="crie sua logo aqui">
+            </figure>
             <input type="file" ref="logoInput" @input="onlogoselect">
-          </div>
-        </div>
+          </aside>
+        </article>
+
         <form class="sendreset">
           <hr />
-          <a href="#">Continuar</a>
+          <a href="#spot">Continuar</a>
           <input type="reset" value="Cancelar" />
         </form>
+      </section>
 
-      </div>
-
-      <div class="card spot">
-        <div id="accessibility">
-          <h4>Adicione detalhes sobre a acessibilidade na estrutura</h4>
-          <p>Clique e adicione e adicione detalhes sobre qual acessibilidade a estrutura disponibiliza</p>
+      <section class="card spot">
+        <article id="accessibility">
+          <header>
+          <h2>Adicione detalhes sobre a acessibilidade</h2>
+          <p>Clique e adicione a acessibilidade que a estrutura possui</p>
+          </header>
           <div class="addwrap acess">
             <!--Add items added to array-->
             <div
@@ -110,9 +117,7 @@
                     <img src="./assets/searchicon.svg" alt="Search button" />
                   </button>
                 </div>
-                <p>
-                  Adicione detalhes sobre a acessibilidade clicando em qualquer lugar do item
-                </p>
+
                 <!--Rendering all team options-->
                 <div class="list acess">
                   <div
@@ -133,14 +138,15 @@
               </div>
             </div>
           </div>
-        </div>
+        </article>
 
-        <div id="spot">
-          <h4>Espaço</h4>
+        <article id="spot">
+          <header>
+          <h2>Espaço</h2>
           <p>
-          Adicione detalhes sobre a acomodação da instituição, se possui salas de esperas, jardins e adicione imagens se quiser 
-          para mostrarmos aos visitantes
+          Clique e Adicione a acomodação disponibilizada e opcionalmente adicione imagens. Ex: Sala de espera, Jardim
           </p>
+          </header>
           <div class="addwrap spot">
             <!--Add items added to array-->
             <div
@@ -196,9 +202,6 @@
                     <img src="./assets/searchicon.svg" alt="Search button" />
                   </button>
                 </div>
-                <p>
-                  Adicione detalhes sobre o Espaço qual compõe a clinica clicando em qualquer lugar do item
-                </p>
                 <!--Rendering all team options-->
                 <div class="list spot">
                   <div
@@ -219,6 +222,63 @@
               </div>
             </div>
           </div>
+        </article>
+
+        <form class="sendreset">
+          <hr />
+          <a href="#">Continuar</a>
+          <input type="reset" value="Cancelar" />
+        </form>
+      </section>
+
+      <section class="card contact">
+        <article>
+        <header>
+        <h2>Contato</h2>
+        <p>
+          Adicione os meios de contato existentes cujo o cliente possa entrar em contato e o horário em que a instituição permanece 
+          aberta para visitas, coloque no mínimo um meio de contato 
+        </p>
+        </header>
+
+        <div class="flexbox">
+
+        <address class="pa po">
+          <label for="website">
+          <span>Site</span>
+          </label>
+          <input type="text" id="website" placeholder="www.seusite.com">
+        </address>
+
+        <address class="pa po">
+          <label for="tel">
+          <span class="rw">Telefone contato *</span>
+          </label>
+          <TheMask mask="(##) ####-#####" type="text" id="tel"/>
+        </address>
+
+        <address class="pa">
+          <label for="tel2">
+          <span>Telefone contato #2</span>
+          </label>
+          <TheMask mask="(##) ####-#####" type="text" id="tel2"/>
+        </address>
+
+      
+
+        <time class="pa ab">
+          <label for="opentime">
+          <span>Horário Aberto a visitação *</span> 
+          <input type="time" v-if="!srdisabled">
+          <input type="time" v-if="srdisabled" :value="srd" class="dis" disabled/>
+          <span>ás</span>    
+          <input type="time" v-if="!srdisabled" id="opentime" />
+          <input type="time" v-if="srdisabled" :value="sra" id="opentime" class="dis" disabled/>
+          </label>
+          <a v-if="!sr" @mouseover="showTagSR"  @click="srClick"><abbr title="Sem restrição">S/R</abbr></a>
+          <a v-if="sr"  @mouseout="closeTagSR"  @click="srClick" class="sr"><abbr>S/R</abbr></a>
+        </time>
+
         </div>
 
         <form class="sendreset">
@@ -226,31 +286,36 @@
           <a href="#">Continuar</a>
           <input type="reset" value="Cancelar" />
         </form>
-      </div>
 
-    </div>
+
+        </article>
+      </section>
+
+    </main>
     
   </div>
   
 </template>
 
 <script>
-import Menu from "./components/menu.vue";
+import menuHeader from "./components/menu.vue";
 import Breakline from "./components/breakline.vue";
 import Teamitem from "./components/teamitem.vue";
 import Teamadd from "./components/teamadd.vue";
 import Spotadd from "./components/spotadd.vue";
+import {TheMask} from "vue-the-mask";
 import slugify from "slugify";
 import axios from "axios";
 
 export default {
   name: "App",
   components: {
-    Menu,
+    menuHeader,
     Breakline,
     Teamadd,
     Teamitem,
     Spotadd,
+    TheMask
   },
   data() {
     return {
@@ -279,7 +344,17 @@ export default {
       spotlenght: 0,
 
       spotslc:0,
-      spotfiles:[0,0,0,0,0,0,0,0,0,0,0,0,0]
+      spotfiles:[0,0,0,0,0,0,0,0,0,0,0,0,0],
+
+      //Acronyms
+      sr:false,
+      srdisabled:false,
+      srd:"", //First input time
+      sra:"", //Second input time
+
+      pm:false,
+      pmdisabled:false,
+      pma:"",
     };
   },
   created: function () {
@@ -308,6 +383,43 @@ export default {
       })
   },
   methods:{
+    //Tags Acronyms 
+
+    //Website
+    showTagPM(){
+      this.pm = true;
+    },
+    closeTagPM(){
+      this.pm = false;
+    },
+    pmClick(){
+      let cst = this.pmdisabled;
+      this.pmdisabled = !cst;
+      this.pma = "Não possui";
+      setTimeout(()=>{
+        this.pm = false;
+      },1000);
+    },
+
+    //Time
+    srClick(){
+      let cst = this.srdisabled;
+      this.srdisabled = !cst;
+      if(this.srdisabled == true){
+         this.srd = "00:00";
+         this.sra = "23:59";
+      }
+      setTimeout(()=>{
+        this.sr = false;
+      },1000);
+    },
+
+    showTagSR(){
+      this.sr = true;
+    },
+    closeTagSR(){
+      this.sr = false;
+    },
 
     //Spot
     onRemovedSpot: function (item,index) {
@@ -327,6 +439,7 @@ export default {
       this.showspot = false;
     },
     onClickedSpot: function () {
+      this.search = "";
       this.showspot = true;
     },
     onAddedSpot: function (item) {
@@ -334,6 +447,7 @@ export default {
       if (this.spotslug.includes(str.slug)) {
         this.onErrorSpot();
       } else {
+        this.search = "";
         this.onRightSpot(str);
       }
     },
@@ -401,6 +515,7 @@ export default {
       this.acessslug.splice(position, 1);
     },
     onClosedAcess: function () {
+      this.search = "";
       this.showacess = false;
     },
     onClickedAcess: function () {
@@ -411,6 +526,7 @@ export default {
       if (this.acessslug.includes(str.slug)) {
         this.onErrorAcess();
       } else {
+        this.search = "";
         this.onRightAcess(str);
       }
     },
@@ -488,7 +604,6 @@ export default {
         this.imageArray.push(imageObj);
         this.imageItem.push(imageObj.filename);
         this.imagelenght +=1;
-        console.log(this.logoItem)
       },
     //Image End
 
@@ -550,8 +665,8 @@ export default {
     //Logo Ends
 
 
-    },
-    computed: {
+  },
+  computed: {
     SearchResultsAcess: function () {
       if (this.search == "" || this.search == " ") {
         return this.acesslist;
@@ -574,7 +689,7 @@ export default {
       }
     },
 
-    }
+  }
 
 
   }
@@ -600,6 +715,149 @@ export default {
 .spot {
   grid-column: 2/13;
 }
+
+.contact {
+  grid-column: 2/13;
+}
+
+/*Contact-Card */
+
+
+/*Contact card ends here */
+.contact time input[type="time"]{
+  padding-top: 1px;
+  border: none;
+  border-radius: inherit;
+  border-bottom: 1px solid black;
+  background-color: inherit;
+  font-size: 16px;
+  font-weight: 200;
+  outline: none;
+  color: #2a2c2d;
+
+}
+.contact time input[type="time"]::webkit-datetime-edit-fields-wrapper{
+  display: flex;
+}
+
+.contact time input[type=time]::webkit-clear-button{
+  display: none;
+}
+
+.contact time input[type=time]::-webkit-inner-spin-button {
+  display: none;
+}
+
+.contact time input[type=time]::-webkit-datetime-edit-ampm-field {
+  display: none;
+}
+
+.contact time a[class="sr"]{
+  position: relative;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.contact time a[class="sr"]::after {
+  content: 'Sem restrição';
+
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  bottom: -40px;
+  width: auto;
+  white-space: nowrap;
+
+  background-color: #F2EEEB;
+  box-shadow: 1px 1px 3px 2px #5f5f5f34;
+  font-size: 16px;
+  font-weight: 200;
+  border-radius: 4px;
+  padding: 16px;
+}
+.contact time input[class="dis"]{
+  opacity: 0.25;
+}
+
+.contact time input[class="dis"]::-webkit-datetime-edit-hour-field {
+  color: #dcdcdc ; 
+  text-decoration-line: line-through;
+  -webkit-text-decoration-line: line-through;
+  text-decoration-color: gainsboro;
+  -webkit-text-decoration-color: gainsboro;
+}
+
+.contact time input[class="dis"]::-webkit-datetime-edit-minute-field {
+  color: gainsboro;
+  text-decoration-line: line-through;
+  -webkit-text-decoration-line: line-through;
+  text-decoration-color: gainsboro;
+  -webkit-text-decoration-color: gainsboro;
+}
+
+.contact time input[class="dis"]::-webkit-datetime-edit-text {
+  color: gainsboro;
+  text-decoration-line: line-through;
+  -webkit-text-decoration-line: line-through;
+  text-decoration-color: gainsboro;
+  -webkit-text-decoration-color: gainsboro;
+}
+
+.contact .flexbox{
+  display: flex;
+  flex-wrap: wrap;
+  align-content: bottom;
+}
+.contact .flexbox span{
+  display: block;
+}
+
+.contact .flexbox time label span:last-of-type{
+  display: inline;
+  font-weight: 100;
+  padding: 0 8px;
+}
+
+.contact .flexbox input[type="text"]{
+  outline: none;
+  border:none;
+  background-color: transparent;
+  padding-bottom: 4px;
+  border-radius: 0;
+  width: 90%;
+  border-bottom: 1px solid black;
+}
+
+.contact .flexbox a{
+  margin-left: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #007C6B;
+  outline: none;
+  border: none;
+  background: inherit;
+}
+
+.contact .flexbox .pa{
+  margin-bottom: 32px;
+  width: 50%;
+}
+
+.contact .flexbox .po{
+  margin-top: 8px;
+  margin-bottom: 32px;
+}
+
+.contact .flexbox .pa input:focus{
+  border-bottom: 2px solid #00a28c;
+  color: #00a28c;
+}
+
+.contact .flexbox a abbr{
+  text-decoration: none;
+}
+
+
 
 /*Image-Card*/
 
@@ -634,7 +892,7 @@ export default {
 #logo-content {
   position: relative;
   border: 1px solid black;
-  background-color: lavenderblush;
+  background-color: #e2e4e381;
   border-radius: 4px;
   width: 16vmax;
   height: 16vmax;
@@ -675,7 +933,7 @@ export default {
   align-items:center;
   width: 100%;
   height: 12vmax;
-  background-color: lavenderblush;
+  background-color: #e2e4e381;
   overflow-x: auto;
 }
 
@@ -684,7 +942,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-right: 8px;
+  margin-left:13px;
   height: auto;
 }
 
@@ -830,9 +1088,10 @@ export default {
   flex-direction: column;
   flex-wrap: wrap;
   height: 12vmax;
+  padding-top:13px;
   width: 100%;
   margin-bottom: 16px;
-  background-color: lavenderblush;
+  background-color: #e2e4e381;
 }
 
 /* Select Item */
@@ -859,22 +1118,21 @@ export default {
 
 /*SearchBar*/
 .selectbar .search-bar {
-  font-family: "Segoe UI Local";
+  font-family: "Segoe UI Local", sans-serif;
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 4px;
 }
 
 .selectbar .search-bar ::placeholder {
-  opacity: 0.25;
+  opacity: 0.5;
 }
 
 .selectbar .search-bar input[type="search"] {
+  -webkit-appearance:none;
+  border-radius: 0;
   text-transform: capitalize;
-}
-
-.selectbar .search-bar input[type="search"] {
   width: 85%;
   height: 28.5px;
   outline: none;
@@ -900,14 +1158,11 @@ export default {
 }
 
 /*TeamList */
-.list {
-  margin-top: 16px;
-}
 
 /*TeamItem */
 
-.items {
-  border-top: 2px solid hsla(0, 0%, 0%, 0.25);
+.items:nth-child(n+2) {
+  border-top: 2px solid #00000040;
 }
 
 .items div {
@@ -929,15 +1184,21 @@ export default {
 .card {
   border: 2px solid #0d0d0d31;
   width: 100%;
+  margin-bottom:32px;
   border-radius: 5px;
   padding: 16px;
+}
+
+.card h2:first-of-type{
+  font-weight: 700;
+  font-size: 16px;
 }
 
 .card p:first-of-type {
   margin-top: 8px;
   margin-bottom: 16px;
   font-weight: 200;
-  font-size: 12px;
+  font-size: 16px;
 }
 
 /*Send and Reset */
@@ -988,8 +1249,18 @@ export default {
 
 /*Tittle Description */
 .title {
-  margin-top: 32px;
   width: 38vmax;
-  margin-bottom: 16px;
 }
+
+.title h1{
+  margin-top: 8px;
+  margin-bottom: 32px;
+  font-weight: 700;
+}
+
+.title p{
+  color:#006154;
+  font-weight: 600;
+}
+
 </style>

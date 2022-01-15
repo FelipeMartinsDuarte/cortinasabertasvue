@@ -1,6 +1,6 @@
 <template>
     <div class="wrap">
-        <div id="backbutton">
+      <div id="backbutton">
         <img src="../assets/backarrow.svg" alt="botão voltar" />
         <span>Voltar</span>
       </div>
@@ -32,7 +32,7 @@ export default {
   font-weight: 600;
   padding-left: 8px;
   color: #006154;
-  font-size: 12px;
+  font-size: 16px;
 }
 
 #backbutton span:hover {
