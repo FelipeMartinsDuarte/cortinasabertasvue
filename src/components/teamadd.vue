@@ -1,11 +1,13 @@
 <template>
-    <div>
+    <figure>
         <div class="wrap">
          <img v-bind:src="'data:image/png;base64,'+Base64" :alt="name">
         </div>
 
+        <figcaption>
          <span>{{name}}</span>
-    </div>
+        </figcaption>
+    </figure>
 </template>
 
 <script>
@@ -22,7 +24,7 @@ export default {
 <style scoped>
 
 
-div{
+figure{
     margin-left: 2px;
     margin-top: 2px;
     font-weight: 100;
@@ -33,7 +35,7 @@ div{
     align-items: center;
 }
 
-div .wrap {
+figure .wrap {
     display: flex;
     flex-direction: column;
     justify-content: center;

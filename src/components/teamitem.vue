@@ -1,8 +1,8 @@
 <template>
-    <div>
+    <figure>
          <img v-bind:src="'data:image/png;base64,'+Base64">
-         <span>{{name}}</span>
-    </div>
+         <figcaption><span>{{name}}</span></figcaption>
+    </figure>
 </template>
 
 <script>
@@ -19,7 +19,9 @@ export default {
 <style scoped>
 
 
-div{
+figure{
+    width: 100%;
+    position: relative;
     font-weight: 100;
     color: #006154;
     display: flex;
@@ -28,8 +30,22 @@ div{
     align-items: center;
 }
 
-div img{
+figure img{
     padding-right: 8px;
+}
+
+figure::after{
+  content: "";
+  position: absolute;
+  z-index: 1;
+  background: url(../assets/selecticon.svg) no-repeat center center;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  right: 0;
+  background-size: 8px;
+  height: 100%;
+  width: 8px;
 }
 
 </style>

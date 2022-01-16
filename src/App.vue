@@ -65,9 +65,9 @@
         </article>
 
         <form class="sendreset">
-          <hr />
-          <a href="#spot">Continuar</a>
-          <input type="reset" value="Cancelar" />
+          <hr class="sendform" />
+          <a href="#" id="continue">Continuar</a>
+          <input type="reset" value="Cancelar" name="cancelar" />
         </form>
       </section>
 
@@ -79,156 +79,107 @@
           </header>
           <div class="addwrap acess">
             <!--Add items added to array-->
-            <div
-              v-for="(item, index) in acessitems"
-              :key="index"
-              class="itemarray"
-            >
-              <a v-on:click="onRemovedAcess(item)"
-                ><img src="./assets/bin.svg" alt="remove"
-              /></a>
+            <label v-for="(item, index) in acessitems" :key="index" class="itemarray">
+              <figure v-on:click="onRemovedAcess(item)"><img src="./assets/bin.svg" alt="Remove"/></figure>
               <Teamadd
                 :name="item.name"
                 :slug="item.slug"
                 :icon="item.icon.contentType"
                 :Base64="item.icon.imageBase64"
               />
-            </div>
+            </label>
 
             <!--Add something, button and list-->
             <div class="add-content">
               <!--Add button-->
-              <div class="add" v-if="acesslenght < 12" v-on:click="onClickedAcess">
-                <img src="./assets/add.svg" />
-              </div>
+              <figure class="add" v-if="acesslenght < 12" v-on:click="onClickedAcess"><img src="./assets/add.svg"/></figure>
               <!--Clickoutside-->
-              <div class="outside" v-if="showacess" v-on:click="onClosedAcess"></div>
+              <label class="outside" v-if="showacess" v-on:click="onClosedAcess"></label>
               <!--Searchbar-->
-              <div class="selectbar acess" v-show="showacess">
-                <div class="search-bar">
-                  <label for="search-bar-acess"></label>
-                  <input
-                    type="search"
-                    id="search-bar-acess"
-                    placeholder="Ex: Móveis planejados"
-                    v-model="search"
-                  />
-                  <button>
-                    <img src="./assets/searchicon.svg" alt="Search button" />
-                  </button>
-                </div>
-
+              <fieldset class="selectbar acess" v-show="showacess">
+                <label class="search-bar" for="search-bar-acess">
+                  <input type="search" id="search-bar-acess" placeholder="Ex: Móveis planejados" v-model="search"/>
+                </label>
                 <!--Rendering all team options-->
-                <div class="list acess">
-                  <div
-                    v-for="(item, index) in SearchResultsAcess"
-                    :key="index"
-                    class="items acess"
-                  >
-                    <div v-on:click="onAddedAcess(item)">
-                      <Teamitem
-                        :name="item.name"
-                        :type="item.icon.contentType"
-                        :Base64="item.icon.imageBase64"
-                      />
-                      <img src="./assets/selecticon.svg" />
-                    </div>
-                  </div>
+                <div v-for="(item, index) in SearchResultsAcess" :key="index" class="items acess">
+                  <label v-on:click="onAddedAcess(item)">
+                    <Teamitem 
+                    :name="item.name" 
+                    :type="item.icon.contentType" 
+                    :Base64="item.icon.imageBase64"
+                    />
+                  </label>
                 </div>
-              </div>
+              </fieldset>
             </div>
           </div>
         </article>
 
         <article id="spot">
           <header>
-          <h2>Espaço</h2>
-          <p>
-          Clique e Adicione a acomodação disponibilizada e opcionalmente adicione imagens. Ex: Sala de espera, Jardim
-          </p>
+            <h2>Espaço</h2>
+            <p>
+            Clique e Adicione a acomodação disponibilizada e opcionalmente adicione imagens. Ex: Sala de espera, Jardim
+            </p>
           </header>
-          <div class="addwrap spot">
-            <!--Add items added to array-->
-            <div
-              v-for="(item, index) in spotitems"
-              :key="index"
-              class="itemarray"
-            >
-              <a v-on:click="onRemovedSpot(item,index)"
-                ><img src="./assets/bin.svg" alt="remove"
-              /></a>
-              <Spotadd
-                :slug="item.slug"
-                :icon="item.icon.contentType"
-                :Base64="item.icon.imageBase64"
-                :imgUrl="spotfiles[index]"
-              />
-
-              <div class="lateral-img" v-if="spotfiles[index] == 0">
-                <span>{{item.name}}</span>
-                <!--Pass values into indirect way-->
-                <a @click="selectSpot(index)">Adicionar imagem</a> 
-              </div>
-
-              <div class="lateral-img" v-if="spotfiles[index] != 0">
-                <span>{{item.name}}</span>
-                <!--Pass values into indirect way-->
-                <a @click="removeCreateSpot(index)">Remover imagem</a> 
-              </div>
-
-            </div>
-
-            <input type="file" ref="spotInput" @input="createSpot">
-
-            <!--Add something, button and list-->
-            <div class="add-content">
-              <!--Add button-->
-              <div class="add add-spot" v-if="spotlenght < 12" v-on:click="onClickedSpot">
-                <img src="./assets/add.svg" />
-              </div>
-              <!--Clickoutside-->
-              <div class="outside" v-if="showspot" v-on:click="onClosedSpot"></div>
-              <!--Searchbar-->
-              <div class="selectbar spot" v-show="showspot">
-                <div class="search-bar">
-                  <label for="search-bar-spot"></label>
-                  <input
-                    type="search"
-                    id="search-bar-spot"
-                    placeholder="Ex: Jardim"
-                    v-model="search"
+            <form class="sendreset">
+              <div class="addwrap spot">
+                <!--Add items added to array-->
+                <label v-for="(item, index) in spotitems" :key="index" class="itemarray">
+                  <figure v-on:click="onRemovedSpot(item,index)"><img src="./assets/bin.svg" alt="remove"/></figure>
+                  <Spotadd
+                    :slug="item.slug"
+                    :icon="item.icon.contentType"
+                    :Base64="item.icon.imageBase64"
+                    :imgUrl="spotfiles[index]"
                   />
-                  <button>
-                    <img src="./assets/searchicon.svg" alt="Search button" />
-                  </button>
-                </div>
-                <!--Rendering all team options-->
-                <div class="list spot">
-                  <div
-                    v-for="(item, index) in SearchResultsSpot"
-                    :key="index"
-                    class="items spot"
-                  >
-                    <div v-on:click="onAddedSpot(item)">
-                      <Teamitem
-                        :name="item.name"
-                        :type="item.icon.contentType"
-                        :Base64="item.icon.imageBase64"
-                      />
-                      <img src="./assets/selecticon.svg" />
-                    </div>
+                  
+                  <div class="lateral-img" v-if="spotfiles[index] == 0">
+                    <span>{{item.name}}</span>
+                    <!--Pass values into indirect way-->
+                    <a @click="selectSpot(index)">Adicionar imagem</a> 
                   </div>
+
+                  <div class="lateral-img" v-if="spotfiles[index] != 0">
+                    <span>{{item.name}}</span>
+                    <!--Pass values into indirect way-->
+                    <a @click="removeCreateSpot(index)">Remover imagem</a> 
+                  </div>
+
+                </label>
+
+                <input type="file" ref="spotInput" @input="createSpot">
+
+                <!--Add something, button and list-->
+                <div class="add-content">
+                  <!--Add button-->
+                  <figure class="add add-spot" v-if="spotlenght < 12" v-on:click="onClickedSpot"><img src="./assets/add.svg" /></figure>
+                  <!--Clickoutside-->
+                  <label class="outside" v-if="showspot" v-on:click="onClosedSpot"></label>
+                  <!--Searchbar-->
+                  <fieldset class="selectbar spot" v-show="showspot">
+                      <label class="search-bar" for="search-bar-spot">
+                        <input type="search" id="search-bar-spot" placeholder="Ex: Jardim" v-model="search"/>
+                      </label>
+                    <!--Rendering all team options-->
+                      <div v-for="(item, index) in SearchResultsSpot" :key="index" class="items spot">
+                        <label v-on:click="onAddedSpot(item)">
+                          <Teamitem
+                          :name="item.name"
+                          :type="item.icon.contentType"
+                          :Base64="item.icon.imageBase64"
+                          />
+                      </label>
+                      </div>
+                  </fieldset>
                 </div>
               </div>
-            </div>
-          </div>
+            <hr class="sendform" />
+            <a href="#" id="continue">Continuar</a>
+            <input type="reset" value="Cancelar" name="cancelar" />
+          </form>
         </article>
-
-        <form class="sendreset">
-          <hr />
-          <a href="#">Continuar</a>
-          <input type="reset" value="Cancelar" />
-        </form>
+        
       </section>
 
       <section class="card contact">
@@ -240,57 +191,73 @@
           aberta para visitas, coloque no mínimo um meio de contato 
         </p>
         </header>
-
-        <div class="flexbox">
-
-        <address class="pa po">
-          <label for="website">
-          <span>Site</span>
-          </label>
-          <input type="text" id="website" placeholder="www.seusite.com">
-        </address>
-
-        <address class="pa po">
-          <label for="tel">
-          <span class="rw">Telefone contato *</span>
-          </label>
-          <TheMask mask="(##) ####-#####" type="text" id="tel"/>
-        </address>
-
-        <address class="pa">
-          <label for="tel2">
-          <span>Telefone contato #2</span>
-          </label>
-          <TheMask mask="(##) ####-#####" type="text" id="tel2"/>
-        </address>
-
-      
-
-        <time class="pa ab">
-          <label for="opentime">
-          <span>Horário Aberto a visitação *</span> 
-          <input type="time" v-if="!srdisabled">
-          <input type="time" v-if="srdisabled" :value="srd" class="dis" disabled/>
-          <span>ás</span>    
-          <input type="time" v-if="!srdisabled" id="opentime" />
-          <input type="time" v-if="srdisabled" :value="sra" id="opentime" class="dis" disabled/>
-          </label>
-          <a v-if="!sr" @mouseover="showTagSR"  @click="srClick"><abbr title="Sem restrição">S/R</abbr></a>
-          <a v-if="sr"  @mouseout="closeTagSR"  @click="srClick" class="sr"><abbr>S/R</abbr></a>
-        </time>
-
-        </div>
-
         <form class="sendreset">
-          <hr />
-          <a href="#">Continuar</a>
-          <input type="reset" value="Cancelar" />
-        </form>
+          <fieldset>
+            <div class="flexbox">
+              <address class="pa po">
+                <label for="website">
+                <span>Site</span>
+                </label>
+                <input type="text" id="website" placeholder="www.seusite.com">
+              </address>
+              <address class="pa po">
+                <label for="tel">
+                <span class="rw">Telefone contato *</span>
+                </label>
+                <TheMask mask="(##) ####-#####" type="text" id="tel"/>
+              </address>
+              <address class="pa">
+                <label for="tel2">
+                <span>Telefone contato #2</span>
+                </label>
+                <TheMask mask="(##) ####-#####" type="text" id="tel2"/>
+              </address>
+              <time class="pa ab">
+                <label for="opentime">
+                <span>Horário Aberto a visitação *</span> 
+                <input type="time" v-if="!srdisabled">
+                <input type="time" v-if="srdisabled" :value="srd" class="dis" disabled/>
+                <span>ás</span>    
+                <input type="time" v-if="!srdisabled" id="opentime" />
+                <input type="time" v-if="srdisabled" :value="sra" id="opentime" class="dis" disabled/>
+                </label>
+                <a v-if="!sr" @mouseover="showTagSR"  @click="srClick"><abbr title="Sem restrição">S/R</abbr></a>
+                <a v-if="sr"  @mouseout="closeTagSR"  @click="srClick" class="sr"><abbr>S/R</abbr></a>
+              </time>
+            </div>
+            
+            <hr class="sendform" />
+            <a href="#" id="continue">Continuar</a>
+            <input type="reset" value="Cancelar" name="cancelar" />
+          </fieldset>
+      </form>
 
 
         </article>
       </section>
 
+      <sectior class="card description">
+        <article>
+          <header>
+            <h2>Fale um pouco sobre vocês</h2>
+            <p>Adicione uma descrição a qual será mostrada aos usuários</p>
+          </header>
+
+          <form class="sendreset">
+              <fieldset>
+                <textarea maxlength="5000"></textarea>
+                <hr class="sendform" />
+                <a href="#" id="continue">Continuar</a>
+                <input type="reset" value="Cancelar" name="cancelar" />
+              </fieldset>
+          </form>
+
+
+        </article>
+
+
+          
+      </sectior>
     </main>
     
   </div>
@@ -720,10 +687,29 @@ export default {
   grid-column: 2/13;
 }
 
+.description {
+  grid-column: 2/13;
+
+}
+/*Description */
+.description article textarea {
+   resize: none;  
+   width: 65%;
+   height: 30vh;
+   border: 1px solid #B9B9B9;
+   border-radius: 5px;
+   padding: 16px;
+   outline: none;
+   font-weight: 200;
+   overflow-y: auto;
+}
+
+.description article textarea:focus {
+  border: 1px solid #00a28c;
+}
+
+/*Description ends here */
 /*Contact-Card */
-
-
-/*Contact card ends here */
 .contact time input[type="time"]{
   padding-top: 1px;
   border: none;
@@ -857,6 +843,7 @@ export default {
   text-decoration: none;
 }
 
+/*Contact ends here */
 
 
 /*Image-Card*/
@@ -1094,6 +1081,10 @@ export default {
   background-color: #e2e4e381;
 }
 
+.addwrap figure{
+  cursor: pointer;
+}
+
 /* Select Item */
 
 /*Main*/
@@ -1109,6 +1100,7 @@ export default {
   border-radius: 5px;
   background-color: white;
   border: 2px solid rgba(0, 0, 0, 0.39);
+  box-shadow: 1px 1px 3px 5px #9b989846;
 }
 
 .selectbar p:first-of-type {
@@ -1119,10 +1111,25 @@ export default {
 /*SearchBar*/
 .selectbar .search-bar {
   font-family: "Segoe UI Local", sans-serif;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+  position: relative;
+  display: inline-block;
+  width: 100%;
   margin-bottom: 4px;
+}
+
+.selectbar .search-bar::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  right: 0;
+  background: url(./assets/searchicon.svg) no-repeat center;
+  background-size: 16px;
+  height: 100%;
+  width: 32px;
+  background-color: #007c6b;
 }
 
 .selectbar .search-bar ::placeholder {
@@ -1132,8 +1139,9 @@ export default {
 .selectbar .search-bar input[type="search"] {
   -webkit-appearance:none;
   border-radius: 0;
+  z-index: 1;
   text-transform: capitalize;
-  width: 85%;
+  width: 100%;
   height: 28.5px;
   outline: none;
   font-weight: 600;
@@ -1146,26 +1154,15 @@ export default {
   border: 1px solid #16d9f2;
 }
 
-.selectbar .search-bar button {
-  cursor: pointer;
-  background-color: #007c6b;
-  padding: 4px 8px;
-  border: inherit;
-}
-
-.selectbar .search-bar button:hover {
-  background-color: #01685a;
-}
-
 /*TeamList */
 
 /*TeamItem */
 
-.items:nth-child(n+2) {
+.items:nth-child(n+3) {
   border-top: 2px solid #00000040;
 }
 
-.items div {
+.items label {
   padding: 4px 0px 4px;
   cursor: pointer;
   display: flex;
@@ -1203,16 +1200,12 @@ export default {
 
 /*Send and Reset */
 
-.card form[class="sendreset"] {
-  margin-top: 16px;
-}
-
-.card form[class="sendreset"] hr {
+.card form[class="sendreset"] hr[class="sendform"] {
   opacity: 0.5;
   margin-bottom: 16px;
 }
 
-.card form[class="sendreset"] input[type="reset"] {
+.card form[class="sendreset"] input[type="reset"][name="cancelar"] {
   color: #68b400;
   background-color: inherit;
   border-radius: 5px;
@@ -1220,11 +1213,11 @@ export default {
   padding: 8px 16px;
 }
 
-.card form[class="sendreset"] input[type="reset"]:hover {
+.card form[class="sendreset"] input[type="reset"][name="cancelar"]:hover {
   background-color: #54990007;
 }
 
-.card form[class="sendreset"] a {
+.card form[class="sendreset"] a[id="continue"] {
   text-decoration: none;
   border: inherit;
   background-color: #68b400;
@@ -1234,12 +1227,12 @@ export default {
   margin-right: 32px;
 }
 
-.card form[class="sendreset"] a:hover {
+.card form[class="sendreset"] a[id="continue"]:hover {
   background-color: #549900;
 }
 
-.card form[class="sendreset"] input[type="reset"],
-.card form[class="sendreset"] a {
+.card form[class="sendreset"] input[type="reset"][name="cancelar"],
+.card form[class="sendreset"] a[id="continue"] {
   cursor: pointer;
   font-weight: 400;
   margin-left: 8px;
