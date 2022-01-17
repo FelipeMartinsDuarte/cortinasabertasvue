@@ -25,7 +25,7 @@ export default {
 
 
 figure{
-    margin-left: 2px;
+    margin-left: 4px;
     margin-top: 2px;
     font-weight: 100;
     color: #006154;

@@ -10,6 +10,95 @@
         <h1>Criação do website</h1>
       </header>
 
+      <section class="card profile">
+        <header>
+          <h2>Perfil da Casa</h2>
+          <p>
+            Clique sobre as opções sim ou não de cada item para Definir o Perfil da instituição
+          </p>
+        </header>
+
+        <form class="sendreset">
+          <div class="wrapprofile">
+
+            <fieldset class="columnprofile">
+              <span>Aceitam Longa estadia?</span>
+              <div class="option">
+              <input type="radio" name="yesnot" id="yesnot1" value="true" hidden >
+                <label for="yesnot1"><a>Sim</a></label>
+                <input type="radio" name="yesnot" id="yesnot2" value="false" hidden>
+                <label for="yesnot2"><a>Não</a></label>
+              </div>
+            </fieldset>
+
+            <fieldset class="columnprofile">
+              <span>Aceitam pessoas Independentes?</span>
+              <div class="option">
+                <input type="radio" name="yesnot2" id="yesnot3" value="true" hidden>
+                <label for="yesnot3"><a>Sim</a></label>
+                <input type="radio" name="yesnot2" id="yesnot4" value="false" hidden>
+                <label for="yesnot4"><a>Não</a></label>
+              </div>
+            </fieldset>
+
+            <fieldset class="columnprofile">
+              <span>Possuem Quartos Coletivos?</span>
+              <div class="option">
+                <input type="radio" name="yesnot3" id="yesnot5" value="true" hidden>
+                <label for="yesnot5"><a>Sim</a></label>
+                <input type="radio" name="yesnot3" id="yesnot6" value="false" hidden>
+                <label for="yesnot6"><a>Não</a></label>
+              </div>
+            </fieldset>
+
+            <fieldset class="columnprofile">
+              <span>Aceitam pessoas Dependentes?</span>
+              <div class="option">
+                <input type="radio" name="yesnot4" id="yesnot7" value="true" hidden>
+                <label for="yesnot7"><a>Sim</a></label>
+                <input type="radio" name="yesnot4" id="yesnot8" value="false" hidden>
+                <label for="yesnot8"><a>Não</a></label>
+              </div>
+            </fieldset>
+
+            <fieldset class="columnprofile">
+              <span>Aceitam pessoas Semi-Dependentes?</span>
+              <div class="option">
+                <input type="radio" name="yesnot5" id="yesnot9" value="true" hidden>
+                <label for="yesnot9"><a>Sim</a></label>
+                <input type="radio" name="yesnot5" id="yesnot10" value="false" hidden>
+                <label for="yesnot10"><a>Não</a></label>
+              </div>
+            </fieldset>
+
+            <fieldset class="columnprofile">
+              <span>Aceitam Curta estadia?</span>
+              <div class="option">
+                <input type="radio" name="yesnot6" id="yesnot11" value="true" hidden>
+                <label for="yesnot11"><a>Sim</a></label>
+                <input type="radio" name="yesnot6" id="yesnot12" value="false" hidden>
+                <label for="yesnot12"><a>Não</a></label>
+              </div>
+            </fieldset>
+
+            <fieldset class="columnprofile">
+              <span>Possuem Quartos Individuais?</span>
+              <div class="option">
+                <input type="radio" name="yesnot7" id="yesnot13" value="true" hidden>
+                <label for="yesnot13"><a>Sim</a></label>
+                <input type="radio" name="yesnot7" id="yesnot14" value="false" hidden>
+                <label for="yesnot14"><a>Não</a></label>
+              </div>
+            </fieldset>
+          </div>
+
+          <hr class="sendform" />
+          <a href="#" id="continue">Continuar</a>
+          <input type="reset" value="Cancelar" name="cancelar" />
+        </form>
+  
+      </section>
+
       <section class="card image">
         <article id="image">
           <header>
@@ -20,20 +109,20 @@
           </header>
           <div id="image-content" @dragover.prevent @drop.stop.prevent="ondrop">
             <div class="image-preview" >
-                <div class="border addimg">
+                <figure class="border addimg">
                   <img src="./assets/imageicon.svg"/>
-                  <span><a href="#" v-on:click="imageSelect">Clique e selecione</a> ou Arraste aqui</span>
-                </div>
+                  <figcaption><span><a v-on:click="imageSelect">Clique e selecione</a> ou Arraste aqui</span></figcaption>
+                </figure>
               </div>
-              <div v-for="(item,index) in imageArray" :key="index" class="image-preview">
-                  <div id="top-bar">
-                    <img src="./assets/bin.svg" alt="remove image" @click="removeImage(item)">
-                    <span>{{item.filename}}</span>
-                  </div>
-                  <div class="border image">
+              <label v-for="(item,index) in imageArray" :key="index" class="image-preview">
+                  <figure id="top-bar">
+                    <img src="./assets/bin.svg" alt="remover imagem" @click="removeImage(item)">
+                    <figcaption><span>{{item.filename}}</span></figcaption>
+                  </figure>
+                  <figure class="border image">
                     <img :src="item.url">
-                  </div>
-              </div>
+                  </figure>
+              </label>
           <input type="file" ref="imageInput" @input="onselect" multiple>
           </div>
         </article>
@@ -45,23 +134,26 @@
             Coloque a sua logo em fundo transparente ou branco. Você poderá adicionar futuramente!
           </p>
           </header>
-          <aside id="logo-content">
+          <div id="logo-content">
             <nav class="row navlogo" v-if="logolenght > 0">
-              <div class="edit">
+              <figure class="edit">
                 <img src="./assets/crop.svg" alt="cortar imagem">
-              </div>
-              <div class="remove" @click="removeLogo">
+              </figure>
+              <figure class="remove" @click="removeLogo">
                 <img src="./assets/bin.svg" alt="excluir imagem">
+              </figure>
+             </nav>
+
+             <figure class="preview-logo" v-for="(item,index) in logoItem" :key="index">
+               <img :src="item.url" alt="visualisação da sua logomarca">
+             </figure>
+
+              <div class="add-logo" @click="logoSelect" v-if="logolenght == 0">
+                <img src="./assets/logoicon.svg" alt="crie sua logo aqui">
+                <span>Selecione ou Arraste aqui</span>
               </div>
-            </nav>
-            <figure class="preview-logo" v-for="(item,index) in logoItem" :key="index">
-              <img :src="item.url" alt="visualisação da sua logomarca">
-            </figure>
-            <figure class="add-logo" @click="logoSelect" v-if="logolenght == 0">
-             <img src="./assets/logoicon.svg" alt="crie sua logo aqui">
-            </figure>
-            <input type="file" ref="logoInput" @input="onlogoselect">
-          </aside>
+              <input type="file" ref="logoInput" @input="onlogoselect">
+          </div>
         </article>
 
         <form class="sendreset">
@@ -69,6 +161,76 @@
           <a href="#" id="continue">Continuar</a>
           <input type="reset" value="Cancelar" name="cancelar" />
         </form>
+      </section>
+
+      <section class="card team">
+        <article id="team">
+          <header>
+          <h2>Adicione sua equipe</h2>
+          <p>Clique e adicione os profissionais a qual formam e fazem parte da equipe que formam sua instituição</p>
+          </header>
+          <div class="addwrap team">
+            <!--Add items added to array-->
+            <label v-for="(item, index) in teamitems" :key="index" class="itemarray">
+              <figure v-on:click="onRemovedTeam(item)"><img src="./assets/bin.svg" alt="Remove"/></figure>
+              <Teamadd
+                :name="item.name"
+                :slug="item.slug"
+                :icon="item.icon.contentType"
+                :Base64="item.icon.imageBase64"
+              />
+            </label>
+
+            <!--Add something, button and list-->
+            <div class="add-content">
+              <!--Add button-->
+              <figure class="add" v-if="teamlenght < 12" v-on:click="onClickedTeam"><img src="./assets/add.svg"/></figure>
+              <!--Clickoutside-->
+              <label class="outside" v-if="showteam" v-on:click="onClosedTeam"></label>
+              <!--Searchbar-->
+              <fieldset class="selectbar acess" v-show="showteam">
+                <label class="search-bar" for="search-bar-acess">
+                  <input type="search" id="search-bar-acess" placeholder="Ex: Nutricionistas" v-model="search"/>
+                </label>
+                <!--Rendering all team options-->
+                <div v-for="(item, index) in SearchResultsTeam" :key="index" class="items acess">
+                  <label v-on:click="onAddedTeam(item)">
+                    <Teamitem 
+                    :name="item.name" 
+                    :type="item.icon.contentType" 
+                    :Base64="item.icon.imageBase64"
+                    />
+                  </label>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+        </article>
+
+        <article id="structure">
+          <header>
+            <h2>Estrutura</h2>
+            <p>
+            Adicione a detalhes sobre o local como quantidade de quartos, salas e banheiros e em etapas futuras você poderá adicionar os itens a qual faltam 
+            </p>
+            </header>
+            <div class="addwrap structura">
+              <!--Add items added to array-->
+              <label v-for="(item, index) in strucitems" :key="index" class="itemarray">
+                <Quantityadd
+                  :name="item.name"
+                  :slug="item.slug"
+                  :icon="item.icon.contentType"
+                  :Base64="item.icon.imageBase64"
+                />
+                <label for="number" class="lateral-struc">
+                    <span>{{item.name}}</span>
+                    <TheMask mask="##" type="text" id="number" placeholder="1"/>
+                </label>
+
+              </label>
+            </div>
+        </article>
       </section>
 
       <section class="card spot">
@@ -236,7 +398,7 @@
         </article>
       </section>
 
-      <sectior class="card description">
+      <section class="card description">
         <article>
           <header>
             <h2>Fale um pouco sobre vocês</h2>
@@ -257,7 +419,7 @@
 
 
           
-      </sectior>
+      </section>
     </main>
     
   </div>
@@ -270,6 +432,7 @@ import Breakline from "./components/breakline.vue";
 import Teamitem from "./components/teamitem.vue";
 import Teamadd from "./components/teamadd.vue";
 import Spotadd from "./components/spotadd.vue";
+import Quantityadd from "./components/quantityadd.vue";
 import {TheMask} from "vue-the-mask";
 import slugify from "slugify";
 import axios from "axios";
@@ -281,6 +444,7 @@ export default {
     Breakline,
     Teamadd,
     Teamitem,
+    Quantityadd,
     Spotadd,
     TheMask
   },
@@ -302,6 +466,19 @@ export default {
       acessitems: [],
       acessslug: [],
       acesslenght: 0,
+
+      //Select Team
+      teamlist: [],
+      showteam: false,
+      teamitems: [],
+      teamslug: ["Medicos","Enfermagem"],
+      teamlenght: 2,
+
+      //Select Structure
+      struclist: [],
+      showstruc: false,
+      strucitems: [],
+      strucslug: [],
 
       //Select spot
       spotlist: [],
@@ -325,6 +502,21 @@ export default {
     };
   },
   created: function () {
+    
+    axios
+      .get("/api/equipe")
+      .then((res) => {
+        let str = JSON.parse(JSON.stringify(res.data));
+        this.teamlist = str;
+        this.teamitems.push(this.teamlist[0]);
+        this.teamitems.push(this.teamlist[1]);
+      })
+      .catch((err) => {
+        if (err) {
+          console.log(err);
+        }
+      })
+
     axios
       .get("/api/acessibilidade")
       .then((res) => {
@@ -342,6 +534,18 @@ export default {
       .then((res) => {
         let str = JSON.parse(JSON.stringify(res.data));
         this.spotlist = str;
+      })
+      .catch((err) => {
+        if (err) {
+          console.log(err);
+        }
+      })
+
+    axios
+      .get("/api/estrutura")
+      .then((res) => {
+        let str = JSON.parse(JSON.stringify(res.data));
+        this.strucitems = str;
       })
       .catch((err) => {
         if (err) {
@@ -380,13 +584,13 @@ export default {
         this.sr = false;
       },1000);
     },
-
     showTagSR(){
       this.sr = true;
     },
     closeTagSR(){
       this.sr = false;
     },
+    //Tags Acronyms ends here
 
     //Spot
     onRemovedSpot: function (item,index) {
@@ -506,13 +710,44 @@ export default {
     },
     //Acess ends here
 
+    //Team
+    onRemovedTeam: function (item) {
+      var str = JSON.parse(JSON.stringify(item));
+      var position = this.teamslug.indexOf(str.slug);
+      this.teamlenght -= 1;
+      this.teamitems.splice(position, 1);
+      this.teamslug.splice(position, 1);
+    },
+    onClosedTeam: function () {
+      this.search = "";
+      this.showteam = false;
+    },
+    onClickedTeam: function () {
+      this.showteam = true;
+    },
+    onAddedTeam: function (item) {
+      let str = JSON.parse(JSON.stringify(item));
+      if (this.teamslug.includes(str.slug)) {
+        this.onErrorTeam();
+      } else {
+        this.search = "";
+        this.onRightTeam(str);
+      }
+    },
+    onErrorTeam: function () {},
+    onRightTeam: function (item) {
+      this.teamitems.push(item);
+      this.teamslug.push(item.slug);
+      this.showteam = false;
+      this.teamlenght += 1;
+    },
+    //Team ends here
+
     //Image starts here
     ondrop: function(event){
         let limit = 13;
         let Images = [...event.dataTransfer.files];
         let cbv = Images.length + this.imagelenght;
-        let oquesobrou = limit - this.imagelenght;
-        console.log(oquesobrou);
         if(cbv < limit){
         this.verificateImage(Images);
         }
@@ -542,25 +777,27 @@ export default {
         var rtype = av.includes(item.type);
         var rsize = item.size < maxsize;
         //Check Requirements
-        var img = new Image;
+        let img = new Image;
         img.onload = ()=>{
           let minsize = 600;
           let width = img.width;
           let height = img.height;
-          if(!rtype){
-          console.log("Tipo de Arquivo não é uma imagem"); //Check if it's an image
-          } else if(!rsize){ //Check image size exceed 3mb
-            console.log("Arquivo muito grande envie no máximo 3mb")
-          } else if(width < minsize && height < minsize){ //Check the dimensions are atach the min size
-            console.log(`A Imagem precisa ter ${minsize}px em um dos lados`)
-          } else if(width > 1920 || height > 1080){ //Check if the dimensions exceed the max size
-            console.log("A Imagem é muito grande precisa ser menor do que 1920x1080")
-          } else{
-            this.previewImage(item, url); //So it can be displayed
-          }
+            if(!rtype){
+              console.log("Tipo de Arquivo não é uma imagem"); //Check if it's an image
+            } 
+            if(!rsize){ //Check image size exceed 3mb
+              console.log("Arquivo muito grande envie no máximo 3mb")
+            } 
+            if(width < minsize && height < minsize){ //Check the dimensions are atach the min size
+              console.log(`A Imagem precisa ter ${minsize}px em um dos lados`)
+            } 
+            if(width > 1920 || height > 1080){ //Check if the dimensions exceed the max size
+              console.log("A Imagem é muito grande precisa ser menor do que 1920x1080")
+            } else{
+                this.previewImage(item, url); //So it can be displayed
+            }
         }
         img.src = url;
-        
       }
     },
     previewImage: function(item,url){
@@ -644,7 +881,6 @@ export default {
         return this.acesslist.filter((item) => item.slug.includes(slug));
       }
     },
-
     SearchResultsSpot: function () {
       if (this.search == "" || this.search == " ") {
         return this.spotlist;
@@ -655,11 +891,27 @@ export default {
         return this.spotlist.filter((item) => item.slug.includes(slug));
       }
     },
-
+    SearchResultsTeam: function () {
+      if (this.search == "" || this.search == " ") {
+        return this.teamlist;
+      } else {
+        const Capitalized =
+          this.search.charAt(0).toUpperCase() + this.search.slice(1);
+        const slug = slugify(Capitalized);
+        return this.teamlist.filter((item) => item.slug.includes(slug));
+      }
+    },
+    SearchResultsStruc: function () {
+      if (this.search == "" || this.search == " ") {
+        return this.struclist;
+      } else {
+        const Capitalized = this.search.charAt(0).toUpperCase() + this.search.slice(1);
+        const slug = slugify(Capitalized);
+        return this.struclist.filter((item) => item.slug.includes(slug));
+      }
+    },
   }
-
-
-  }
+}
 
 </script>
 
@@ -671,8 +923,17 @@ export default {
   gap: 20px;
 }
 
+
 .title {
   grid-column: 2/15;
+}
+
+.profile{
+  grid-column: 2/13;
+}
+
+.team{
+  grid-column: 2/13;
 }
 
 .image {
@@ -689,8 +950,92 @@ export default {
 
 .description {
   grid-column: 2/13;
-
 }
+
+/*Structure*/
+.lateral-struc{
+  padding-top: 4px;
+  margin-left: 8px;
+  color: #006154;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  height: 62px;
+  width: 20vmin;
+}
+
+.lateral-struc input[type="text"]{
+  background-color: inherit;
+  margin-right: 8px;
+  border: inherit;
+  outline: none;
+  border-bottom: 1px solid #0d0d0d70;
+  font-weight: 200;
+  text-indent: 4px;
+  padding-bottom: 4px;
+  font-size: 16px;
+  color: #0d0d0d;
+  width: 33vmax;
+  margin-bottom: 32px;
+}
+
+.lateral-struc input[type="text"]:focus {
+  border-bottom: 1px solid #00a28c83;
+  color: #00a28c;
+}
+
+.lateral-struc input[type="text"]{
+  width: 4vmax;
+}
+
+
+
+/*Structure ends here */
+
+/*Info*/
+.profile .columnprofile input[type="radio"]:checked + label a{
+  color: #00A28C;
+}
+
+.profile form .wrapprofile{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.profile label a {
+  cursor: pointer;
+}
+
+.profile .columnprofile span{
+  display: block;
+  margin-bottom: 8px;
+  width: 9vmax;
+}
+
+.profile .sendreset .wrapprofile .columnprofile{
+  width: 33%;
+  padding: 0;
+  margin-bottom: 8px;
+}
+
+.profile form .columnprofile .option{
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.profile form .columnprofile a {
+  display: block;
+  margin-bottom: 16px;
+  text-decoration: none;
+  color: #00615481;
+  font-weight: 600;
+}
+/*Info ends here */
+
 /*Description */
 .description article textarea {
    resize: none;  
@@ -709,6 +1054,7 @@ export default {
 }
 
 /*Description ends here */
+
 /*Contact-Card */
 .contact time input[type="time"]{
   padding-top: 1px;
@@ -852,6 +1198,7 @@ export default {
 
 #logo{
   margin-top: 16px;
+  margin-bottom: 32px;
 }
 
 .row{
@@ -887,8 +1234,8 @@ export default {
 
 #logo-content .add-logo {
   cursor: pointer;
-  height: 100%;
-  widows: 100%;
+  height: 100% ;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -896,8 +1243,16 @@ export default {
 }
 
 #logo-content .add-logo img{
-  height: 8vmax;
-  width: 8vmax;
+  height: 6vmax;
+  width: 6vmax;
+}
+
+#logo-content .add-logo span{
+  width: 50%;
+  text-align: center;
+  color: #68B400;
+  padding-top: 4px;
+
 }
 
 #logo-content .preview-logo{
@@ -987,6 +1342,8 @@ export default {
 
 #image-content .addimg span a{
   color: #00a28c;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .border{
@@ -1079,6 +1436,10 @@ export default {
   width: 100%;
   margin-bottom: 16px;
   background-color: #e2e4e381;
+}
+
+.structura{
+  height: 30vh;
 }
 
 .addwrap figure{

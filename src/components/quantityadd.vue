@@ -3,10 +3,6 @@
         <div class="wrap">
          <img v-bind:src="'data:image/png;base64,'+Base64" :alt="name">
         </div>
-        <div class="column">
-        <span>{{name}}</span>
-        <input type="text" placeholder="1">
-        </div>
     </div>
 </template>
 
@@ -42,8 +38,7 @@ div .wrap {
     border-right: 2px solid #006154;
     height: 59px;
     width: 59px;
-    margin-right: 8px;
-    margin-bottom: 8px;
+    margin-bottom: 16px;
 }
 
 div .column{
