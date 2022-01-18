@@ -10,7 +10,6 @@
   "dependencies": {
     "axios": "^0.24.0",
     "core-js": "^3.6.5",
-    "cors": "^2.8.5",
     "cropperjs": "^1.5.12",
     "express": "^4.17.2",
     "slugify": "^1.6.5",

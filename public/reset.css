@@ -136,7 +136,7 @@ body {
 
 /* In Chrome we can't use the semilight weight of the local web font. Use web fonts instead. */
 body:not(*:root) {
-  font-family: 'Segoe UI Web (West European)', sans-serif ;
+  font-family: 'Segoe UI Web (West European)', 'Segoe UI', sans-serif ;
 }
 
 @font-face {
