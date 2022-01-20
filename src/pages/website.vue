@@ -970,7 +970,6 @@ export default {
 }
 
 .profile form .wrapprofile{
-  background-color: #006154;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;

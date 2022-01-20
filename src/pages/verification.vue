@@ -3,6 +3,38 @@
   <Menu />
   <Breakline />
   <main >
+    <header class="pr">
+      <h1>Vamos identificar sua instituição</h1>
+    </header>
+
+    <section class="pan">
+      <header>
+        <h2>Coloque CNPJ constituído</h2>
+      </header>
+    </section>
+
+    <section class="card nhn">
+      <header>
+        <h2>Coloque o nome da instituição</h2>
+        <p>
+          Coloque o nome cujo a instituição será mostrada pelo site ao cliente
+        </p>
+      </header>
+      <fieldset>
+        <label for="nameclinic">
+          <input type="text"  @click="hideNameError" :class="errornamestyle" name="nameclinic" maxlength="30" id="nameclinic" @keyup="countdown" v-model="nomeinst"/>
+          <span class="error" v-if="errorname"><i class="fas fa-exclamation-circle"></i></span>
+          <div id="count">
+            <span id="current">{{remainingCount}}</span>
+            <span id="maximum">/ 30</span>
+          </div>
+        </label>
+        <form class="sendreset" v-if="cpcn">
+          <a @click="CheckName" id="continue" class="edit">Salvar</a>
+          <input type="reset" value="Cancelar" class="remove" name="cancelar" @click="namedischange"/>
+        </form>
+      </fieldset>
+    </section>
 
     <section class="card cep" id="card-cep">
       <header>
@@ -13,11 +45,11 @@
       </p>
       </header>
       <fieldset>
-        <TheMask :class="errorstyle" mask="#####-###" v-model="cep" type="text" name="cep" id="cnpj" @click.native="hideErrorCEP" @keydown.native="cepchanged"/>
+        <TheMask :class="errorstylecep" mask="#####-###" v-model="cep" type="text" name="cep" id="cnpj" @click.native="hideErrorCEP" @keydown.native="cepchanged"/>
         <span class="error" v-if="errorcep"><i class="fas fa-exclamation-circle"></i>{{errormessagecep[0]}}</span>
         <form class="sendreset" v-if="cpch">
-          <a @click="checkCEP" id="continue">Salvar</a>
-          <input type="reset" value="Cancelar" name="cancelar" />
+          <a @click="checkCEP" id="continue" class="edit">Salvar</a>
+          <input @click="cepdischange" type="reset" value="Cancelar" class="remove" name="cancelar" />
         </form>
       </fieldset>
     </section>
@@ -84,13 +116,21 @@ export default {
   },
   data() {
     return {
+      maxCount: 30,
+      remainingCount: 30,
+
       errornum: false,
       errorcep:false,
+      errorname:false,
+
       errormessagecep:[],
-      errorstyle:"",
+
+      errorstylecep:"",
+      errornamestyle:"",
       errornumstyle:"",
 
       cpch:false,
+      cpcn:false,
 
       valid:"",
       cnpj:"",
@@ -132,13 +172,28 @@ export default {
     if(isEmpty || isValid){
       this.errornumstyle = "errorinput";
       this.errornum = "true";
-    } else{
-      console.log("Tá Certo")
     }
     },
-
+    namedischange(){
+      this.nomeinst = this.$route.params.datas.nomeinst;
+      this.cpcn = false;
+      this.errornamestyle = "";
+      this.errorname  = false;
+    },
+    cepdischange(){
+      this.cep = this.$route.params.datas.cep;
+      this.cpch = false;
+      this.errorcepstyle = "";
+      this.errorcep  = false;
+      this.errorcepstyle = "";
+    },
     cepchanged(){
-      this.cpch = true;
+      if(this.cpcn === true){
+        this.cpch = true;
+        this.namedischange();
+      } else {
+        this.cpch = true;
+      }
     },
     checkCEP(){
       let isEmpty = this.cep == "" || this.cep == " ";
@@ -146,14 +201,14 @@ export default {
       if(isEmpty || !isValid){
         this.errorcep = true;
         this.errormessagecep.push("Por favor preencha o campo corretamente");
-        this.errorstyle = "errorinput";
+        this.errorcepstyle = "errorinput";
       } else {
         this.checkValidCEP();
       }
     },
     hideErrorCEP(){
       this.errorcep = false;
-      this.errorstyle = ""
+      this.errorstylecep = ""
       this.errormessagecep = [];
     },
     checkValidCEP(){
@@ -164,21 +219,57 @@ export default {
         if(res.status == 200 && res.data.erro == true){
           this.errorcep = true;
           this.errormessagecep.push("Por favor digite um CEP Valído");
-          this.errorstyle = "errorinput";
+          this.errorstylecep = "errorinput";
         } else {
           this.endereco = res.data.logradouro;
           this.estado = res.data.uf;
           this.bairro = res.data.bairro;
           this.cidade = res.data.localidade;
+          this.cpch = false;
         }
       })
       .catch((err)=>{
         console.log(err);
       })
+    },
+    countdown: function () {
+      this.remainingCount = this.maxCount - this.nomeinst.length;
+      this.hasError = this.remainingCount < 0;
+      if(this.cpch === true){
+        this.cpcn = true;
+        this.cepdischange();
+      } else {
+        this.cpcn = true;
+      }
+    },
+    CheckName: function() {
+      let isEmpty = this.nomeinst == "" || this.nomeinst == " ";
+      let isValid = this.nomeinst.length <= 30;
+      if(!isValid || isEmpty){
+        this.errorname = true;
+        this.errormessagename = "Por favor preencha o campo corretamente";
+        this.errornamestyle = "errorstyle";
+      } else {
+        this.cpcn = false;
+      }
+    },
+    hideNameError: function(){
+      this.errorname = false;
+      this.errormessagename = "";
+      this.errornamestyle = "";
     }
   },
   mounted:function(){
-
+    if(this.$route.params.datas){
+      let datas = this.$route.params.datas;
+      this.bairro = datas.bairro;
+      this.cidade = datas.cidade;
+      this.endereco = datas.endereco;
+      this.estado = datas.estado;
+      this.cep = datas.cep;
+      this.nomeinst = datas.nomeinst;
+      this.remainingCount = this.maxCount - datas.nomeinst.length;
+    }
   }
 }
 </script>
@@ -272,7 +363,7 @@ main header[class="pr"] h1{
 }
 
 .cep input[type="text"][class="errorinput"]{
-  border-bottom: 1px solid red;
+  border-bottom: 1px solid black;
 }
 
 .cep input[type="text"]:focus {
@@ -340,6 +431,7 @@ main header[class="pr"] h1{
 
 .endereco input[class="ds"][type="text"]{
   color: #B9B9B9;
+  cursor: not-allowed;
   border-bottom: 1px solid #B9B9B9;
 }
 
@@ -377,10 +469,6 @@ main header[class="pr"] h1{
   padding: 8px 16px;
 }
 
-.card form[class="sendreset"] input[type="reset"][name="cancelar"]:hover {
-  background-color: #54990007;
-}
-
 .card form[class="sendreset"] a[id="continue"] {
   text-decoration: none;
   border: inherit;
@@ -391,10 +479,6 @@ main header[class="pr"] h1{
   margin-right: 32px;
 }
 
-.card form[class="sendreset"] a[id="continue"]:hover {
-  background-color: #549900;
-}
-
 .card form[class="sendreset"] input[type="reset"][name="cancelar"],
 .card form[class="sendreset"] a[id="continue"] {
   cursor: pointer;
@@ -403,6 +487,18 @@ main header[class="pr"] h1{
   float: right;
   align-items: center;
 }
+
+.card form[class="sendreset"] a[class="edit"][id="continue"] {
+  background-color: #C5B800;
+}
+
+.card form[class="sendreset"] input[type="reset"][name="cancelar"][class="remove"]{
+  border: 1px solid #c7ba00;
+  color: #c7ba00;
+}
+
+
+
 
 /*Tittle Description */
 .title {

@@ -113,7 +113,7 @@ export default {
           datas.cidade = res.data.localidade;
 
           this.$router.push({
-            name: "Verification",
+            name: "Verificar",
             params: {datas}
           })
         }
