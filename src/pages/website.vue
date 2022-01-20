@@ -885,6 +885,10 @@ export default {
 </script>
 
 <style>
+@import '../../public/default.css';
+@import '../../public/normalizer.css';
+@import '../../public/reset.css';
+
 /*Grid*/
 #content-wrap {
   display: grid;
@@ -966,6 +970,7 @@ export default {
 }
 
 .profile form .wrapprofile{
+  background-color: #006154;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -1522,7 +1527,6 @@ export default {
 
 .card p:first-of-type {
   margin-top: 8px;
-  margin-bottom: 16px;
   font-weight: 200;
   font-size: 16px;
 }

@@ -89,6 +89,12 @@ export default {
 }
 
 /*Menu */
+main{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
 menu nav a img{
   display: block;
   height: 16px;
@@ -184,7 +190,7 @@ main header h1{
 
 main header p{
   font-weight: 100;
-  padding-bottom: 32px;
+  padding-bottom: 8px;
 }
 
 main fieldset[class="fr"] input{
@@ -207,7 +213,6 @@ main fieldset[class=fr] button{
   background-color: #68B400;
   font-weight: 600;
   color: white;
-  margin-bottom: 16px;
 }
 /*First fieldset ends here*/
 

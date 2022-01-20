@@ -3,74 +3,52 @@
   <Menu />
   <Breakline />
   <main >
-
-    <section class="card cep" id="card-cep">
-      <header>
-      <h2>Digite o CEP</h2>
-      <p>
-        Coloque o CEP no qual a intuição está estabelecida para localizarmos o
-        endereço
-      </p>
+      <header class="pr">
+        <h1>Vamos identificar sua instituição</h1>
       </header>
-      <fieldset>
-        <TheMask :class="errorstyle" mask="#####-###" v-model="cep" type="text" name="cep" id="cnpj" @click.native="hideErrorCEP" @keydown.native="cepchanged"/>
-        <span class="error" v-if="errorcep"><i class="fas fa-exclamation-circle"></i>{{errormessagecep[0]}}</span>
-        <form class="sendreset" v-if="cpch">
-          <a @click="checkCEP" id="continue">Salvar</a>
-          <input type="reset" value="Cancelar" name="cancelar" />
-        </form>
-      </fieldset>
-    </section>
 
-    <section class="card endereco" id="card-endereco">
+      <section class="pan">
         <header>
-          <h2>Endereço</h2>
+          <h2>Coloque CNPJ constituído</h2>
+        </header>
+      </section>
+
+      <section class="pan">
+        <header>
+          <h2>Coloque o nome da instituição</h2>
+        </header>
+      </section>
+
+      <section class="card cep" id="card-cep">
+        <header>
+        <h2>Digite o CEP</h2>
           <p>
-            Faça revisão do endereço colocado e preencha as informações não coletadas
+            Coloque o CEP no qual a intuição está estabelecida para localizarmos o
+            endereço
           </p>
         </header>
-        <fieldset class="wrap">
-          <label for="rua" class="column1">
-            <span>Endereço</span>
-            <input type="text" id="rua" name="rua" v-model="endereco" class="ds" disabled/>
-          </label>
-
-          <label for="num" :class="errornumstyle">
-            <span>Número</span>
-            <TheMask type="text" id="number" mask="#######" :class="errornumstyle" v-model="num" @click.native="resetNum"/>
-          </label>
-
-          <label for="bairro" class="column3">
-            <span>Bairro</span>
-            <input type="text" id="bairro" name="bairro" :value="bairro" class="ds" disabled/>
-          </label>
-
-          <label for="estado" class="column4">
-            <span>Estado</span>
-            <select name="estado" id="estado" v-model="estado">
-              <option selected  v-if="estado === '' || estado === ' '" disabled></option>
-              <option v-for="(item,index) in statelist" :key="index" :value="item" :selected="estado === statelist">{{item}}</option>
-            </select>
-          </label>
-
-          <label for="cidade" class="column5">
-            <span>Cidade</span>
-            <input type="text" id="municipio" name="municipio" :value="cidade" class="ds" disabled/>
-          </label>
+        <fieldset>
+          <TheMask :class="errorstyle" mask="#####-###" v-model="cep" type="text" name="cep" id="cnpj" @click.native="hideError"/>
+          <span class="error" v-if="error"><i class="fas fa-exclamation-circle"></i>{{errormessage[0]}}</span>
+          <form class="sendreset">
+            <a @click="check" id="continue">Continuar</a>
+            <input type="reset" value="Cancelar" name="cancelar" />
+          </form>
         </fieldset>
+      </section>
 
-        <form class="sendreset">
-          <a id="continue" @click="endHasError">Confirmar</a>
-          <input type="reset" value="Cancelar" name="cancelar" />
-        </form>
-    </section>
+      <section class="pan">
+        <header>
+          <h2>Endereço</h2>
+        </header>
+      </section>
 
   </main>
 </div>
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios';
 import Menu from "../components/menu.vue";
 import Breakline from "../components/breakline.vue";
 import {TheMask} from "vue-the-mask";
@@ -84,13 +62,9 @@ export default {
   },
   data() {
     return {
-      errornum: false,
-      errorcep:false,
-      errormessagecep:[],
+      error:false,
+      errormessage:[],
       errorstyle:"",
-      errornumstyle:"",
-
-      cpch:false,
 
       valid:"",
       cnpj:"",
@@ -102,74 +76,46 @@ export default {
       estado:"",
       cidade:"",
 
-      statelist: [],
     };
   },
-  created: function(){
-    axios
-    .get("https://servicodados.ibge.gov.br/api/v1/localidades/estados")
-    .then((res)=>{
-    //Catch the States Acronyms 
-      for(const i of res.data){
-        this.statelist.push(i.sigla);
-      }
-     })
-     .catch((err)=>{
-       if(err){
-       console.log(err);
-        }
-     })
-  },
-  methods: {
-    resetNum(){
-      this.errornumstyle = "";
-      this.errornum = "false";
-    },
-    endHasError(){
-    console.log("Funcionou")
-    let isEmpty = this.num == "" || this.num == " ";
-    let isValid = isNaN(this.num);
-    if(isEmpty || isValid){
-      this.errornumstyle = "errorinput";
-      this.errornum = "true";
-    } else{
-      console.log("Tá Certo")
-    }
-    },
-
-    cepchanged(){
-      this.cpch = true;
-    },
-    checkCEP(){
+  methods:{
+    check(){
       let isEmpty = this.cep == "" || this.cep == " ";
       let isValid = this.cep.length == 8;
       if(isEmpty || !isValid){
-        this.errorcep = true;
-        this.errormessagecep.push("Por favor preencha o campo corretamente");
+        this.error = true;
+        this.errormessage.push("Por favor preencha o campo corretamente");
         this.errorstyle = "errorinput";
       } else {
-        this.checkValidCEP();
+        this.checkValid();
       }
     },
-    hideErrorCEP(){
-      this.errorcep = false;
+    hideError(){
+      this.error = false;
       this.errorstyle = ""
-      this.errormessagecep = [];
+      this.errormessage = [];
     },
-    checkValidCEP(){
+    checkValid(){
     let street =  "https://viacep.com.br/ws/" + this.cep + "/json/"
       axios
       .get(street)
       .then((res)=>{
         if(res.status == 200 && res.data.erro == true){
-          this.errorcep = true;
-          this.errormessagecep.push("Por favor digite um CEP Valído");
+          this.error = true;
+          this.errormessage.push("Por favor digite um CEP Valído");
           this.errorstyle = "errorinput";
         } else {
-          this.endereco = res.data.logradouro;
-          this.estado = res.data.uf;
-          this.bairro = res.data.bairro;
-          this.cidade = res.data.localidade;
+          let datas = this.$route.params.datas;
+          datas.cep = this.cep;
+          datas.endereco = res.data.logradouro;
+          datas.estado = res.data.uf;
+          datas.bairro = res.data.bairro;
+          datas.cidade = res.data.localidade;
+
+          this.$router.push({
+            name: "Verification",
+            params: {datas}
+          })
         }
       })
       .catch((err)=>{
@@ -177,10 +123,14 @@ export default {
       })
     }
   },
-  mounted:function(){
-
-  }
+  mounted(){
+    if(this.$route.params.datas){
+      let datas = this.$route.params.datas;
+      this.cep = datas.cep;
+    }
+  },
 }
+
 </script>
 
 <style>
@@ -188,20 +138,12 @@ export default {
 @import '../../public/normalizer.css';
 @import '../../public/reset.css';
 
+/*Grid*/
 main {
   display: grid;
   grid-template-columns: 21% repeat(12, 1fr) 21%;
   gap: 20px;
 }
-.cep {
-  grid-column: 2/13;
-}
-
-.endereco {
-  grid-column: 2/13;
-}
-
-/*Main*/
 
 main header[class="pr"]{
   display: flex;
@@ -215,6 +157,9 @@ main header[class="pr"] img{
   margin-right: 16px;
 }
 
+.cep {
+  grid-column: 2/13;
+}
 
 section[class="pan"]{
   grid-column: 2/13;
@@ -244,6 +189,8 @@ section[class="pan"] h2{
   color: #bababac0;
 }
 
+/*Main*/
+
 .error{
   display: inline-block;
   color: red;
@@ -260,7 +207,6 @@ main header[class="pr"] h1{
   font-weight: 700;
 }
 
-/*CARD CEP*/
 .nhn input[type="text"], .cep input[type="text"], .cnpj input[type="text"]{
   width: 40vw;
   outline: 0;
@@ -275,13 +221,13 @@ main header[class="pr"] h1{
   border-bottom: 1px solid red;
 }
 
+/*Card-cep */
 .cep input[type="text"]:focus {
   border-bottom: 2px solid #00a28c;
   color: #00a28c;
 }
 
 /*CARD-ENDERECO */
-
 .endereco label span {
   display: block;
   margin-bottom: 8px;
@@ -293,8 +239,8 @@ main header[class="pr"] h1{
   flex-wrap: wrap;
 }
 
-.endereco input[type="text"][id="number"],
-.endereco input[id="number"],
+.endereco input[type="text"],
+.endereco input[type="number"],
 .endereco select {
   background-color: inherit;
   margin-right: 8px;
@@ -306,21 +252,13 @@ main header[class="pr"] h1{
   padding-bottom: 4px;
   font-size: 22px;
   color: #0d0d0d;
-  width: 30vw;
+  width: 40vw;
   margin-bottom: 32px;
 }
 
-.endereco input[type="text"][id="number"],
+.endereco input[type="number"],
 .endereco select {
   width: 14vmin;
-}
-
-.endereco input[type="text"][class="errorinput"]{
-  border-bottom: 2px solid red;
-}
-
-.endereco label[class="errorinput"]{
-  color: red;
 }
 
 .endereco input[type="text"]:focus {
@@ -328,7 +266,7 @@ main header[class="pr"] h1{
   color: #00a28c;
 }
 
-.endereco input[type="text"][class="number"]:focus {
+.endereco input[type="number"]:focus {
   border-bottom: 2px solid #00a28c;
   color: #00a28c;
 }
@@ -338,12 +276,8 @@ main header[class="pr"] h1{
   color: #00a28c;
 }
 
-.endereco input[class="ds"][type="text"]{
-  color: #B9B9B9;
-  border-bottom: 1px solid #B9B9B9;
-}
 
-/*Card Default*/
+/*Card*/
 .card {
   border: 2px solid #0d0d0d31;
   width: 100%;
@@ -364,7 +298,9 @@ main header[class="pr"] h1{
   font-size: 16px;
 }
 
+/*Reset*/
 /*Send and Reset */
+
 .card form[class="sendreset"]{
   margin-top: 64px;
 }

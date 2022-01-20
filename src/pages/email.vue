@@ -47,13 +47,11 @@ export default {
 @import '../../public/default.css';
 @import '../../public/normalizer.css';
 @import '../../public/reset.css';
-
 #app{
   display: grid;
   grid-template-columns: 21% repeat(12, 1fr) 21%;
   gap: 20px;
 }
-
 /*Menu */
 menu nav a img{
   display: block;
@@ -64,7 +62,6 @@ menu {
   grid-column: 2/14;
   margin-top: 16px;
 }
-
 #back{
   position: relative;
   grid-column: 2/14;
@@ -75,7 +72,6 @@ menu {
   margin-bottom: 64px;
   font-weight: 600;
 }
-
 #back::after{
   content: "";
   position: absolute;
@@ -85,27 +81,23 @@ menu {
   width: 13.5px;
   height: 13.5px;
 }
-
 label{
   margin-bottom: 8px;
 }
 /*Menu ends here */
-
-
-
 /*Principally starts here */
 main{
-  width: 100;
+  width: 100%;
   grid-column: 5/11;
+  display: flex;
+  flex-direction: column;
 }
-
 main fieldset[class="fr"], 
 main fieldset[class="sc"]{
   display: flex;
   flex-direction: column;
   width: 100%;
 }
-
 button{
   cursor: pointer;
   height: 45px;
@@ -114,24 +106,20 @@ button{
   font-size: 16px;
 }
 
-input, button{
+input{
   margin-bottom: 16px;
 }
 
 main a{
   text-decoration: underline;
   cursor: pointer;
-  float: right;
+  align-self: flex-end;
   color: #00615485;
 }
-
 main a span{
   font-weight: 200;
 }
 /*Principally ends here */
-
-
-
 /*First fieldset starts here */
 main header{
   font-weight: 800;
@@ -139,7 +127,6 @@ main header{
   text-align: center;
   padding-bottom: 32px;
 }
-
 main fieldset[class="fr"] input{
   border: 2px solid rgb(185, 185, 185);
   border: 2px solid rgba(185, 185, 185, 0.5);
@@ -151,19 +138,15 @@ main fieldset[class="fr"] input{
   text-indent: 4px;
   font-weight: 200;
 }
-
 main fieldset[class=fr] input:focus{
   border-color: #16D9F2;
 }
-
 main fieldset[class=fr] button{
   background-color: #68B400;
   font-weight: 600;
   color: white;
 }
 /*First fieldset ends here*/
-
-
 /*Second fieldset */
 main fieldset[class="sc"]{
   width: 100%;
@@ -171,12 +154,9 @@ main fieldset[class="sc"]{
   font-size: 16px;
   text-align: center;
 }
-
 main fieldset[class="sc"] button{
   margin-top: 16px;
   background-color: #F2EEEB;
 }
 /*Second fieldset ends here */
-
-
 </style>
