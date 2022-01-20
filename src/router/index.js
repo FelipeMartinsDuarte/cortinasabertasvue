@@ -1,13 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Verification from '../pages/verification.vue'
+import Verification from '../pages/verification/verification.vue'
 import Password from '../pages/password.vue'
 import Email from '../pages/email.vue'
 import Website from '../pages/website.vue'
-import Webname from '../pages/webname.vue'
-import Webcep from '../pages/webcep.vue'
-import Webend from '../pages/webend.vue'
-import Webcnpj from '../pages/webcnpj.vue'
+import Webname from '../pages/verification/webname.vue'
+import Webcep from '../pages/verification/webcep.vue'
+import Webcnpj from '../pages/verification/webcnpj.vue'
 
 
 Vue.use(Router)
@@ -15,35 +14,30 @@ Vue.use(Router)
 export default new Router({
   routes: [
       {
-        path:'/webcnpj',
+        path:'/verificate/1',
         name: 'Webcnpj',
         component: Webcnpj
       },
       {
-          path:'/webname',
+          path:'/verificate/2',
           name: 'Webname',
           component: Webname,
           props: true,
       },
       {
-          path:'/webcep',
+          path:'/verificate/3',
           name: 'Webcep',
           component: Webcep
       },
       {
-        path:'/webend',
-        name: 'Webend',
-        component: Webend
+        path:'/verificate/4',
+        name: 'Verificar',
+        component: Verification
       },
       {
         path:'/website',
         name: 'Website',
         component: Website
-      },
-      {
-        path:'/verification',
-        name: 'Verificar',
-        component: Verification
       },
       {
         path:'/email',

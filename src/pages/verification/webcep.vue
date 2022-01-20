@@ -49,8 +49,8 @@
 
 <script>
 import axios from 'axios';
-import Menu from "../components/menu.vue";
-import Breakline from "../components/breakline.vue";
+import Menu from "../../components/menu.vue";
+import Breakline from "../../components/breakline.vue";
 import {TheMask} from "vue-the-mask";
 
 export default {
@@ -133,10 +133,10 @@ export default {
 
 </script>
 
-<style>
-@import '../../public/default.css';
-@import '../../public/normalizer.css';
-@import '../../public/reset.css';
+<style scoped>
+@import '../../../public/default.css';
+@import '../../../public/normalizer.css';
+@import '../../../public/reset.css';
 
 /*Grid*/
 main {
@@ -177,7 +177,7 @@ section[class="pan"]:after{
   bottom: 0;
   margin: auto;
   right: 0;
-  background: url(../assets/downarrow.svg) no-repeat center;
+  background: url(../../assets/downarrow.svg) no-repeat center;
   background-size: 16px;
   height: 100%;
   width: 32px;
@@ -306,10 +306,10 @@ main header[class="pr"] h1{
 }
 
 .card form[class="sendreset"] input[type="reset"][name="cancelar"] {
-  color: #68b400;
+  color: #0D0D0D;
   background-color: inherit;
   border-radius: 5px;
-  border: 1px solid #68b400;
+  border: 1px solid #0D0D0D;
   padding: 8px 16px;
 }
 
@@ -320,7 +320,7 @@ main header[class="pr"] h1{
 .card form[class="sendreset"] a[id="continue"] {
   text-decoration: none;
   border: inherit;
-  background-color: #68b400;
+  background-color: #0D0D0D;
   color: white;
   padding: 10px 16px;
   border-radius: 5px;
@@ -328,7 +328,7 @@ main header[class="pr"] h1{
 }
 
 .card form[class="sendreset"] a[id="continue"]:hover {
-  background-color: #549900;
+  background-color: #0D0D0D;
 }
 
 .card form[class="sendreset"] input[type="reset"][name="cancelar"],

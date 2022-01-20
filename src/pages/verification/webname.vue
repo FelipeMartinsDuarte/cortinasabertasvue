@@ -53,8 +53,8 @@
 </template>
 
 <script>
-import Menu from "../components/menu.vue";
-import Breakline from "../components/breakline.vue";
+import Menu from "../../components/menu.vue";
+import Breakline from '../../components/breakline.vue';
 
 export default {
   name: "verification",
@@ -113,10 +113,10 @@ export default {
  }
 </script>
 
-<style>
-@import '../../public/default.css';
-@import '../../public/normalizer.css';
-@import '../../public/reset.css';
+<style scoped>
+@import '../../../public/default.css';
+@import '../../../public/normalizer.css';
+@import '../../../public/reset.css';
 
 /*Grid*/
 main {
@@ -185,7 +185,7 @@ section[class="pan"]:after{
   bottom: 0;
   margin: auto;
   right: 0;
-  background: url(../assets/downarrow.svg) no-repeat center;
+  background: url(../../assets/downarrow.svg) no-repeat center;
   background-size: 16px;
   height: 100%;
   width: 32px;

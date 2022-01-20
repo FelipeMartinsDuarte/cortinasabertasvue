@@ -103,8 +103,8 @@
 
 <script>
 import axios from "axios";
-import Menu from "../components/menu.vue";
-import Breakline from "../components/breakline.vue";
+import Menu from "../../components/menu.vue";
+import Breakline from "../../components/breakline.vue";
 import {TheMask} from "vue-the-mask";
 
 export default {
@@ -201,7 +201,7 @@ export default {
       if(isEmpty || !isValid){
         this.errorcep = true;
         this.errormessagecep.push("Por favor preencha o campo corretamente");
-        this.errorcepstyle = "errorinput";
+        this.errorstylecep = "errorinput";
       } else {
         this.checkValidCEP();
       }
@@ -248,7 +248,7 @@ export default {
       if(!isValid || isEmpty){
         this.errorname = true;
         this.errormessagename = "Por favor preencha o campo corretamente";
-        this.errornamestyle = "errorstyle";
+        this.errornamestyle = "errorinput";
       } else {
         this.cpcn = false;
       }
@@ -274,10 +274,10 @@ export default {
 }
 </script>
 
-<style>
-@import '../../public/default.css';
-@import '../../public/normalizer.css';
-@import '../../public/reset.css';
+<style scoped>
+@import '../../../public/default.css';
+@import '../../../public/normalizer.css';
+@import '../../../public/reset.css';
 
 main {
   display: grid;
@@ -292,7 +292,21 @@ main {
   grid-column: 2/13;
 }
 
+.card{
+  grid-column: 2/13;
+}
+
 /*Main*/
+
+#count {
+  width: 40vw;
+  margin-top: 8px;
+  text-align: right;
+}
+
+.nhn input[class="errorinput"]{
+  border-bottom: 1px solid red;
+}
 
 main header[class="pr"]{
   display: flex;
@@ -323,7 +337,7 @@ section[class="pan"]:after{
   bottom: 0;
   margin: auto;
   right: 0;
-  background: url(../assets/downarrow.svg) no-repeat center;
+  background: url(../../assets/downarrow.svg) no-repeat center;
   background-size: 16px;
   height: 100%;
   width: 32px;
@@ -362,8 +376,8 @@ main header[class="pr"] h1{
   font-weight: 200;
 }
 
-.cep input[type="text"][class="errorinput"]{
-  border-bottom: 1px solid black;
+input[type="text"][class="errorinput"]{
+  border-bottom: 1px solid red;
 }
 
 .cep input[type="text"]:focus {
@@ -384,8 +398,7 @@ main header[class="pr"] h1{
   flex-wrap: wrap;
 }
 
-.endereco input[type="text"][id="number"],
-.endereco input[id="number"],
+.endereco input[type="text"],
 .endereco select {
   background-color: inherit;
   margin-right: 8px;
@@ -397,13 +410,13 @@ main header[class="pr"] h1{
   padding-bottom: 4px;
   font-size: 22px;
   color: #0d0d0d;
-  width: 30vw;
+  width: 40vw;
   margin-bottom: 32px;
 }
 
 .endereco input[type="text"][id="number"],
 .endereco select {
-  width: 14vmin;
+  width: 5vw;
 }
 
 .endereco input[type="text"][class="errorinput"]{

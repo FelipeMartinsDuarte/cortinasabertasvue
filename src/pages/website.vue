@@ -1,424 +1,430 @@
 <template>    
-<main id="content-wrap">
-      <header class="title">
-        <p>Etapa 1 de 2</p>
-        <h1>Criação do website</h1>
-      </header>
+<div class="wrap">
+  <Menu />
+  <Breakline />
+  <main id="content-wrap">
+    <header class="title">
+      <p>Etapa 1 de 2</p>
+      <h1>Criação do website</h1>
+    </header>
 
-      <section class="card profile">
-        <header>
-          <h2>Perfil da Casa</h2>
-          <p>
-            Clique sobre as opções sim ou não de cada item para Definir o Perfil da instituição
-          </p>
-        </header>
-
-        <form class="sendreset">
-          <div class="wrapprofile">
-
-            <fieldset class="columnprofile">
-              <span>Aceitam Longa estadia?</span>
-              <div class="option">
-              <input type="radio" name="yesnot" id="yesnot1" value="true" hidden >
-                <label for="yesnot1"><a>Sim</a></label>
-                <input type="radio" name="yesnot" id="yesnot2" value="false" hidden>
-                <label for="yesnot2"><a>Não</a></label>
-              </div>
-            </fieldset>
-
-            <fieldset class="columnprofile">
-              <span>Aceitam pessoas Independentes?</span>
-              <div class="option">
-                <input type="radio" name="yesnot2" id="yesnot3" value="true" hidden>
-                <label for="yesnot3"><a>Sim</a></label>
-                <input type="radio" name="yesnot2" id="yesnot4" value="false" hidden>
-                <label for="yesnot4"><a>Não</a></label>
-              </div>
-            </fieldset>
-
-            <fieldset class="columnprofile">
-              <span>Possuem Quartos Coletivos?</span>
-              <div class="option">
-                <input type="radio" name="yesnot3" id="yesnot5" value="true" hidden>
-                <label for="yesnot5"><a>Sim</a></label>
-                <input type="radio" name="yesnot3" id="yesnot6" value="false" hidden>
-                <label for="yesnot6"><a>Não</a></label>
-              </div>
-            </fieldset>
-
-            <fieldset class="columnprofile">
-              <span>Aceitam pessoas Dependentes?</span>
-              <div class="option">
-                <input type="radio" name="yesnot4" id="yesnot7" value="true" hidden>
-                <label for="yesnot7"><a>Sim</a></label>
-                <input type="radio" name="yesnot4" id="yesnot8" value="false" hidden>
-                <label for="yesnot8"><a>Não</a></label>
-              </div>
-            </fieldset>
-
-            <fieldset class="columnprofile">
-              <span>Aceitam pessoas Semi-Dependentes?</span>
-              <div class="option">
-                <input type="radio" name="yesnot5" id="yesnot9" value="true" hidden>
-                <label for="yesnot9"><a>Sim</a></label>
-                <input type="radio" name="yesnot5" id="yesnot10" value="false" hidden>
-                <label for="yesnot10"><a>Não</a></label>
-              </div>
-            </fieldset>
-
-            <fieldset class="columnprofile">
-              <span>Aceitam Curta estadia?</span>
-              <div class="option">
-                <input type="radio" name="yesnot6" id="yesnot11" value="true" hidden>
-                <label for="yesnot11"><a>Sim</a></label>
-                <input type="radio" name="yesnot6" id="yesnot12" value="false" hidden>
-                <label for="yesnot12"><a>Não</a></label>
-              </div>
-            </fieldset>
-
-            <fieldset class="columnprofile">
-              <span>Possuem Quartos Individuais?</span>
-              <div class="option">
-                <input type="radio" name="yesnot7" id="yesnot13" value="true" hidden>
-                <label for="yesnot13"><a>Sim</a></label>
-                <input type="radio" name="yesnot7" id="yesnot14" value="false" hidden>
-                <label for="yesnot14"><a>Não</a></label>
-              </div>
-            </fieldset>
-          </div>
-
-          <hr class="sendform" />
-          <a href="#" id="continue">Continuar</a>
-          <input type="reset" value="Cancelar" name="cancelar" />
-        </form>
-  
-      </section>
-
-      <section class="card image">
-        <article id="image">
+    <section class="card profile">
           <header>
-          <h2>Adicione fotos</h2>
-          <p>
-            Coloque uma ou mais fotos sobre a estrutura, com no mínimo 600 Pixels
-          </p>
+            <h2>Perfil da Casa</h2>
+            <p>
+              Clique sobre as opções sim ou não de cada item para Definir o Perfil da instituição
+            </p>
           </header>
-          <div id="image-content" @dragover.prevent @drop.stop.prevent="ondrop">
-            <div class="image-preview" >
-                <figure class="border addimg">
-                  <img src="../assets/imageicon.svg"/>
-                  <figcaption><span><a v-on:click="imageSelect">Clique e selecione</a> ou Arraste aqui</span></figcaption>
-                </figure>
-              </div>
-              <label v-for="(item,index) in imageArray" :key="index" class="image-preview">
-                  <figure id="top-bar">
-                    <img src="../assets/bin.svg" alt="remover imagem" @click="removeImage(item)">
-                    <figcaption><span>{{item.filename}}</span></figcaption>
-                  </figure>
-                  <figure class="border image">
-                    <img :src="item.url">
-                  </figure>
-              </label>
-          <input type="file" ref="imageInput" @input="onselect" multiple>
-          </div>
-        </article>
 
-        <article id="logo">
-          <header>
-          <h2>Possui uma Logo?</h2>
-          <p>
-            Coloque a sua logo em fundo transparente ou branco. Você poderá adicionar futuramente!
-          </p>
-          </header>
-          <div id="logo-content">
-            <nav class="row navlogo" v-if="logolenght > 0">
-              <figure class="edit">
-                <img src="../assets/crop.svg" alt="cortar imagem">
-              </figure>
-              <figure class="remove" @click="removeLogo">
-                <img src="../assets/bin.svg" alt="excluir imagem">
-              </figure>
-             </nav>
+          <form class="sendreset">
+            <div class="wrapprofile">
 
-             <figure class="preview-logo" v-for="(item,index) in logoItem" :key="index">
-               <img :src="item.url" alt="visualisação da sua logomarca">
-             </figure>
+              <fieldset class="columnprofile">
+                <span>Aceitam Longa estadia?</span>
+                <div class="option">
+                <input type="radio" name="yesnot" id="yesnot1" value="true" hidden >
+                  <label for="yesnot1"><a>Sim</a></label>
+                  <input type="radio" name="yesnot" id="yesnot2" value="false" hidden>
+                  <label for="yesnot2"><a>Não</a></label>
+                </div>
+              </fieldset>
 
-              <div class="add-logo" @click="logoSelect" v-if="logolenght == 0">
-                <img src="../assets/logoicon.svg" alt="crie sua logo aqui">
-                <span>Selecione ou Arraste aqui</span>
-              </div>
-              <input type="file" ref="logoInput" @input="onlogoselect">
-          </div>
-        </article>
+              <fieldset class="columnprofile">
+                <span>Aceitam pessoas Independentes?</span>
+                <div class="option">
+                  <input type="radio" name="yesnot2" id="yesnot3" value="true" hidden>
+                  <label for="yesnot3"><a>Sim</a></label>
+                  <input type="radio" name="yesnot2" id="yesnot4" value="false" hidden>
+                  <label for="yesnot4"><a>Não</a></label>
+                </div>
+              </fieldset>
 
-        <form class="sendreset">
-          <hr class="sendform" />
-          <a href="#" id="continue">Continuar</a>
-          <input type="reset" value="Cancelar" name="cancelar" />
-        </form>
-      </section>
+              <fieldset class="columnprofile">
+                <span>Possuem Quartos Coletivos?</span>
+                <div class="option">
+                  <input type="radio" name="yesnot3" id="yesnot5" value="true" hidden>
+                  <label for="yesnot5"><a>Sim</a></label>
+                  <input type="radio" name="yesnot3" id="yesnot6" value="false" hidden>
+                  <label for="yesnot6"><a>Não</a></label>
+                </div>
+              </fieldset>
 
-      <section class="card team">
-        <article id="team">
-          <header>
-          <h2>Adicione sua equipe</h2>
-          <p>Clique e adicione os profissionais a qual formam e fazem parte da equipe que formam sua instituição</p>
-          </header>
-          <div class="addwrap team">
-            <!--Add items added to array-->
-            <label v-for="(item, index) in teamitems" :key="index" class="itemarray">
-              <figure v-on:click="onRemovedTeam(item)"><img src="../assets/bin.svg" alt="Remove"/></figure>
-              <Teamadd
-                :name="item.name"
-                :slug="item.slug"
-                :icon="item.icon.contentType"
-                :Base64="item.icon.imageBase64"
-              />
-            </label>
+              <fieldset class="columnprofile">
+                <span>Aceitam pessoas Dependentes?</span>
+                <div class="option">
+                  <input type="radio" name="yesnot4" id="yesnot7" value="true" hidden>
+                  <label for="yesnot7"><a>Sim</a></label>
+                  <input type="radio" name="yesnot4" id="yesnot8" value="false" hidden>
+                  <label for="yesnot8"><a>Não</a></label>
+                </div>
+              </fieldset>
 
-            <!--Add something, button and list-->
-            <div class="add-content">
-              <!--Add button-->
-              <figure class="add" v-if="teamlenght < 12" v-on:click="onClickedTeam"><img src="../assets/add.svg"/></figure>
-              <!--Clickoutside-->
-              <label class="outside" v-if="showteam" v-on:click="onClosedTeam"></label>
-              <!--Searchbar-->
-              <fieldset class="selectbar acess" v-show="showteam">
-                <label class="search-bar" for="search-bar-acess">
-                  <input type="search" id="search-bar-acess" placeholder="Ex: Nutricionistas" v-model="search"/>
-                </label>
-                <!--Rendering all team options-->
-                <div v-for="(item, index) in SearchResultsTeam" :key="index" class="items acess">
-                  <label v-on:click="onAddedTeam(item)">
-                    <Teamitem 
-                    :name="item.name" 
-                    :type="item.icon.contentType" 
-                    :Base64="item.icon.imageBase64"
-                    />
-                  </label>
+              <fieldset class="columnprofile">
+                <span>Aceitam pessoas Semi-Dependentes?</span>
+                <div class="option">
+                  <input type="radio" name="yesnot5" id="yesnot9" value="true" hidden>
+                  <label for="yesnot9"><a>Sim</a></label>
+                  <input type="radio" name="yesnot5" id="yesnot10" value="false" hidden>
+                  <label for="yesnot10"><a>Não</a></label>
+                </div>
+              </fieldset>
+
+              <fieldset class="columnprofile">
+                <span>Aceitam Curta estadia?</span>
+                <div class="option">
+                  <input type="radio" name="yesnot6" id="yesnot11" value="true" hidden>
+                  <label for="yesnot11"><a>Sim</a></label>
+                  <input type="radio" name="yesnot6" id="yesnot12" value="false" hidden>
+                  <label for="yesnot12"><a>Não</a></label>
+                </div>
+              </fieldset>
+
+              <fieldset class="columnprofile">
+                <span>Possuem Quartos Individuais?</span>
+                <div class="option">
+                  <input type="radio" name="yesnot7" id="yesnot13" value="true" hidden>
+                  <label for="yesnot13"><a>Sim</a></label>
+                  <input type="radio" name="yesnot7" id="yesnot14" value="false" hidden>
+                  <label for="yesnot14"><a>Não</a></label>
                 </div>
               </fieldset>
             </div>
-          </div>
-        </article>
 
-        <article id="structure">
-          <header>
-            <h2>Estrutura</h2>
+            <hr class="sendform" />
+            <a href="#" id="continue">Continuar</a>
+            <input type="reset" value="Cancelar" name="cancelar" />
+          </form>
+    
+    </section>
+
+    <section class="card image">
+          <article id="image">
+            <header>
+            <h2>Adicione fotos</h2>
             <p>
-            Adicione a detalhes sobre o local como quantidade de quartos, salas e banheiros e em etapas futuras você poderá adicionar os itens a qual faltam 
+              Coloque uma ou mais fotos sobre a estrutura, com no mínimo 600 Pixels
             </p>
             </header>
-            <div class="addwrap structura">
+            <div id="image-content" @dragover.prevent @drop.stop.prevent="ondrop">
+              <div class="image-preview" >
+                  <figure class="border addimg">
+                    <img src="../assets/imageicon.svg"/>
+                    <figcaption><span><a v-on:click="imageSelect">Clique e selecione</a> ou Arraste aqui</span></figcaption>
+                  </figure>
+                </div>
+                <label v-for="(item,index) in imageArray" :key="index" class="image-preview">
+                    <figure id="top-bar">
+                      <img src="../assets/bin.svg" alt="remover imagem" @click="removeImage(item)">
+                      <figcaption><span>{{item.filename}}</span></figcaption>
+                    </figure>
+                    <figure class="border image">
+                      <img :src="item.url">
+                    </figure>
+                </label>
+            <input type="file" ref="imageInput" @input="onselect" multiple>
+            </div>
+          </article>
+
+          <article id="logo">
+            <header>
+            <h2>Possui uma Logo?</h2>
+            <p>
+              Coloque a sua logo em fundo transparente ou branco. Você poderá adicionar futuramente!
+            </p>
+            </header>
+            <div id="logo-content">
+              <nav class="row navlogo" v-if="logolenght > 0">
+                <figure class="edit">
+                  <img src="../assets/crop.svg" alt="cortar imagem">
+                </figure>
+                <figure class="remove" @click="removeLogo">
+                  <img src="../assets/bin.svg" alt="excluir imagem">
+                </figure>
+              </nav>
+
+              <figure class="preview-logo" v-for="(item,index) in logoItem" :key="index">
+                <img :src="item.url" alt="visualisação da sua logomarca">
+              </figure>
+
+                <div class="add-logo" @click="logoSelect" v-if="logolenght == 0">
+                  <img src="../assets/logoicon.svg" alt="crie sua logo aqui">
+                  <span>Selecione ou Arraste aqui</span>
+                </div>
+                <input type="file" ref="logoInput" @input="onlogoselect">
+            </div>
+          </article>
+
+          <form class="sendreset">
+            <hr class="sendform" />
+            <a href="#" id="continue">Continuar</a>
+            <input type="reset" value="Cancelar" name="cancelar" />
+          </form>
+    </section>
+
+    <section class="card team">
+          <article id="team">
+            <header>
+            <h2>Adicione sua equipe</h2>
+            <p>Clique e adicione os profissionais a qual formam e fazem parte da equipe que formam sua instituição</p>
+            </header>
+            <div class="addwrap team">
               <!--Add items added to array-->
-              <label v-for="(item, index) in strucitems" :key="index" class="itemarray">
-                <Quantityadd
+              <label v-for="(item, index) in teamitems" :key="index" class="itemarray">
+                <figure v-on:click="onRemovedTeam(item)"><img src="../assets/bin.svg" alt="Remove"/></figure>
+                <Teamadd
                   :name="item.name"
                   :slug="item.slug"
                   :icon="item.icon.contentType"
                   :Base64="item.icon.imageBase64"
                 />
-                <label for="number" class="lateral-struc">
-                    <span>{{item.name}}</span>
-                    <TheMask mask="##" type="text" id="number" placeholder="1"/>
-                </label>
-
               </label>
-            </div>
-        </article>
-      </section>
 
-      <section class="card spot">
-        <article id="accessibility">
-          <header>
-          <h2>Adicione detalhes sobre a acessibilidade</h2>
-          <p>Clique e adicione a acessibilidade que a estrutura possui</p>
-          </header>
-          <div class="addwrap acess">
-            <!--Add items added to array-->
-            <label v-for="(item, index) in acessitems" :key="index" class="itemarray">
-              <figure v-on:click="onRemovedAcess(item)"><img src="../assets/bin.svg" alt="Remove"/></figure>
-              <Teamadd
-                :name="item.name"
-                :slug="item.slug"
-                :icon="item.icon.contentType"
-                :Base64="item.icon.imageBase64"
-              />
-            </label>
-
-            <!--Add something, button and list-->
-            <div class="add-content">
-              <!--Add button-->
-              <figure class="add" v-if="acesslenght < 12" v-on:click="onClickedAcess"><img src="../assets/add.svg"/></figure>
-              <!--Clickoutside-->
-              <label class="outside" v-if="showacess" v-on:click="onClosedAcess"></label>
-              <!--Searchbar-->
-              <fieldset class="selectbar acess" v-show="showacess">
-                <label class="search-bar" for="search-bar-acess">
-                  <input type="search" id="search-bar-acess" placeholder="Ex: Móveis planejados" v-model="search"/>
-                </label>
-                <!--Rendering all team options-->
-                <div v-for="(item, index) in SearchResultsAcess" :key="index" class="items acess">
-                  <label v-on:click="onAddedAcess(item)">
-                    <Teamitem 
-                    :name="item.name" 
-                    :type="item.icon.contentType" 
-                    :Base64="item.icon.imageBase64"
-                    />
+              <!--Add something, button and list-->
+              <div class="add-content">
+                <!--Add button-->
+                <figure class="add" v-if="teamlenght < 12" v-on:click="onClickedTeam"><img src="../assets/add.svg"/></figure>
+                <!--Clickoutside-->
+                <label class="outside" v-if="showteam" v-on:click="onClosedTeam"></label>
+                <!--Searchbar-->
+                <fieldset class="selectbar acess" v-show="showteam">
+                  <label class="search-bar" for="search-bar-acess">
+                    <input type="search" id="search-bar-acess" placeholder="Ex: Nutricionistas" v-model="search"/>
                   </label>
-                </div>
-              </fieldset>
+                  <!--Rendering all team options-->
+                  <div v-for="(item, index) in SearchResultsTeam" :key="index" class="items acess">
+                    <label v-on:click="onAddedTeam(item)">
+                      <Teamitem 
+                      :name="item.name" 
+                      :type="item.icon.contentType" 
+                      :Base64="item.icon.imageBase64"
+                      />
+                    </label>
+                  </div>
+                </fieldset>
+              </div>
             </div>
-          </div>
-        </article>
+          </article>
 
-        <article id="spot">
-          <header>
-            <h2>Espaço</h2>
-            <p>
-            Clique e Adicione a acomodação disponibilizada e opcionalmente adicione imagens. Ex: Sala de espera, Jardim
-            </p>
-          </header>
-            <form class="sendreset">
-              <div class="addwrap spot">
+          <article id="structure">
+            <header>
+              <h2>Estrutura</h2>
+              <p>
+              Adicione a detalhes sobre o local como quantidade de quartos, salas e banheiros e em etapas futuras você poderá adicionar os itens a qual faltam 
+              </p>
+              </header>
+              <div class="addwrap structura">
                 <!--Add items added to array-->
-                <label v-for="(item, index) in spotitems" :key="index" class="itemarray">
-                  <figure v-on:click="onRemovedSpot(item,index)"><img src="../assets/bin.svg" alt="remove"/></figure>
-                  <Spotadd
+                <label v-for="(item, index) in strucitems" :key="index" class="itemarray">
+                  <Quantityadd
+                    :name="item.name"
                     :slug="item.slug"
                     :icon="item.icon.contentType"
                     :Base64="item.icon.imageBase64"
-                    :imgUrl="spotfiles[index]"
                   />
-                  
-                  <div class="lateral-img" v-if="spotfiles[index] == 0">
-                    <span>{{item.name}}</span>
-                    <!--Pass values into indirect way-->
-                    <a @click="selectSpot(index)">Adicionar imagem</a> 
-                  </div>
-
-                  <div class="lateral-img" v-if="spotfiles[index] != 0">
-                    <span>{{item.name}}</span>
-                    <!--Pass values into indirect way-->
-                    <a @click="removeCreateSpot(index)">Remover imagem</a> 
-                  </div>
+                  <label for="number" class="lateral-struc">
+                      <span>{{item.name}}</span>
+                      <TheMask mask="##" type="text" id="number" placeholder="1"/>
+                  </label>
 
                 </label>
-
-                <input type="file" ref="spotInput" @input="createSpot">
-
-                <!--Add something, button and list-->
-                <div class="add-content">
-                  <!--Add button-->
-                  <figure class="add add-spot" v-if="spotlenght < 12" v-on:click="onClickedSpot"><img src="../assets/add.svg" /></figure>
-                  <!--Clickoutside-->
-                  <label class="outside" v-if="showspot" v-on:click="onClosedSpot"></label>
-                  <!--Searchbar-->
-                  <fieldset class="selectbar spot" v-show="showspot">
-                      <label class="search-bar" for="search-bar-spot">
-                        <input type="search" id="search-bar-spot" placeholder="Ex: Jardim" v-model="search"/>
-                      </label>
-                    <!--Rendering all team options-->
-                      <div v-for="(item, index) in SearchResultsSpot" :key="index" class="items spot">
-                        <label v-on:click="onAddedSpot(item)">
-                          <Teamitem
-                          :name="item.name"
-                          :type="item.icon.contentType"
-                          :Base64="item.icon.imageBase64"
-                          />
-                      </label>
-                      </div>
-                  </fieldset>
-                </div>
               </div>
-            <hr class="sendform" />
-            <a href="#" id="continue">Continuar</a>
-            <input type="reset" value="Cancelar" name="cancelar" />
-          </form>
-        </article>
-        
-      </section>
+          </article>
+    </section>
 
-      <section class="card contact">
-        <article>
-        <header>
-        <h2>Contato</h2>
-        <p>
-          Adicione os meios de contato existentes cujo o cliente possa entrar em contato e o horário em que a instituição permanece 
-          aberta para visitas, coloque no mínimo um meio de contato 
-        </p>
-        </header>
-        <form class="sendreset">
-          <fieldset>
-            <div class="flexbox">
-              <address class="pa po">
-                <label for="website">
-                <span>Site</span>
-                </label>
-                <input type="text" id="website" placeholder="www.seusite.com">
-              </address>
-              <address class="pa po">
-                <label for="tel">
-                <span class="rw">Telefone contato *</span>
-                </label>
-                <TheMask mask="(##) ####-#####" type="text" id="tel"/>
-              </address>
-              <address class="pa">
-                <label for="tel2">
-                <span>Telefone contato #2</span>
-                </label>
-                <TheMask mask="(##) ####-#####" type="text" id="tel2"/>
-              </address>
-              <time class="pa ab">
-                <label for="opentime">
-                <span>Horário Aberto a visitação *</span> 
-                <input type="time" v-if="!srdisabled">
-                <input type="time" v-if="srdisabled" :value="srd" class="dis" disabled/>
-                <span>ás</span>    
-                <input type="time" v-if="!srdisabled" id="opentime" />
-                <input type="time" v-if="srdisabled" :value="sra" id="opentime" class="dis" disabled/>
-                </label>
-                <a v-if="!sr" @mouseover="showTagSR"  @click="srClick"><abbr title="Sem restrição">S/R</abbr></a>
-                <a v-if="sr"  @mouseout="closeTagSR"  @click="srClick" class="sr"><abbr>S/R</abbr></a>
-              </time>
+    <section class="card spot">
+          <article id="accessibility">
+            <header>
+            <h2>Adicione detalhes sobre a acessibilidade</h2>
+            <p>Clique e adicione a acessibilidade que a estrutura possui</p>
+            </header>
+            <div class="addwrap acess">
+              <!--Add items added to array-->
+              <label v-for="(item, index) in acessitems" :key="index" class="itemarray">
+                <figure v-on:click="onRemovedAcess(item)"><img src="../assets/bin.svg" alt="Remove"/></figure>
+                <Teamadd
+                  :name="item.name"
+                  :slug="item.slug"
+                  :icon="item.icon.contentType"
+                  :Base64="item.icon.imageBase64"
+                />
+              </label>
+
+              <!--Add something, button and list-->
+              <div class="add-content">
+                <!--Add button-->
+                <figure class="add" v-if="acesslenght < 12" v-on:click="onClickedAcess"><img src="../assets/add.svg"/></figure>
+                <!--Clickoutside-->
+                <label class="outside" v-if="showacess" v-on:click="onClosedAcess"></label>
+                <!--Searchbar-->
+                <fieldset class="selectbar acess" v-show="showacess">
+                  <label class="search-bar" for="search-bar-acess">
+                    <input type="search" id="search-bar-acess" placeholder="Ex: Móveis planejados" v-model="search"/>
+                  </label>
+                  <!--Rendering all team options-->
+                  <div v-for="(item, index) in SearchResultsAcess" :key="index" class="items acess">
+                    <label v-on:click="onAddedAcess(item)">
+                      <Teamitem 
+                      :name="item.name" 
+                      :type="item.icon.contentType" 
+                      :Base64="item.icon.imageBase64"
+                      />
+                    </label>
+                  </div>
+                </fieldset>
+              </div>
             </div>
-            
-            <hr class="sendform" />
-            <a href="#" id="continue">Continuar</a>
-            <input type="reset" value="Cancelar" name="cancelar" />
-          </fieldset>
-      </form>
+          </article>
 
+          <article id="spot">
+            <header>
+              <h2>Espaço</h2>
+              <p>
+              Clique e Adicione a acomodação disponibilizada e opcionalmente adicione imagens. Ex: Sala de espera, Jardim
+              </p>
+            </header>
+              <form class="sendreset">
+                <div class="addwrap spot">
+                  <!--Add items added to array-->
+                  <label v-for="(item, index) in spotitems" :key="index" class="itemarray">
+                    <figure v-on:click="onRemovedSpot(item,index)"><img src="../assets/bin.svg" alt="remove"/></figure>
+                    <Spotadd
+                      :slug="item.slug"
+                      :icon="item.icon.contentType"
+                      :Base64="item.icon.imageBase64"
+                      :imgUrl="spotfiles[index]"
+                    />
+                    
+                    <div class="lateral-img" v-if="spotfiles[index] == 0">
+                      <span>{{item.name}}</span>
+                      <!--Pass values into indirect way-->
+                      <a @click="selectSpot(index)">Adicionar imagem</a> 
+                    </div>
 
-        </article>
-      </section>
+                    <div class="lateral-img" v-if="spotfiles[index] != 0">
+                      <span>{{item.name}}</span>
+                      <!--Pass values into indirect way-->
+                      <a @click="removeCreateSpot(index)">Remover imagem</a> 
+                    </div>
 
-      <section class="card description">
-        <article>
-          <header>
-            <h2>Fale um pouco sobre vocês</h2>
-            <p>Adicione uma descrição a qual será mostrada aos usuários</p>
-          </header>
+                  </label>
 
-          <form class="sendreset">
-              <fieldset>
-                <textarea maxlength="5000"></textarea>
-                <hr class="sendform" />
-                <a href="#" id="continue">Continuar</a>
-                <input type="reset" value="Cancelar" name="cancelar" />
-              </fieldset>
-          </form>
+                  <input type="file" ref="spotInput" @input="createSpot">
 
-
-        </article>
-
-
+                  <!--Add something, button and list-->
+                  <div class="add-content">
+                    <!--Add button-->
+                    <figure class="add add-spot" v-if="spotlenght < 12" v-on:click="onClickedSpot"><img src="../assets/add.svg" /></figure>
+                    <!--Clickoutside-->
+                    <label class="outside" v-if="showspot" v-on:click="onClosedSpot"></label>
+                    <!--Searchbar-->
+                    <fieldset class="selectbar spot" v-show="showspot">
+                        <label class="search-bar" for="search-bar-spot">
+                          <input type="search" id="search-bar-spot" placeholder="Ex: Jardim" v-model="search"/>
+                        </label>
+                      <!--Rendering all team options-->
+                        <div v-for="(item, index) in SearchResultsSpot" :key="index" class="items spot">
+                          <label v-on:click="onAddedSpot(item)">
+                            <Teamitem
+                            :name="item.name"
+                            :type="item.icon.contentType"
+                            :Base64="item.icon.imageBase64"
+                            />
+                        </label>
+                        </div>
+                    </fieldset>
+                  </div>
+                </div>
+              <hr class="sendform" />
+              <a href="#" id="continue">Continuar</a>
+              <input type="reset" value="Cancelar" name="cancelar" />
+            </form>
+          </article>
           
-      </section>
-    </main>
+    </section>
+
+    <section class="card contact">
+          <article>
+          <header>
+          <h2>Contato</h2>
+          <p>
+            Adicione os meios de contato existentes cujo o cliente possa entrar em contato e o horário em que a instituição permanece 
+            aberta para visitas, coloque no mínimo um meio de contato 
+          </p>
+          </header>
+          <form class="sendreset">
+            <fieldset>
+              <div class="flexbox">
+                <address class="pa po">
+                  <label for="website">
+                  <span>Site</span>
+                  </label>
+                  <input type="text" id="website" placeholder="www.seusite.com">
+                </address>
+                <address class="pa po">
+                  <label for="tel">
+                  <span class="rw">Telefone contato *</span>
+                  </label>
+                  <TheMask mask="(##) ####-#####" type="text" id="tel"/>
+                </address>
+                <address class="pa">
+                  <label for="tel2">
+                  <span>Telefone contato #2</span>
+                  </label>
+                  <TheMask mask="(##) ####-#####" type="text" id="tel2"/>
+                </address>
+                <time class="pa ab">
+                  <label for="opentime">
+                  <span>Horário Aberto a visitação *</span> 
+                  <input type="time" v-if="!srdisabled">
+                  <input type="time" v-if="srdisabled" :value="srd" class="dis" disabled/>
+                  <span>ás</span>    
+                  <input type="time" v-if="!srdisabled" id="opentime" />
+                  <input type="time" v-if="srdisabled" :value="sra" id="opentime" class="dis" disabled/>
+                  </label>
+                  <a v-if="!sr" @mouseover="showTagSR"  @click="srClick"><abbr title="Sem restrição">S/R</abbr></a>
+                  <a v-if="sr"  @mouseout="closeTagSR"  @click="srClick" class="sr"><abbr>S/R</abbr></a>
+                </time>
+              </div>
+              
+              <hr class="sendform" />
+              <a href="#" id="continue">Continuar</a>
+              <input type="reset" value="Cancelar" name="cancelar" />
+            </fieldset>
+        </form>
+
+
+          </article>
+    </section>
+
+    <section class="card description">
+          <article>
+            <header>
+              <h2>Fale um pouco sobre vocês</h2>
+              <p>Adicione uma descrição a qual será mostrada aos usuários</p>
+            </header>
+
+            <form class="sendreset">
+                <fieldset>
+                  <textarea maxlength="5000"></textarea>
+                  <hr class="sendform" />
+                  <a href="#" id="continue">Continuar</a>
+                  <input type="reset" value="Cancelar" name="cancelar" />
+                </fieldset>
+            </form>
+
+
+          </article>
+
+
+            
+    </section>
+  </main>
+</div>
 </template>
 
 <script>
+import Menu from "../components/menu.vue";
+import Breakline from "../components/breakline.vue";
 import Teamitem from "../components/teamitem.vue";
 import Teamadd from "../components/teamadd.vue";
 import Spotadd from "../components/spotadd.vue";
@@ -434,7 +440,9 @@ export default {
     Teamitem,
     Quantityadd,
     Spotadd,
-    TheMask
+    TheMask,
+    Menu,
+    Breakline
   },
   data() {
     return {
@@ -884,7 +892,7 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
 @import '../../public/default.css';
 @import '../../public/normalizer.css';
 @import '../../public/reset.css';
@@ -1525,7 +1533,7 @@ export default {
 }
 
 .card p:first-of-type {
-  margin-top: 8px;
+  margin: 8px 0 16px 0;
   font-weight: 200;
   font-size: 16px;
 }
@@ -1578,13 +1586,13 @@ export default {
 }
 
 .title h1{
-  margin-top: 8px;
   margin-bottom: 32px;
   font-weight: 700;
 }
 
 .title p{
   color:#006154;
+  margin-bottom: 8px;
   font-weight: 600;
 }
 </style>
