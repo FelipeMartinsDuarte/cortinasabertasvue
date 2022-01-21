@@ -108,13 +108,13 @@
             <div id="image-content" @dragover.prevent @drop.stop.prevent="ondrop">
               <div class="image-preview" >
                   <figure class="border addimg">
-                    <img src="../assets/imageicon.svg"/>
+                    <img src="../../assets/imageicon.svg"/>
                     <figcaption><span><a v-on:click="imageSelect">Clique e selecione</a> ou Arraste aqui</span></figcaption>
                   </figure>
                 </div>
                 <label v-for="(item,index) in imageArray" :key="index" class="image-preview">
                     <figure id="top-bar">
-                      <img src="../assets/bin.svg" alt="remover imagem" @click="removeImage(item)">
+                      <img src="../../assets/bin.svg" alt="remover imagem" @click="removeImage(item)">
                       <figcaption><span>{{item.filename}}</span></figcaption>
                     </figure>
                     <figure class="border image">
@@ -135,10 +135,10 @@
             <div id="logo-content">
               <nav class="row navlogo" v-if="logolenght > 0">
                 <figure class="edit">
-                  <img src="../assets/crop.svg" alt="cortar imagem">
+                  <img src="../../assets/crop.svg" alt="cortar imagem">
                 </figure>
                 <figure class="remove" @click="removeLogo">
-                  <img src="../assets/bin.svg" alt="excluir imagem">
+                  <img src="../../assets/bin.svg" alt="excluir imagem">
                 </figure>
               </nav>
 
@@ -147,7 +147,7 @@
               </figure>
 
                 <div class="add-logo" @click="logoSelect" v-if="logolenght == 0">
-                  <img src="../assets/logoicon.svg" alt="crie sua logo aqui">
+                  <img src="../../assets/logoicon.svg" alt="crie sua logo aqui">
                   <span>Selecione ou Arraste aqui</span>
                 </div>
                 <input type="file" ref="logoInput" @input="onlogoselect">
@@ -170,7 +170,7 @@
             <div class="addwrap team">
               <!--Add items added to array-->
               <label v-for="(item, index) in teamitems" :key="index" class="itemarray">
-                <figure v-on:click="onRemovedTeam(item)"><img src="../assets/bin.svg" alt="Remove"/></figure>
+                <figure v-on:click="onRemovedTeam(item)"><img src="../../assets/bin.svg" alt="Remove"/></figure>
                 <Teamadd
                   :name="item.name"
                   :slug="item.slug"
@@ -182,7 +182,7 @@
               <!--Add something, button and list-->
               <div class="add-content">
                 <!--Add button-->
-                <figure class="add" v-if="teamlenght < 12" v-on:click="onClickedTeam"><img src="../assets/add.svg"/></figure>
+                <figure class="add" v-if="teamlenght < 12" v-on:click="onClickedTeam"><img src="../../assets/add.svg"/></figure>
                 <!--Clickoutside-->
                 <label class="outside" v-if="showteam" v-on:click="onClosedTeam"></label>
                 <!--Searchbar-->
@@ -240,7 +240,7 @@
             <div class="addwrap acess">
               <!--Add items added to array-->
               <label v-for="(item, index) in acessitems" :key="index" class="itemarray">
-                <figure v-on:click="onRemovedAcess(item)"><img src="../assets/bin.svg" alt="Remove"/></figure>
+                <figure v-on:click="onRemovedAcess(item)"><img src="../../assets/bin.svg" alt="Remove"/></figure>
                 <Teamadd
                   :name="item.name"
                   :slug="item.slug"
@@ -252,7 +252,7 @@
               <!--Add something, button and list-->
               <div class="add-content">
                 <!--Add button-->
-                <figure class="add" v-if="acesslenght < 12" v-on:click="onClickedAcess"><img src="../assets/add.svg"/></figure>
+                <figure class="add" v-if="acesslenght < 12" v-on:click="onClickedAcess"><img src="../../assets/add.svg"/></figure>
                 <!--Clickoutside-->
                 <label class="outside" v-if="showacess" v-on:click="onClosedAcess"></label>
                 <!--Searchbar-->
@@ -286,7 +286,7 @@
                 <div class="addwrap spot">
                   <!--Add items added to array-->
                   <label v-for="(item, index) in spotitems" :key="index" class="itemarray">
-                    <figure v-on:click="onRemovedSpot(item,index)"><img src="../assets/bin.svg" alt="remove"/></figure>
+                    <figure v-on:click="onRemovedSpot(item,index)"><img src="../../assets/bin.svg" alt="remove"/></figure>
                     <Spotadd
                       :slug="item.slug"
                       :icon="item.icon.contentType"
@@ -313,7 +313,7 @@
                   <!--Add something, button and list-->
                   <div class="add-content">
                     <!--Add button-->
-                    <figure class="add add-spot" v-if="spotlenght < 12" v-on:click="onClickedSpot"><img src="../assets/add.svg" /></figure>
+                    <figure class="add add-spot" v-if="spotlenght < 12" v-on:click="onClickedSpot"><img src="../../assets/add.svg" /></figure>
                     <!--Clickoutside-->
                     <label class="outside" v-if="showspot" v-on:click="onClosedSpot"></label>
                     <!--Searchbar-->
@@ -423,12 +423,12 @@
 </template>
 
 <script>
-import Menu from "../components/menu.vue";
-import Breakline from "../components/breakline.vue";
-import Teamitem from "../components/teamitem.vue";
-import Teamadd from "../components/teamadd.vue";
-import Spotadd from "../components/spotadd.vue";
-import Quantityadd from "../components/quantityadd.vue";
+import Menu from "../../components/menu.vue";
+import Breakline from "../../components/breakline.vue";
+import Teamitem from "../../components/teamitem.vue";
+import Teamadd from "../../components/teamadd.vue";
+import Spotadd from "../../components/spotadd.vue";
+import Quantityadd from "../../components/quantityadd.vue";
 import {TheMask} from "vue-the-mask";
 import slugify from "slugify";
 import axios from "axios";
@@ -893,9 +893,9 @@ export default {
 </script>
 
 <style scoped>
-@import '../../public/default.css';
-@import '../../public/normalizer.css';
-@import '../../public/reset.css';
+@import '../../../public/default.css';
+@import '../../../public/normalizer.css';
+@import '../../../public/reset.css';
 
 /*Grid*/
 #content-wrap {
@@ -1466,7 +1466,7 @@ export default {
   bottom: 0;
   margin: auto;
   right: 0;
-  background: url(../assets/searchicon.svg) no-repeat center;
+  background: url(../../assets/searchicon.svg) no-repeat center;
   background-size: 16px;
   height: 100%;
   width: 32px;
