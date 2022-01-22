@@ -136,6 +136,7 @@ export default {
   data() {
     return {
       img: 'https://images.unsplash.com/photo-1600984575359-310ae7b6bdf2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80',
+      zoom: 0,
       //Main
       search: "",
 
@@ -154,6 +155,61 @@ export default {
     change({ coordinates, canvas }) {
 			console.log(coordinates, canvas)
 		},
+    defaultSize({ imageSize }) {
+      return {
+        width: Math.min(imageSize.height, imageSize.width),
+        height: Math.min(imageSize.height, imageSize.width),
+      };
+    },
+    stencilSize({ boundaries }) {
+      return {
+        width: Math.min(boundaries.height, boundaries.width) - 48,
+        height: Math.min(boundaries.height, boundaries.width) - 48,
+      };
+    },
+    onChange() {
+      const cropper = this.$refs.cropper;
+      if (cropper) {
+        const { coordinates, imageSize } = cropper;
+        if (
+          imageSize.width / imageSize.height >
+          coordinates.width / coordinates.height
+        ) {
+          // Determine the position of slider bullet
+          // It's 0 if the stencil has the maximum size and it's 1 if the has the minimum size
+          this.zoom =
+            (cropper.imageSize.height - cropper.coordinates.height) /
+            (cropper.imageSize.height - cropper.sizeRestrictions.minHeight);
+        } else {
+          this.zoom =
+            (cropper.imageSize.width - cropper.coordinates.width) /
+            (cropper.imageSize.width - cropper.sizeRestrictions.minWidth);
+        }
+      }
+    },
+    onZoom(value) {
+      const cropper = this.$refs.cropper;
+      if (cropper) {
+        if (cropper.imageSize.height < cropper.imageSize.width) {
+          const minHeight = cropper.sizeRestrictions.minHeight;
+          const imageHeight = cropper.imageSize.height;
+          // Determine the current absolute zoom and the new absolute zoom
+          // to calculate the sought relative zoom value
+          cropper.zoom(
+            (imageHeight - this.zoom * (imageHeight - minHeight)) /
+              (imageHeight - value * (imageHeight - minHeight))
+          );
+        } else {
+          const minWidth = cropper.sizeRestrictions.minWidth;
+          const imageWidth = cropper.imageSize.width;
+          cropper.zoom(
+            (imageWidth - this.zoom * (imageWidth - minWidth)) /
+              (imageWidth - value * (imageWidth - minWidth))
+          );
+        }
+      }
+    },
+
     //Image starts here
     ondrop: function(event){
         let limit = 13;
