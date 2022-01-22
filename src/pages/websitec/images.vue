@@ -44,13 +44,11 @@
               Coloque a sua logo em fundo transparente ou branco. Você poderá adicionar futuramente!
             </p>
 
-            
-
             </header>
             <div class="logo-wrap">
               <div id="logo-content">
                 <nav class="row navlogo" v-if="logolenght > 0">
-                  <figure class="edit" @click="cancrop">
+                  <figure class="edit" @click="cropImage">
                     <img src="../../assets/crop.svg" alt="cortar imagem" >
                   </figure>
                   <figure class="remove" @click="removeLogo" v-if="!crop">
@@ -59,13 +57,8 @@
                 </nav>
 
                 <figure class="preview-logo" v-for="(item,index) in logoItem" :key="index">
-                  <img  v-show="!crop" alt="crie sua logo aqui" :src="item.url">
-                  <cropper 
-                    ref="cropper"
-                    v-show="crop"
-                    class="cropper"
-                    :src="item.url"
-                  />
+                  <img :src="item.url" alt="visualisação da sua logomarca" >
+                  
                 </figure>
 
                   <div class="add-logo" @click="logoSelect" v-if="logolenght == 0">
@@ -100,25 +93,15 @@
 <script>
 import Menu from "../../components/menu.vue";
 import Breakline from "../../components/breakline.vue";
-import { Cropper } from 'vue-advanced-cropper'
-import 'vue-advanced-cropper/dist/style.css';
 
 export default {
   name: "website",
   components: {
     Menu,
     Breakline,
-    Cropper,
   },
   data() {
     return {
-      coordinates: {
-				width: 0,
-				height: 0,
-				left: 0,
-				top: 0,
-			},
-      crop:false,
       //Main
       search: "",
 
@@ -133,23 +116,6 @@ export default {
     };
   },
   methods:{
-    //Crop
-    change({ coordinates, canvas }) {
-			console.log(coordinates, canvas)
-		},
-    cancrop(){
-      if(this.crop == false){
-        this.crop = true;
-      } else {
-        console.log("Tá entrando em true")
-        const {canvas} = this.$refs.cropper.getResult();
-        canvas.toBlob((blob) => {
-				this.logoItem[0].url = blob;
-        this.crop = false;
-        }, this.image.type);
-      }
-
-    },
     //Image starts here
     ondrop: function(event){
         let limit = 13;
@@ -302,8 +268,8 @@ export default {
 
 /*Crop */
 .cropper {
-	height: 100%;
-  width: 100%;
+	height: 128px;
+  width: 128px;
 	background: #DDD;
 }
 
