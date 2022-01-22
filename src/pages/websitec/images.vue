@@ -50,8 +50,8 @@
             <p>
               Coloque a sua logo em fundo transparente ou branco. Você poderá adicionar futuramente!
             </p>
-
             </header>
+            <span class="error" v-if="errorlogoL.length > 0"><i class="fas fa-exclamation-circle"></i>{{errorlogoL[0]}}</span>
             <div class="logo-wrap">
               <div id="logo-content">
                 <nav class="row navlogo" v-if="logolenght > 0">
@@ -113,6 +113,7 @@ export default {
     return {
       //Main
       errormessageI:[],
+      errorlogoL:[],
       search: "",
 
       imageFile:[],
@@ -204,7 +205,7 @@ export default {
       this.errormessageI.push(msg);
       setTimeout(()=>{
         this.errormessageI = [];
-      },7000)
+      },5000)
     },
     //Image End
 
@@ -217,7 +218,12 @@ export default {
         let Logo = logoInput.files[0];
         this.verificateLogoImage(Logo);
     },
-
+    logoerror: function(msg){
+      this.errorlogoL.push(msg);
+      setTimeout(()=>{
+        this.errorlogoL = [];
+      },5000)
+    },
     verificateLogoImage: function(Logo){
       //Define rules
       const av = ["image/jpeg","image/jpg","image/png","image/webp"];
@@ -234,13 +240,13 @@ export default {
         let width = img.width;
         let height = img.height;
         if(!rtype){
-          console.log("Tipo de Arquivo não é uma imagem");
+          this.logoerror("Tipo de Arquivo não é uma imagem");
         } else if(!rsize){
-          console.log("Arquivo muito grande envie no máximo 3mb")
+          this.logoerror("Arquivo muito grande envie no máximo 3mb")
         } else if(width < minsize || height < minsize){
-          console.log("Este arquivo é muito pequeno precisa ter 64px nos dois lados")
+          this.logoerror("Este arquivo é muito pequeno precisa ter 64px nos dois lados")
         } else if(width > 512 || height > 512){
-          console.log("Logo muito grande precisa ser menor do que 512")
+          this.logoerror("Logo muito grande precisa ser menor do que 512")
         } else{
           this.onlogopreview(Logo,url);
         }
@@ -361,8 +367,9 @@ export default {
 }
 
 #logo-content .add-logo img{
-  height: 2.5em;
-  width: 2.5em;
+  height: 1.8em;
+  margin-bottom: 4px;
+  width: auto;
 }
 
 #logo-content .add-logo span{
@@ -477,8 +484,9 @@ export default {
 }
 
 #image-content .image-preview .addimg img{
-  height: 2.5em;
-  width: 2.5em;
+  height: 1.8em;
+  margin-bottom: 4px;
+  width: auto;
 }
 
 .border{

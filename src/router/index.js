@@ -15,6 +15,8 @@ import Verification from '../pages/verification/verification.vue'
 import Website from '../pages/websitec/website.vue'
 import Profile from '../pages/websitec/profile.vue'
 import Images from '../pages/websitec/images.vue'
+import TeamStructure from '../pages/websitec/teamstruc.vue'
+import AcessSpot from '../pages/websitec/accspot.vue'
 
 
 Vue.use(Router)
@@ -51,6 +53,16 @@ export default new Router({
         path:'/website/2',
         name: 'Images',
         component: Images
+      },
+      {
+        path:'/website/3',
+        name: 'TeamStructure',
+        component: TeamStructure
+      },
+      {
+        path:'/website/4',
+        name: 'AcessSpot',
+        component: AcessSpot
       },
       {
         path:'/website/6',
