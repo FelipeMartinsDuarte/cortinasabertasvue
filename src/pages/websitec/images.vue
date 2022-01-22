@@ -17,6 +17,7 @@
               Coloque uma ou mais fotos sobre a estrutura, com no mínimo 600 Pixels
             </p>
             </header>
+            <span class="error" v-if="errormessageI.length > 0"><i class="fas fa-exclamation-circle"></i>{{errormessageI[0]}}</span>
             <div id="image-content" @dragover.prevent @drop.stop.prevent="ondrop" >
               <div class="image-preview" @click="imageSelect" >
                   <figure class="border addimg">
@@ -24,6 +25,8 @@
                     <figcaption><span><a>Clique e selecione</a> ou Arraste aqui</span></figcaption>
                   </figure>
                 </div>
+
+                <draggable v-model="imageArray" draggable=".image-preview" class="draggable">
                 <label v-for="(item,index) in imageArray" :key="index" class="image-preview">
                     <figure id="top-bar">
                       <img src="../../assets/bin.svg" alt="remover imagem" @click="removeImage(item)">
@@ -33,6 +36,10 @@
                       <img :src="item.url">
                     </figure>
                 </label>
+                </draggable>
+
+
+
             <input type="file" ref="imageInput" @input="onselect" multiple>
             </div>
           </article>
@@ -48,10 +55,10 @@
             <div class="logo-wrap">
               <div id="logo-content">
                 <nav class="row navlogo" v-if="logolenght > 0">
-                  <figure class="edit" @click="cropImage">
+                  <figure class="edit" >
                     <img src="../../assets/crop.svg" alt="cortar imagem" >
                   </figure>
-                  <figure class="remove" @click="removeLogo" v-if="!crop">
+                  <figure class="remove" @click="removeLogo">
                     <img src="../../assets/bin.svg" alt="excluir imagem">
                   </figure>
                 </nav>
@@ -93,16 +100,19 @@
 <script>
 import Menu from "../../components/menu.vue";
 import Breakline from "../../components/breakline.vue";
+import draggable from 'vuedraggable'
 
 export default {
   name: "website",
   components: {
     Menu,
     Breakline,
+    draggable,
   },
   data() {
     return {
       //Main
+      errormessageI:[],
       search: "",
 
       imageFile:[],
@@ -145,6 +155,7 @@ export default {
       const maxsize = 3000000; //3Mb to Bytes
       //Check item by item comply with the rule
       for(var item of Images){
+        const imgname = item.name;
         let url = URL.createObjectURL(item);
         //Booleans
         var rtype = av.includes(item.type);
@@ -155,33 +166,46 @@ export default {
           let minsize = 600;
           let width = img.width;
           let height = img.height;
+          //Fixing bug, images being upload althought it doesn't apply to the rules
+          for(let i = 0; i<1; i++){
             if(!rtype){
-              console.log("Tipo de Arquivo não é uma imagem"); //Check if it's an image
+              this.errorImage("Tipo de Arquivo não é uma imagem"); //Check if it's an image
+              continue;
             } 
             if(!rsize){ //Check image size exceed 3mb
-              console.log("Arquivo muito grande envie no máximo 3mb")
+              this.errorImage("Arquivo muito grande envie no máximo 3mb")
+              continue;
             } 
             if(width < minsize && height < minsize){ //Check the dimensions are atach the min size
-              console.log(`A Imagem precisa ter ${minsize}px em um dos lados`)
+              this.errorImage(`A Imagem precisa ter ${minsize}px em um dos lados`)
+              continue;
             } 
             if(width > 1920 || height > 1080){ //Check if the dimensions exceed the max size
-              console.log("A Imagem é muito grande precisa ser menor do que 1920x1080")
-            } else{
-                this.previewImage(item, url); //So it can be displayed
+              this.errorImage("A Imagem é muito grande precisa ser menor do que 1920x1080")
+              continue;
+            } else {
+              this.previewImage(item, url, imgname); //So it can be displayed 
             }
+         }
         }
         img.src = url;
       }
     },
-    previewImage: function(item,url){
+    previewImage: function(item,url,imgname){
         let imageObj = new Object;
         imageObj.url = url;
-        imageObj.filename = item.name;
+        imageObj.filename = imgname;
         imageObj.filetype = item.type;
         this.imageArray.push(imageObj);
-        this.imageItem.push(imageObj.filename);
         this.imagelenght +=1;
       },
+
+    errorImage(msg){
+      this.errormessageI.push(msg);
+      setTimeout(()=>{
+        this.errormessageI = [];
+      },7000)
+    },
     //Image End
 
     //Logo 
@@ -224,7 +248,6 @@ export default {
 
       img.src = url;
     },
-
     onlogopreview: function(item,url){
         let Logo = new Object;
         Logo.url = url;
@@ -266,13 +289,6 @@ export default {
   grid-column: 2/13;
 }
 
-/*Crop */
-.cropper {
-	height: 128px;
-  width: 128px;
-	background: #DDD;
-}
-
 
 /*Image-Card*/
 /*Logo*/
@@ -297,6 +313,10 @@ export default {
   display: flex;
   flex-direction: row;
 
+}
+
+.draggable{
+  display: flex;
 }
 #logo-content .navlogo .remove img, #logo-content .navlogo .edit img{
   cursor: pointer;
@@ -360,6 +380,17 @@ export default {
 #logo-content .preview-logo img{
   height: 100%;
   width: 100%;
+}
+
+.error{
+  display: inline-block;
+  color: red;
+  vertical-align: middle;
+  margin-bottom: 8px;
+}
+
+.error i{
+  margin-right: 4px;
 }
 
 /*Logo ends here*/
@@ -457,7 +488,7 @@ export default {
   height: 8vmax;
 }
 
-#image-content .image-preview:nth-child(2) .image::before{
+#image-content .image-preview:nth-child(1) .image::before{
   content: "Imagem Principal";
   color: white;
   position: absolute;
