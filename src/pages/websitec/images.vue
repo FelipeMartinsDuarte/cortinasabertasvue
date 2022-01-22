@@ -16,6 +16,7 @@
             <p>
               Coloque uma ou mais fotos sobre a estrutura, com no mínimo 600 Pixels
             </p>
+
             </header>
             <div id="image-content" @dragover.prevent @drop.stop.prevent="ondrop" >
               <div class="image-preview" @click="imageSelect" >
@@ -43,20 +44,49 @@
             <p>
               Coloque a sua logo em fundo transparente ou branco. Você poderá adicionar futuramente!
             </p>
+
+            <cropper
+              ref="cropper"
+              class="twitter-cropper"
+              background-class="twitter-cropper__background"
+              foreground-class="twitter-cropper__foreground"
+              image-restriction="stencil"
+              :stencil-size="stencilSize"
+              :stencil-props="{
+                lines: {},
+                handlers: {},
+                movable: false,
+                scalable: false,
+                aspectRatio: 1,
+                previewClass: 'twitter-cropper__stencil',
+              }"
+              :transitions="false"
+              :canvas="false"
+              :debounce="false"
+              :default-size="defaultSize"
+              :min-width="150"
+              :min-height="150"
+              :src="img"
+              @change="onChange"
+            />
+
+            <Zoom :zoom="zoom" @change="onZoom" />
+            
             </header>
             <div class="logo-wrap">
               <div id="logo-content">
                 <nav class="row navlogo" v-if="logolenght > 0">
-                  <figure class="edit">
-                    <img src="../../assets/crop.svg" alt="cortar imagem">
+                  <figure class="edit" @click="cropImage">
+                    <img src="../../assets/crop.svg" alt="cortar imagem" >
                   </figure>
-                  <figure class="remove" @click="removeLogo">
+                  <figure class="remove" @click="removeLogo" v-if="!crop">
                     <img src="../../assets/bin.svg" alt="excluir imagem">
                   </figure>
                 </nav>
 
                 <figure class="preview-logo" v-for="(item,index) in logoItem" :key="index">
-                  <img :src="item.url" alt="visualisação da sua logomarca">
+                  <img :src="item.url" alt="visualisação da sua logomarca" >
+                  
                 </figure>
 
                   <div class="add-logo" @click="logoSelect" v-if="logolenght == 0">
@@ -65,8 +95,17 @@
                   </div>
                   <input type="file" ref="logoInput" @input="onlogoselect">
               </div>
+
+              
+
+              
+
             </div>
           </article>
+
+          
+
+
 
           <form class="sendreset">
             <hr class="sendform" />
@@ -82,17 +121,25 @@
 <script>
 import Menu from "../../components/menu.vue";
 import Breakline from "../../components/breakline.vue";
+import Zoom from "../../components/zoom.vue";
+import { Cropper } from 'vue-advanced-cropper'
+import 'vue-advanced-cropper/dist/style.css';
 
 export default {
   name: "website",
   components: {
     Menu,
-    Breakline
+    Breakline,
+    Cropper,
+    Zoom,
   },
   data() {
     return {
+      img: 'https://images.unsplash.com/photo-1600984575359-310ae7b6bdf2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80',
       //Main
       search: "",
+
+      imageFile:[],
 
       //Image-Logo card
       imageArray:[],
@@ -103,6 +150,10 @@ export default {
     };
   },
   methods:{
+    //Crop
+    change({ coordinates, canvas }) {
+			console.log(coordinates, canvas)
+		},
     //Image starts here
     ondrop: function(event){
         let limit = 13;
@@ -213,13 +264,13 @@ export default {
     },
 
     onlogopreview: function(item,url){
-        console.log(url);
         let Logo = new Object;
         Logo.url = url;
         Logo.filename = item.name;
         Logo.filetype = item.type;
-        this.logoItem.push(Logo);
         this.logolenght +=1;
+        this.logoItem = [Logo];
+        this.img = url;
     },
     removeLogo: function(){
         this.logolenght = 0;
@@ -253,9 +304,15 @@ export default {
   grid-column: 2/13;
 }
 
+/*Crop */
+.cropper {
+	height: 128px;
+  width: 128px;
+	background: #DDD;
+}
+
 
 /*Image-Card*/
-
 /*Logo*/
 
 .logo-wrap{
@@ -268,6 +325,7 @@ export default {
   background-color: #e2e4e381;
   overflow-x: auto;
 }
+
 #logo{
   margin-top: 16px;
   margin-bottom: 32px;
