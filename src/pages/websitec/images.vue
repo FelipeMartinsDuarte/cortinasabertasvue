@@ -16,7 +16,6 @@
             <p>
               Coloque uma ou mais fotos sobre a estrutura, com no mínimo 600 Pixels
             </p>
-
             </header>
             <div id="image-content" @dragover.prevent @drop.stop.prevent="ondrop" >
               <div class="image-preview" @click="imageSelect" >
@@ -45,38 +44,13 @@
               Coloque a sua logo em fundo transparente ou branco. Você poderá adicionar futuramente!
             </p>
 
-            <cropper
-              ref="cropper"
-              class="twitter-cropper"
-              background-class="twitter-cropper__background"
-              foreground-class="twitter-cropper__foreground"
-              image-restriction="stencil"
-              :stencil-size="stencilSize"
-              :stencil-props="{
-                lines: {},
-                handlers: {},
-                movable: false,
-                scalable: false,
-                aspectRatio: 1,
-                previewClass: 'twitter-cropper__stencil',
-              }"
-              :transitions="false"
-              :canvas="false"
-              :debounce="false"
-              :default-size="defaultSize"
-              :min-width="150"
-              :min-height="150"
-              :src="img"
-              @change="onChange"
-            />
-
-            <Zoom :zoom="zoom" @change="onZoom" />
             
+
             </header>
             <div class="logo-wrap">
               <div id="logo-content">
                 <nav class="row navlogo" v-if="logolenght > 0">
-                  <figure class="edit" @click="cropImage">
+                  <figure class="edit" @click="cancrop">
                     <img src="../../assets/crop.svg" alt="cortar imagem" >
                   </figure>
                   <figure class="remove" @click="removeLogo" v-if="!crop">
@@ -85,8 +59,13 @@
                 </nav>
 
                 <figure class="preview-logo" v-for="(item,index) in logoItem" :key="index">
-                  <img :src="item.url" alt="visualisação da sua logomarca" >
-                  
+                  <img  v-show="!crop" alt="crie sua logo aqui" :src="item.url">
+                  <cropper 
+                    ref="cropper"
+                    v-show="crop"
+                    class="cropper"
+                    :src="item.url"
+                  />
                 </figure>
 
                   <div class="add-logo" @click="logoSelect" v-if="logolenght == 0">
@@ -121,7 +100,6 @@
 <script>
 import Menu from "../../components/menu.vue";
 import Breakline from "../../components/breakline.vue";
-import Zoom from "../../components/zoom.vue";
 import { Cropper } from 'vue-advanced-cropper'
 import 'vue-advanced-cropper/dist/style.css';
 
@@ -131,12 +109,16 @@ export default {
     Menu,
     Breakline,
     Cropper,
-    Zoom,
   },
   data() {
     return {
-      img: 'https://images.unsplash.com/photo-1600984575359-310ae7b6bdf2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80',
-      zoom: 0,
+      coordinates: {
+				width: 0,
+				height: 0,
+				left: 0,
+				top: 0,
+			},
+      crop:false,
       //Main
       search: "",
 
@@ -155,61 +137,19 @@ export default {
     change({ coordinates, canvas }) {
 			console.log(coordinates, canvas)
 		},
-    defaultSize({ imageSize }) {
-      return {
-        width: Math.min(imageSize.height, imageSize.width),
-        height: Math.min(imageSize.height, imageSize.width),
-      };
-    },
-    stencilSize({ boundaries }) {
-      return {
-        width: Math.min(boundaries.height, boundaries.width) - 48,
-        height: Math.min(boundaries.height, boundaries.width) - 48,
-      };
-    },
-    onChange() {
-      const cropper = this.$refs.cropper;
-      if (cropper) {
-        const { coordinates, imageSize } = cropper;
-        if (
-          imageSize.width / imageSize.height >
-          coordinates.width / coordinates.height
-        ) {
-          // Determine the position of slider bullet
-          // It's 0 if the stencil has the maximum size and it's 1 if the has the minimum size
-          this.zoom =
-            (cropper.imageSize.height - cropper.coordinates.height) /
-            (cropper.imageSize.height - cropper.sizeRestrictions.minHeight);
-        } else {
-          this.zoom =
-            (cropper.imageSize.width - cropper.coordinates.width) /
-            (cropper.imageSize.width - cropper.sizeRestrictions.minWidth);
-        }
+    cancrop(){
+      if(this.crop == false){
+        this.crop = true;
+      } else {
+        console.log("Tá entrando em true")
+        const {canvas} = this.$refs.cropper.getResult();
+        canvas.toBlob((blob) => {
+				this.logoItem[0].url = blob;
+        this.crop = false;
+        }, this.image.type);
       }
-    },
-    onZoom(value) {
-      const cropper = this.$refs.cropper;
-      if (cropper) {
-        if (cropper.imageSize.height < cropper.imageSize.width) {
-          const minHeight = cropper.sizeRestrictions.minHeight;
-          const imageHeight = cropper.imageSize.height;
-          // Determine the current absolute zoom and the new absolute zoom
-          // to calculate the sought relative zoom value
-          cropper.zoom(
-            (imageHeight - this.zoom * (imageHeight - minHeight)) /
-              (imageHeight - value * (imageHeight - minHeight))
-          );
-        } else {
-          const minWidth = cropper.sizeRestrictions.minWidth;
-          const imageWidth = cropper.imageSize.width;
-          cropper.zoom(
-            (imageWidth - this.zoom * (imageWidth - minWidth)) /
-              (imageWidth - value * (imageWidth - minWidth))
-          );
-        }
-      }
-    },
 
+    },
     //Image starts here
     ondrop: function(event){
         let limit = 13;
@@ -362,8 +302,8 @@ export default {
 
 /*Crop */
 .cropper {
-	height: 128px;
-  width: 128px;
+	height: 100%;
+  width: 100%;
 	background: #DDD;
 }
 
