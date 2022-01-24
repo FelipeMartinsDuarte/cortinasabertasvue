@@ -198,8 +198,8 @@ export default {
           spot:"",
         };
         this.$router.push({
-            name: "Images",
-            params: {datas}
+          name: "Images",
+          params: {datas}
         })
       }
   }
