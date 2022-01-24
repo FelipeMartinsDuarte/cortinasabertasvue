@@ -173,7 +173,24 @@ export default {
           this.inputTSMessage = "";
         },5000)
       } else {
-        console.log("Tá Certo")
+        let obj = this.$route.params.datas;
+        let data = new Object;
+        
+        if(obj.logo == undefined){
+          data.profile = obj.profile;
+          data.images = obj.images;
+        } else {
+          data.profile = obj.profile;
+          data.images = obj.images;
+          data.logo = obj.logo;
+        }
+        data.team = this.teamlist;
+        data.structure = this.inputTS;
+
+        this.$router.push({
+        name: "AcessSpot",
+        params: {data}
+        }) 
       }
     },
 
@@ -345,7 +362,7 @@ export default {
 }
 
 .structura{
-  height: 32vh;
+  height: 34vh;
 }
 
 .addwrap figure{

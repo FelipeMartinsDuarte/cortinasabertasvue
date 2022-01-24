@@ -12,11 +12,13 @@ import Webcep from '../pages/verification/webcep.vue'
 import Verification from '../pages/verification/verification.vue'
 
 //Website Creation
-import Website from '../pages/websitec/website.vue'
+import WebsiteVerificator from '../pages/websitec/website.vue'
 import Profile from '../pages/websitec/profile.vue'
 import Images from '../pages/websitec/images.vue'
 import TeamStructure from '../pages/websitec/teamstruc.vue'
 import AcessSpot from '../pages/websitec/accspot.vue'
+import Contact from '../pages/websitec/contact.vue'
+import Description from  '../pages/websitec/description.vue'
 
 
 Vue.use(Router)
@@ -65,9 +67,19 @@ export default new Router({
         component: AcessSpot
       },
       {
+        path:'/website/5',
+        name: 'Contact',
+        component: Contact
+      },
+      {
         path:'/website/6',
-        name: 'Website',
-        component: Website
+        name: 'Description',
+        component: Description
+      },
+      {
+        path:'/website/7',
+        name: 'WebsiteVerificator',
+        component: WebsiteVerificator
       },
       {
         path:'/email',

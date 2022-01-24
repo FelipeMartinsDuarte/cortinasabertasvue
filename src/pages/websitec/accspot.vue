@@ -168,6 +168,7 @@ export default {
 
       spotslc:0,
       spotfiles:[0,0,0,0,0,0,0,0,0,0,0,0,0],
+      spotImgFl:[0,0,0,0,0,0,0,0,0,0,0,0,0],
 
     };
   },
@@ -204,6 +205,22 @@ export default {
       }
       if(this.spotlenght == 0){
         this.errorspotmessage = "Por favor adicione no minimo 1 item";
+      } else{
+        let array = [];
+        let datas = this.$route.params.data;
+        for(let i = 0; i < this.spotlist.length; i++){
+          let obj = new Object;
+          obj.item = this.spotlist[i];
+          obj.data = this.spotImgFl[i];
+          array.push(obj);
+        }
+        datas.accessibility = this.acesslist;
+        datas.spot = array;
+
+        this.$router.push({
+          name: "Contact",
+          params: {datas}
+        })
       }
     },
 
@@ -278,17 +295,19 @@ export default {
         } else if(width > 1920 || height > 1080){
           this.ErrorSpotImage("Imagem muito grande precisa ser menor do que 1920x1080")
         } else{
-          this.rightCreateSpot(url);
+          this.rightCreateSpot(url,Images);
         }
       }
 
       img.src = url
     },
-    rightCreateSpot: function(url){
+    rightCreateSpot: function(url,Images){
       this.spotfiles.splice(this.spotslc,1,url) //Catch the selected index and replace by the image name
+      this.spotImgFl.splice(this.spotslc,1,Images) 
     },
     removeCreateSpot:function(index){
       this.spotfiles.splice(index,1,0) //Catch the sent item index and delete it
+      this.spotImgFl.splice(index,1,0)
     },
     ErrorSpotImage(msg){
       this.errorspotmessage = msg;
@@ -453,6 +472,20 @@ export default {
 /* Select Item */
 
 /*Main*/
+
+.items:nth-child(n+3) {
+  border-top: 2px solid #00000040;
+}
+
+.items label {
+  padding: 4px 0px 4px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
 
 .selectbar {
   z-index: 32;

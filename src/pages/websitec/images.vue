@@ -65,7 +65,6 @@
 
                 <figure class="preview-logo" v-for="(item,index) in logoItem" :key="index">
                   <img :src="item.url" alt="visualisação da sua logomarca" >
-                  
                 </figure>
 
                   <div class="add-logo" @click="logoSelect" v-if="logolenght == 0">
@@ -74,21 +73,11 @@
                   </div>
                   <input type="file" ref="logoInput" @input="onlogoselect">
               </div>
-
-              
-
-              
-
             </div>
           </article>
-
-          
-
-
-
           <form class="sendreset">
             <hr class="sendform" />
-            <a href="#" id="continue">Continuar</a>
+            <a @click="sendImageLogo" id="continue">Continuar</a>
             <input type="reset" value="Cancelar" name="cancelar" />
           </form>
     </section>
@@ -116,6 +105,7 @@ export default {
       errorlogoL:[],
       search: "",
 
+      logoFile:[],
       imageFile:[],
 
       //Image-Logo card
@@ -146,6 +136,7 @@ export default {
       this.imagelenght -= 1;
       this.imageArray.splice(position, 1);
       this.imageItem.splice(position, 1);
+      this.imageFile.splice(position,1);
     },
     imageSelect: function (){
       this.$refs.imageInput.click()
@@ -193,14 +184,15 @@ export default {
       }
     },
     previewImage: function(item,url,imgname){
+        this.errormessageI = [];
         let imageObj = new Object;
         imageObj.url = url;
         imageObj.filename = imgname;
         imageObj.filetype = item.type;
         this.imageArray.push(imageObj);
+        this.imageFile.push(item);
         this.imagelenght +=1;
       },
-
     errorImage(msg){
       this.errormessageI.push(msg);
       setTimeout(()=>{
@@ -255,21 +247,49 @@ export default {
       img.src = url;
     },
     onlogopreview: function(item,url){
-        let Logo = new Object;
+      let Logo = new Object;
         Logo.url = url;
         Logo.filename = item.name;
         Logo.filetype = item.type;
         this.logolenght +=1;
         this.logoItem = [Logo];
         this.img = url;
+      this.logoFile.push(item);
     },
     removeLogo: function(){
+        this.logoItem = [];
         this.logolenght = 0;
         this.logoItem.splice(0,1);
-    }
+    },
     //Logo Ends
-
-
+    sendImageLogo(){
+      let isValid = this.imagelenght > 0;
+      let hsLogo = this.logolenght > 0;
+      if(!isValid){
+        this.errormessageI.push("Por favor adicione no minimo uma foto");
+      } else if(hsLogo && isValid){
+        let data = this.$route.params.datas;
+        let datas = {
+          profile: data.profile,
+          images: this.imageFile,
+          logo: this.logoFile,
+        }
+        this.$router.push({
+          name: "TeamStructure",
+          params: {datas}
+        })
+      } else {
+        let data = this.$route.params.datas;
+        let datas = {
+          profile: data.profile,
+          images: this.imageFile,
+        }
+        this.$router.push({
+          name: "TeamStructure",
+          params: {datas}
+        })
+      }   
+    }
   },
 }
 
@@ -373,7 +393,7 @@ export default {
 }
 
 #logo-content .add-logo span{
-  text-align: left;
+  text-align: center;
   color: black;
 
 }
@@ -474,6 +494,7 @@ export default {
 }
 
 #image-content .addimg span{
+  display: inherit;
   text-align: center;
   width: 99%;
 }
@@ -500,6 +521,8 @@ export default {
   content: "Imagem Principal";
   color: white;
   position: absolute;
+  width: 100%;
+  text-align: center;
   text-shadow: 1px 1px 5px black;
 }
 /*Image card ends here */

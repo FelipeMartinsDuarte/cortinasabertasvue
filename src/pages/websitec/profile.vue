@@ -193,7 +193,9 @@ export default {
           objarray.push(obj);
         }
         let datas = {
-          profile: objarray
+          profile: objarray,
+          accessibility: "",
+          spot:"",
         };
         this.$router.push({
             name: "Images",
