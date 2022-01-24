@@ -261,10 +261,6 @@ export default {
   margin-left: 10px;
 }
 
-
-
-
-
 /*Grid*/
 #content-wrap {
   display: grid;

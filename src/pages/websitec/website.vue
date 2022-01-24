@@ -247,6 +247,119 @@
           </form>
     </section>
 
+    <section class="card spot">
+          <article id="accessibility">
+            <header>
+            <h2>Adicione detalhes sobre a acessibilidade</h2>
+            <p>Clique e adicione a acessibilidade que a estrutura possui</p>
+            </header>
+            <span class="error" v-if="erroracessmessage !== ''"><i class="fas fa-exclamation-circle"></i>{{erroracessmessage}}</span>
+            <div class="addwrap acess">
+              <!--Add items added to array-->
+              <label v-for="(item, index) in acessitems" :key="index" class="itemarray">
+                <figure v-on:click="onRemovedAcess(item)"><img src="../../assets/bin.svg" alt="Remove"/></figure>
+                <Teamadd
+                  :name="item.name"
+                  :slug="item.slug"
+                  :icon="item.icon.contentType"
+                  :Base64="item.icon.imageBase64"
+                />
+              </label>
+
+              <!--Add something, button and list-->
+              <div class="add-content">
+                <!--Add button-->
+                <figure class="add" v-if="acesslenght < 12" v-on:click="onClickedAcess"><img src="../../assets/add.svg"/></figure>
+                <!--Clickoutside-->
+                <label class="outside" v-if="showacess" v-on:click="onClosedAcess"></label>
+                <!--Searchbar-->
+                <fieldset class="selectbar acess" v-show="showacess">
+                  <label class="search-bar" for="search-bar-acess">
+                    <input type="search" id="search-bar-acess" placeholder="Ex: Móveis planejados" v-model="search"/>
+                  </label>
+                  <!--Rendering all team options-->
+                  <div v-for="(item, index) in SearchResultsAcess" :key="index" class="items acess">
+                    <label v-on:click="onAddedAcess(item)">
+                      <Teamitem 
+                      :name="item.name" 
+                      :type="item.icon.contentType" 
+                      :Base64="item.icon.imageBase64"
+                      />
+                    </label>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+          </article>
+
+          <article id="spot">
+            <header>
+              <h2>Espaço</h2>
+              <p>
+              Clique e Adicione a acomodação disponibilizada e opcionalmente adicione imagens. Ex: Sala de espera, Jardim
+              </p>
+            </header>
+              <span class="error" v-if="errorspotmessage !== ''"><i class="fas fa-exclamation-circle"></i>{{errorspotmessage}}</span>
+                <div class="addwrap spot">
+                  <!--Add items added to array-->
+                  <label v-for="(item, index) in spotitems" :key="index" class="itemarray">
+                    <figure v-on:click="onRemovedSpot(item,index)"><img src="../../assets/bin.svg" alt="remove"/></figure>
+                    <Spotadd
+                      :slug="item.slug"
+                      :icon="item.icon.contentType"
+                      :Base64="item.icon.imageBase64"
+                      :imgUrl="spotfiles[index]"
+                    />
+                    
+                    <div class="lateral-img" v-if="spotfiles[index] == 0">
+                      <span>{{item.name}}</span>
+                      <!--Pass values into indirect way-->
+                      <a @click="selectSpot(index)">Adicionar imagem</a> 
+                    </div>
+
+                    <div class="lateral-img" v-if="spotfiles[index] != 0">
+                      <span>{{item.name}}</span>
+                      <!--Pass values into indirect way-->
+                      <a @click="removeCreateSpot(index)">Remover imagem</a> 
+                    </div>
+
+                  </label>
+
+                  <input type="file" ref="spotInput" @input="createSpot">
+
+                  <!--Add something, button and list-->
+                  <div class="add-content">
+                    <!--Add button-->
+                    <figure class="add add-spot" v-if="spotlenght < 12" v-on:click="onClickedSpot"><img src="../../assets/add.svg" /></figure>
+                    <!--Clickoutside-->
+                    <label class="outside" v-if="showspot" v-on:click="onClosedSpot"></label>
+                    <!--Searchbar-->
+                    <fieldset class="selectbar spot" v-show="showspot">
+                        <label class="search-bar" for="search-bar-spot">
+                          <input type="search" id="search-bar-spot" placeholder="Ex: Jardim" v-model="search"/>
+                        </label>
+                      <!--Rendering all team options-->
+                        <div v-for="(item, index) in SearchResultsSpot" :key="index" class="items spot">
+                          <label v-on:click="onAddedSpot(item)">
+                            <Teamitem
+                            :name="item.name"
+                            :type="item.icon.contentType"
+                            :Base64="item.icon.imageBase64"
+                            />
+                        </label>
+                        </div>
+                    </fieldset>
+                  </div>
+                </div>
+            <form class="sendreset">
+              <hr class="sendform" />
+              <a id="continue">Continuar</a>
+              <input type="reset" value="Cancelar" name="cancelar" />
+            </form>
+          </article>
+          
+    </section>
+
   </main>
 </div>
 </template>
@@ -257,6 +370,7 @@ import Breakline from "../../components/breakline.vue";
 import draggable from 'vuedraggable'
 import Teamitem from "../../components/teamitem.vue";
 import Teamadd from "../../components/teamadd.vue";
+import Spotadd from "../../components/spotadd.vue";
 import Quantityadd from "../../components/quantityadd.vue";
 import {TheMask} from "vue-the-mask";
 import slugify from "slugify";
@@ -272,11 +386,34 @@ export default {
     Menu,
     Breakline,
     draggable,
+    Spotadd,
   },
   data() {
     return {
       //Main
       search: "",
+
+      //Accessibility
+      erroracessmessage:"",
+
+      acesslist: [],
+      showacess: false,
+      acessitems: [],
+      acessslug: [],
+      acesslenght: 0,
+
+      //Spot
+      errorspotmessage:"",
+
+      spotlist: [],
+      showspot: false,
+      spotitems: [],
+      spotslug: [],
+      spotlenght: 0,
+
+      spotslc:0,
+      spotfiles:[0,0,0,0,0,0,0,0,0,0,0,0,0],
+      spotImgFl:[0,0,0,0,0,0,0,0,0,0,0,0,0],
 
       //Team - Structure
       inputTS:[],
@@ -339,8 +476,160 @@ export default {
           console.log(err);
         }
       })
+
+    axios
+      .get("/api/acessibilidade")
+      .then((res) => {
+        let str = JSON.parse(JSON.stringify(res.data));
+        this.acesslist = str;
+      })
+      .catch((err) => {
+        if (err) {
+          console.log(err);
+        }
+      })
+
+    axios
+      .get("/api/lugar")
+      .then((res) => {
+        let str = JSON.parse(JSON.stringify(res.data));
+        this.spotlist = str;
+      })
+      .catch((err) => {
+        if (err) {
+          console.log(err);
+        }
+      })
   },
   methods:{ 
+
+  //Acess
+  onRemovedAcess: function (item) {
+    var str = JSON.parse(JSON.stringify(item));
+    var position = this.acessslug.indexOf(str.slug);
+    this.acesslenght -= 1;
+    this.acessitems.splice(position, 1);
+    this.acessslug.splice(position, 1);
+  },
+  onClosedAcess: function () {
+      this.search = "";
+      this.showacess = false;
+  },
+  onClickedAcess: function () {
+    this.showacess = true;
+  },
+  onAddedAcess: function (item) {
+      let str = JSON.parse(JSON.stringify(item));
+      if (this.acessslug.includes(str.slug)) {
+        this.onErrorAcess();
+      } else {
+        this.search = "";
+        this.erroracessmessage = "";
+        this.onRightAcess(str);
+      }
+  },
+  onErrorAcess: function () {},
+  onRightAcess: function (item) {
+      this.acessitems.push(item);
+      this.acessslug.push(item.slug);
+      this.showacess = false;
+      this.acesslenght += 1;
+  },
+  //Acess ends here
+
+  //Spot starts here
+  onRemovedSpot: function (item,index) {
+      var str = JSON.parse(JSON.stringify(item));
+      var position = this.spotslug.indexOf(str.slug);
+      this.spotlenght -= 1;
+      this.spotitems.splice(position, 1);
+      this.spotslug.splice(position, 1);
+      //Fix item slug index decresing and files interlaced index keep the same
+      let i;
+      for(i = index + 1; i <= 12; i++){ //Garantee it catch from the next value until the end
+        this.spotfiles.splice(i - 1, 1, this.spotfiles[i]); //Catch previous value of index number
+        this.spotfiles.splice(i, 1, 0);
+      }
+  },
+  onClosedSpot: function () {
+      this.showspot = false;
+  },
+  onClickedSpot: function () {
+      this.search = "";
+      this.showspot = true;
+  },
+  onAddedSpot: function (item) {
+      let str = JSON.parse(JSON.stringify(item));
+      if (this.spotslug.includes(str.slug)) {
+        this.onErrorSpot();
+      } else {
+        this.search = "";
+        this.errorspotmessage = "";
+        this.onRightSpot(str);
+      }
+  },
+  onErrorSpot: function () {},
+  onRightSpot: function (item) {
+      this.spotitems.push(item);
+      this.spotslug.push(item.slug);
+      this.showspot = false;
+      this.spotlenght += 1;
+  },
+  selectSpot: function(index){
+      this.spotslc = index; //Pass selected value toa variable so it can be used to interlace the file to the slug
+      this.$refs.spotInput.click()
+  },
+  createSpot: function(){
+      const spotInput = this.$refs.spotInput; //Import the files
+      let spotadd = spotInput.files[0];
+      this.verificateSpotImage(spotadd); //Pass to the filter that pass to the right
+  },
+  verificateSpotImage: function(Images){
+      //Define rules
+      const av = ["image/jpeg","image/jpg","image/png","image/webp"];
+      const maxsize = 3000000; //3Mb to Bytes
+      //Check item by item comply with the rule
+      let url = URL.createObjectURL(Images);
+      //Booleans
+      var rtype = av.includes(Images.type);
+      var rsize = Images.size < maxsize;
+      //Check Requirements
+      let img = new Image;
+      img.onload = () =>{
+        let min = 600;
+        let width = img.width;
+        let height = img.height;
+        if(!rtype){
+          this.ErrorSpotImage("Tipo de Arquivo não é uma imagem");
+        } else if(!rsize){
+          this.ErrorSpotImage("Arquivo muito grande envie no máximo 3mb")
+        } else if(width < min && height < min){
+          this.ErrorSpotImage(`A Imagem precisa ter ${min}px em um dos lados`)
+        } else if(width > 1920 || height > 1080){
+          this.ErrorSpotImage("Imagem muito grande precisa ser menor do que 1920x1080")
+        } else{
+          this.rightCreateSpot(url,Images);
+        }
+      }
+
+      img.src = url
+  },
+  rightCreateSpot: function(url,Images){
+      this.spotfiles.splice(this.spotslc,1,url) //Catch the selected index and replace by the image name
+      this.spotImgFl.splice(this.spotslc,1,Images) 
+  },
+  removeCreateSpot:function(index){
+      this.spotfiles.splice(index,1,0) //Catch the sent item index and delete it
+      this.spotImgFl.splice(index,1,0)
+  },
+  ErrorSpotImage(msg){
+      this.errorspotmessage = msg;
+      setTimeout(()=>{
+        this.errorspotmessage = "";
+      },5000)
+  },
+  //Spot ends here
+
   //Team starts here 
   onRemovedTeam: function (item) {
       var str = JSON.parse(JSON.stringify(item));
@@ -640,6 +929,26 @@ export default {
       return this.struclist.filter((item) => item.slug.includes(slug));
     }
   },
+  SearchResultsAcess: function () {
+      if (this.search == "" || this.search == " ") {
+        return this.acesslist;
+      } else {
+        const Capitalized =
+          this.search.charAt(0).toUpperCase() + this.search.slice(1);
+        const slug = slugify(Capitalized);
+        return this.acesslist.filter((item) => item.slug.includes(slug));
+      }
+  },
+  SearchResultsSpot: function () {
+      if (this.search == "" || this.search == " ") {
+        return this.spotlist;
+      } else {
+        const Capitalized =
+          this.search.charAt(0).toUpperCase() + this.search.slice(1);
+        const slug = slugify(Capitalized);
+        return this.spotlist.filter((item) => item.slug.includes(slug));
+      }
+  },
  }
 }
 </script>
@@ -671,6 +980,36 @@ export default {
 .team{
   grid-column: 2/13;
 }
+
+.spot {
+  grid-column: 2/13;
+}
+
+
+/*Spot*/
+.lateral-img{
+  margin-top: 4px;
+  height: 78%;
+  justify-self: baseline;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-weight: 100;
+  color: #006154;
+}
+
+.lateral-img a{
+  cursor:pointer;
+  margin-top: 4px;
+  text-decoration: underline;
+  font-size: 12px;
+  color:#68B400;
+}
+
+.lateral-img a:hover, .lateral-img a:active{
+  color:#5a9b00;
+}
+/*Spot ends here*/
 
 /*Structure*/
 #lateral-struc{
