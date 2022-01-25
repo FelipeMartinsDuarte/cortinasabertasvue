@@ -379,21 +379,17 @@ export default {
 }
 
 .card form[class="sendreset"] input[type="reset"][name="cancelar"] {
-  color: #68b400;
+  color: #0D0D0D;
   background-color: inherit;
   border-radius: 5px;
-  border: 1px solid #68b400;
+  border: 1px solid #0D0D0D;
   padding: 8px 16px;
-}
-
-.card form[class="sendreset"] input[type="reset"][name="cancelar"]:hover {
-  background-color: #54990007;
 }
 
 .card form[class="sendreset"] a[id="continue"] {
   text-decoration: none;
   border: inherit;
-  background-color: #68b400;
+  background-color: #0D0D0D;
   color: white;
   padding: 10px 16px;
   border-radius: 5px;
@@ -402,10 +398,6 @@ export default {
 
 i[class="important"]{
   color: red;
-}
-
-.card form[class="sendreset"] a[id="continue"]:hover {
-  background-color: #549900;
 }
 
 .card form[class="sendreset"] input[type="reset"][name="cancelar"],

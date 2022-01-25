@@ -148,10 +148,12 @@ export default {
       //Check item by item comply with the rule
       for(var item of Images){
         const imgname = item.name;
+        this.imageFile.push(item);
         let url = URL.createObjectURL(item);
         //Booleans
         var rtype = av.includes(item.type);
         var rsize = item.size < maxsize;
+        var exAn = this.imageItem.indexOf(imgname);
         //Check Requirements
         let img = new Image;
         img.onload = ()=>{
@@ -160,19 +162,28 @@ export default {
           let height = img.height;
           //Fixing bug, images being upload althought it doesn't apply to the rules
           for(let i = 0; i<1; i++){
+            if(exAn !== -1){
+              this.imageFile.pop();
+              this.errorImage("Por favor não envie Imagens duplicadas"); //Check if it's an image
+              continue;
+            }
             if(!rtype){
+              this.imageFile.pop();
               this.errorImage("Tipo de Arquivo não é uma imagem"); //Check if it's an image
               continue;
             } 
             if(!rsize){ //Check image size exceed 3mb
+              this.imageFile.pop();
               this.errorImage("Arquivo muito grande envie no máximo 3mb")
               continue;
             } 
             if(width < minsize && height < minsize){ //Check the dimensions are atach the min size
+              this.imageFile.pop();
               this.errorImage(`A Imagem precisa ter ${minsize}px em um dos lados`)
               continue;
             } 
             if(width > 1920 || height > 1080){ //Check if the dimensions exceed the max size
+              this.imageFile.pop();
               this.errorImage("A Imagem é muito grande precisa ser menor do que 1920x1080")
               continue;
             } else {
@@ -189,8 +200,10 @@ export default {
         imageObj.url = url;
         imageObj.filename = imgname;
         imageObj.filetype = item.type;
+        imageObj.size = item.size;
+        imageObj.lastModified = item.lastModified;
         this.imageArray.push(imageObj);
-        this.imageFile.push(item);
+        this.imageItem.push(imgname);
         this.imagelenght +=1;
       },
     errorImage(msg){
@@ -562,29 +575,21 @@ export default {
 }
 
 .card form[class="sendreset"] input[type="reset"][name="cancelar"] {
-  color: #68b400;
+  color: #0D0D0D;
   background-color: inherit;
   border-radius: 5px;
-  border: 1px solid #68b400;
+  border: 1px solid #0D0D0D;
   padding: 8px 16px;
-}
-
-.card form[class="sendreset"] input[type="reset"][name="cancelar"]:hover {
-  background-color: #54990007;
 }
 
 .card form[class="sendreset"] a[id="continue"] {
   text-decoration: none;
   border: inherit;
-  background-color: #68b400;
+  background-color: #0D0D0D;
   color: white;
   padding: 10px 16px;
   border-radius: 5px;
   margin-right: 32px;
-}
-
-.card form[class="sendreset"] a[id="continue"]:hover {
-  background-color: #549900;
 }
 
 .card form[class="sendreset"] input[type="reset"][name="cancelar"],

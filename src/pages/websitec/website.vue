@@ -17,85 +17,84 @@
             <span class="error" v-if="errorPmessage !== ''"><i class="fas fa-exclamation-circle"></i>{{errorPmessage}}</span>
           </header>
 
-          <form class="sendreset">
+          <form class="sendreset" >
             <div class="wrapprofile">
-
               <fieldset class="columnprofile">
                 <span :class="errorstyleP[0]">Aceitam Longa estadia?</span>
                 <div class="option">
-                <input type="radio" name="yesnot" id="yesnot1" value="true"  hidden >
-                  <label for="yesnot1" @click="profileClick(true,1)"><a>Sim</a></label>
-                  <input type="radio" name="yesnot" id="yesnot2" value="false"  hidden>
+                <input type="radio" name="yesnot" id="yesnot1" :value="true" v-model="inputP[0]"  hidden >
+                  <label for="yesnot1" @click="profileClick(true,1)" ><a>Sim</a></label>
+                  <input type="radio" name="yesnot" id="yesnot2" value="false" v-model="inputP[0]" hidden>
                   <label for="yesnot2" @click="profileClick(false,1)"><a>Não</a></label>
                 </div>
               </fieldset>
 
               <fieldset class="columnprofile">
-                <span :class="errorstyleP[5]">Aceitam Curta estadia?</span>
+                <span :class="errorstyleP[1]">Aceitam Curta estadia?</span>
                 <div class="option">
-                  <input type="radio" name="yesnot6" id="yesnot11" value="true" hidden>
-                  <label for="yesnot11" @click="profileClick(true,6)"><a>Sim</a></label>
-                  <input type="radio" name="yesnot6" id="yesnot12" value="false" hidden>
-                  <label for="yesnot12" @click="profileClick(false,6)"><a>Não</a></label>
+                  <input type="radio" name="yesnot6" id="yesnot11" value="true" v-model="inputP[1]" hidden>
+                  <label for="yesnot11" @click="profileClick(true,2)"><a>Sim</a></label>
+                  <input type="radio" name="yesnot6" id="yesnot12" value="false" v-model="inputP[1]" hidden>
+                  <label for="yesnot12" @click="profileClick(false,2)"><a>Não</a></label>
                 </div>
               </fieldset>
 
               <fieldset class="columnprofile">
                 <span :class="errorstyleP[2]">Possuem Quartos Coletivos?</span>
                 <div class="option">
-                  <input type="radio" name="yesnot3" id="yesnot5" value="true" hidden>
+                  <input type="radio" name="yesnot3" id="yesnot5" value="true" v-model="inputP[2]" hidden>
                   <label for="yesnot5" @click="profileClick(true,3)"><a>Sim</a></label>
-                  <input type="radio" name="yesnot3" id="yesnot6" value="false" hidden>
+                  <input type="radio" name="yesnot3" id="yesnot6" value="false" v-model="inputP[2]" hidden>
                   <label for="yesnot6" @click="profileClick(false,3)"><a>Não</a></label>
                 </div>
               </fieldset>
 
               <fieldset class="columnprofile">
-                <span :class="errorstyleP[6]">Possuem Quartos Individuais?</span>
+                <span :class="errorstyleP[3]">Possuem Quartos Individuais?</span>
                 <div class="option">
-                  <input type="radio" name="yesnot7" id="yesnot13" value="true" hidden>
-                  <label for="yesnot13" @click="profileClick(true,7)"><a>Sim</a></label>
-                  <input type="radio" name="yesnot7" id="yesnot14" value="false" hidden>
-                  <label for="yesnot14" @click="profileClick(false,7)"><a>Não</a></label>
+                  <input type="radio" name="yesnot7" id="yesnot13" value="true" v-model="inputP[3]" hidden>
+                  <label for="yesnot13" @click="profileClick(true,4)"><a>Sim</a></label>
+                  <input type="radio" name="yesnot7" id="yesnot14" value="false" v-model="inputP[3]" hidden>
+                  <label for="yesnot14" @click="profileClick(false,4)"><a>Não</a></label>
                 </div>
               </fieldset>
 
               <fieldset class="columnprofile">
-                <span :class="errorstyleP[3]">Aceitam pessoas Dependentes?</span>
+                <span :class="errorstyleP[4]">Aceitam pessoas Dependentes?</span>
                 <div class="option">
-                  <input type="radio" name="yesnot4" id="yesnot7" value="true" hidden>
-                  <label for="yesnot7" @click="profileClick(true,4)"><a>Sim</a></label>
-                  <input type="radio" name="yesnot4" id="yesnot8" value="false" hidden>
-                  <label for="yesnot8" @click="profileClick(false,4)"><a>Não</a></label>
+                  <input type="radio" name="yesnot4" id="yesnot7" value="true" v-model="inputP[4]" hidden>
+                  <label for="yesnot7" @click="profileClick(true,5)"><a>Sim</a></label>
+                  <input type="radio" name="yesnot4" id="yesnot8" value="false" v-model="inputP[4]" hidden>
+                  <label for="yesnot8" @click="profileClick(false,5)"><a>Não</a></label>
                 </div>
               </fieldset>
 
               <fieldset class="columnprofile">
-                <span :class="errorstyleP[1]">Aceitam pessoas Independentes?</span>
+                <span :class="errorstyleP[5]">Aceitam pessoas Independentes?</span>
                 <div class="option">
-                  <input type="radio" name="yesnot2" id="yesnot3" value="true" hidden>
-                  <label for="yesnot3" @click="profileClick(true,2)"><a>Sim</a></label>
-                  <input type="radio" name="yesnot2" id="yesnot4" value="false"  hidden>
-                  <label for="yesnot4" @click="profileClick(false,2)"><a>Não</a></label>
+                  <input type="radio" name="yesnot2" id="yesnot3" value="true" v-model="inputP[5]" hidden>
+                  <label for="yesnot3" @click="profileClick(true,6)"><a>Sim</a></label>
+                  <input type="radio" name="yesnot2" id="yesnot4" value="false" v-model="inputP[5]" hidden>
+                  <label for="yesnot4" @click="profileClick(false,6)"><a>Não</a></label>
                 </div>
               </fieldset>
 
               <fieldset class="columnprofile">
-                <span :class="errorstyleP[4]">Aceitam pessoas Semi-Dependentes?</span>
+                <span :class="errorstyleP[6]">Aceitam pessoas Semi-Dependentes?</span>
                 <div class="option">
-                  <input type="radio" name="yesnot5" id="yesnot9" value="true" hidden>
-                  <label for="yesnot9" @click="profileClick(true,5)"><a>Sim</a></label>
-                  <input type="radio" name="yesnot5" id="yesnot10" value="false" hidden>
-                  <label for="yesnot10" @click="profileClick(false,5)"><a>Não</a></label>
+                  <input type="radio" name="yesnot5" id="yesnot9" value="true" v-model="inputP[6]"  hidden>
+                  <label for="yesnot9" @click="profileClick(true,7)"><a>Sim</a></label>
+                  <input type="radio" name="yesnot5" id="yesnot10" value="false" v-model="inputP[6]" hidden>
+                  <label for="yesnot10" @click="profileClick(false,7)"><a>Não</a></label>
                 </div>
               </fieldset>
-
             </div>
-
+          </form> 
+          <form v-if="change.profile != false" class="sendreset"> 
             <hr class="sendform" />
-            <a @click="Profilesend" id="continue">Continuar</a>
-            <input type="reset" value="Cancelar" name="cancelar" />
-          </form>    
+            <a id="continue" class="edit" @click="Profilesend">Salvar</a>
+            <input type="reset" @click="cancelState(1)" class="remove" value="Cancelar" name="cancelar" />
+          </form> 
     </section>
 
     <section class="card image">
@@ -126,7 +125,6 @@
                     </figure>
                 </label>
                 </draggable>
-
 
 
             <input type="file" ref="imageInput" @input="onselect" multiple>
@@ -163,12 +161,12 @@
                   <input type="file" ref="logoInput" @input="onlogoselect">
               </div>
             </div>
+            <form class="sendreset" v-if="change.image != false">
+              <hr class="sendform" />
+              <a id="continue" class="edit" @click="sendImageLogo">Salvar</a>
+              <input type="reset" class="remove" @click="cancelState(2)"  value="Cancelar" name="cancelar" />
+            </form>
           </article>
-          <form class="sendreset">
-            <hr class="sendform" />
-            <a @click="sendImageLogo" id="continue">Continuar</a>
-            <input type="reset" value="Cancelar" name="cancelar" />
-          </form>
     </section>
 
     <section class="card team">
@@ -234,17 +232,17 @@
                   />
                   <label for="number" id="lateral-struc">
                       <span>{{item.name}}</span>
-                      <TheMask mask="##" type="text" id="number" placeholder="1" v-model="inputTS[index]" />
+                      <TheMask mask="##" type="text" id="number" placeholder="1" @keydown.native="changeState(3)" v-model="inputTS[index]" />
                   </label>
 
                 </label>
               </div>
+            <form class="sendreset" v-if="change.team != false">
+              <hr class="sendform" />
+              <a id="continue" class="edit" @click="strcheck">Salvar</a>
+              <input type="reset" @click="cancelState(3)" class="remove" value="Cancelar" name="cancelar" />
+            </form>
           </article>
-          <form class="sendreset">
-            <hr class="sendform" />
-            <a id="continue">Continuar</a>
-            <input type="reset" value="Cancelar" name="cancelar" />
-          </form>
     </section>
 
     <section class="card spot">
@@ -351,10 +349,10 @@
                     </fieldset>
                   </div>
                 </div>
-            <form class="sendreset">
+            <form class="sendreset" v-if="change.acess != false">
               <hr class="sendform" />
-              <a id="continue">Continuar</a>
-              <input type="reset" value="Cancelar" name="cancelar" />
+              <a id="continue" class="edit" @click="checkacess">Salvar</a>
+              <input type="reset" @click="cancelState(4)" class="remove" value="Cancelar" name="cancelar" />
             </form>
           </article>
           
@@ -375,30 +373,30 @@
                   <label for="website">
                   <span>Site</span>
                   </label>
-                  <input type="text" id="website" placeholder="www.seusite.com" v-model="webs" @click="desableC(0)"/>
+                  <input type="text" id="website" placeholder="www.seusite.com" v-model="webs" @keydown="changeState(5)" @click="desableC(0)"/>
                   <span class="error" v-if="weberror != ''"><i class="fas fa-exclamation-circle"></i>{{weberror}}</span>
                 </address>
                 <address class="pa po">
                   <label for="tel">
                   <span class="rw">Telefone contato <i class="important">*</i></span>
                   </label>
-                  <TheMask mask="(##) ####-#####" type="text" id="tel" v-model="tel" @click.native="desableC(1)"/>
+                  <TheMask mask="(##) ####-#####" type="text" id="tel" v-model="tel" @keydown.native="changeState(5)" @click.native="desableC(1)"/>
                   <span class="error" v-if="telerror != ''"><i class="fas fa-exclamation-circle"></i>{{telerror}}</span>
                 </address>
                 <address class="pa">
                   <label for="tel2">
                   <span>Telefone contato #2</span>
                   </label>
-                  <TheMask mask="(##) ####-#####" type="text" id="tel2"  v-model="tel2" @click.native="desableC(2)"/>
+                  <TheMask mask="(##) ####-#####" type="text" id="tel2"  v-model="tel2" @keydown.native="changeState(5)" @click.native="desableC(2)"/>
                   <span class="error" v-if="tel2error != ''"><i class="fas fa-exclamation-circle"></i>{{tel2error}}</span>
                 </address>
                 <time class="pa ab">
                   <label for="opentime">
                   <span>Horário Aberto a visitação <i class="important">*</i></span> 
-                  <input type="time" v-if="!srdisabled" v-model="srd" @click="desableC(3)" />
+                  <input type="time" v-if="!srdisabled" v-model="srd" @click="desableC(3)" @keydown="changeState(5)" />
                   <input type="time" v-else v-model="srd" class="dis" disabled/>
                   <span>ás</span>    
-                  <input type="time" v-if="!srdisabled" v-model="sra" id="opentime" @click="desableC(3)"/>
+                  <input type="time" v-if="!srdisabled" v-model="sra" id="opentime" @keydown="changeState(5)"  @click="desableC(3) "/>
                   <input type="time" v-else v-model="sra" id="opentime" class="dis" disabled/>
                   </label>
                   <a v-if="!sr" @mouseover="showTagSR"  @click="srClick"><abbr title="Sem restrição">S/R</abbr></a>
@@ -407,11 +405,33 @@
                 </time>
               </div>
             </fieldset>
-          <form class="sendreset">    
+            <form class="sendreset" v-if="change.contact != false">
               <hr class="sendform" />
-              <a @click="checkEmail" id="continue">Continuar</a>
+              <a id="continue" class="edit" @click="checkEmail">Salvar</a>
+              <input type="reset" @click="cancelState(5)" class="remove" value="Cancelar" name="cancelar" />
+            </form>
+          </article>
+    </section>
+
+    <section class="card description">
+          <article>
+            <header>
+              <h2>Fale um pouco sobre vocês</h2>
+              <p>Adicione uma descrição a qual será mostrada aos usuários</p>
+            </header>
+
+                <fieldset>
+                  <textarea maxlength="5000" v-model="description"></textarea>
+                  <ul>
+                    <li>Não inclua caracteres especiais</li>
+                    <li>Conselho: Seja empático e profissional</li>
+                  </ul>
+                </fieldset>
+              <form class="sendreset">
+              <hr class="sendform" />
+              <a id="continue">Continuar</a>
               <input type="reset" value="Cancelar" name="cancelar" />
-          </form>
+            </form>
           </article>
     </section>
   </main>
@@ -445,8 +465,42 @@ export default {
   },
   data() {
     return {
+      //Backup
+      backup:{
+        accessibility: [],
+        contact:{
+          tel:"",
+          tel2:"",
+          time: {
+            initial:"",
+            end:""
+          },
+          website:"",
+        },
+        description:"",
+        images:[],
+        logo:[],
+        profile:[],
+        spot:[],
+        structure:[],
+        team:[],
+      },
+
       //Main
       search: "",
+
+      //Change
+      change:{
+        profile:false,
+        image:false,
+        team:false,
+        acess:false,
+        contact:false,
+        description:false,
+      },
+
+      //Description
+      description:"",
 
       //Contact
       weberror:"",
@@ -499,8 +553,8 @@ export default {
       strucitems: [],
       strucslug: [],
 
-      //Profile 
-      isDisabledP:[true,true,true,true,true,true,true],
+      //Profile
+      isDisabledP:[false,false,false,false,false,false,false],
       inputP:[false,false,false,false,false,false,false],
       errorstyleP:["","","","","","",""],
       errorPmessage:"",
@@ -524,9 +578,7 @@ export default {
       .get("/api/equipe")
       .then((res) => {
         let str = JSON.parse(JSON.stringify(res.data));
-        this.teamlist = str;
-        this.teamitems.push(this.teamlist[0]);
-        this.teamitems.push(this.teamlist[1]);
+        this.teamlist = str; //Add to a list for search
       })
       .catch((err) => {
         if (err) {
@@ -571,6 +623,29 @@ export default {
       })
   },
   methods:{ 
+  //Save Edit
+  changeState(num){
+    switch(num){
+      case 1:
+        this.change.profile = true;
+        break;
+      case 2:
+        this.change.image = true;
+        break;
+      case 3:
+        this.change.team = true;
+        break;
+      case 4:
+        this.change.acess = true;
+        break;
+      case 5:
+        this.change.contact = true;
+        break;
+      case 6:
+        this.change.description = true;
+        break;
+    }
+  },
   //Contact
   desableC(num){
       if(num == 0){
@@ -597,9 +672,10 @@ export default {
         this.srd = "";
         this.sra = "";
       }
-  setTimeout(()=>{
+      setTimeout(()=>{
         this.sr = false;
       },1000);
+      this.changeState(5)
   },
   showTagSR(){
       this.sr = true;
@@ -631,28 +707,20 @@ export default {
       if(isDtEpty || !isDtValid){
         this.timeerror = "Por favor preencha este campo corretamente";
       } else {
-        let datas = this.$route.params.datas;
-
-        let contact = new Object;
-        contact.tel = this.tel;
-        contact.website = this.webs;
-        contact.tel2 = this.tel2;
-        contact.time = new Object;
-        contact.time.initial = this.srd 
-        contact.time.end = this.sra
-
-        datas = {...datas, contact}
-
-        this.$router.push({
-          name: "Description",
-          params: {datas}
-        })
+        //Save the file into backup in case cancel and what to back to the previous
+        this.backup.tel = this.tel;
+        this.backup.website = this.webs;
+        this.backup.tel2 = this.tel2;
+        this.backup.contact.time.initial = this.srd 
+        this.backup.contact.time.end = this.sra
+        this.change.contact = false;
       }
   },
   //Contact ends here
 
   //Acess
   onRemovedAcess: function (item) {
+    this.changeState(4)
     var str = JSON.parse(JSON.stringify(item));
     var position = this.acessslug.indexOf(str.slug);
     this.acesslenght -= 1;
@@ -665,6 +733,7 @@ export default {
   },
   onClickedAcess: function () {
     this.showacess = true;
+    this.changeState(4)
   },
   onAddedAcess: function (item) {
       let str = JSON.parse(JSON.stringify(item));
@@ -683,10 +752,31 @@ export default {
       this.showacess = false;
       this.acesslenght += 1;
   },
+  checkacess(){
+      if(this.acesslenght == 0){
+        this.erroracessmessage = "Por favor adicione no minimo 1 item";
+      }
+      if(this.spotlenght == 0){
+        this.errorspotmessage = "Por favor adicione no minimo 1 item";
+      } else{
+        let array = [];
+        for(let i = 0; i < this.spotlist.length; i++){
+          let obj = new Object;
+          obj.item = this.spotlist[i];
+          obj.data = this.spotImgFl[i];
+          array.push(obj);
+        }
+        //Is saving in the backup to back to the previous
+        this.backup.accessibility = this.acesslist;
+        this.backup.spot = array;
+        this.change.acess = false;
+      }
+    },
   //Acess ends here
 
   //Spot starts here
   onRemovedSpot: function (item,index) {
+      this.changeState(3)
       var str = JSON.parse(JSON.stringify(item));
       var position = this.spotslug.indexOf(str.slug);
       this.spotlenght -= 1;
@@ -698,11 +788,13 @@ export default {
         this.spotfiles.splice(i - 1, 1, this.spotfiles[i]); //Catch previous value of index number
         this.spotfiles.splice(i, 1, 0);
       }
+      this.change.acess = true;
   },
   onClosedSpot: function () {
       this.showspot = false;
   },
   onClickedSpot: function () {
+      this.changeState(4)
       this.search = "";
       this.showspot = true;
   },
@@ -724,6 +816,7 @@ export default {
       this.spotlenght += 1;
   },
   selectSpot: function(index){
+      this.changeState(4)
       this.spotslc = index; //Pass selected value toa variable so it can be used to interlace the file to the slug
       this.$refs.spotInput.click()
   },
@@ -767,8 +860,10 @@ export default {
       this.spotImgFl.splice(this.spotslc,1,Images) 
   },
   removeCreateSpot:function(index){
+      this.changeState(3)
       this.spotfiles.splice(index,1,0) //Catch the sent item index and delete it
       this.spotImgFl.splice(index,1,0)
+      this.change.acess = true;
   },
   ErrorSpotImage(msg){
       this.errorspotmessage = msg;
@@ -780,6 +875,7 @@ export default {
 
   //Team starts here 
   onRemovedTeam: function (item) {
+      this.changeState(3)
       var str = JSON.parse(JSON.stringify(item));
       var position = this.teamslug.indexOf(str.slug);
       this.teamlenght -= 1;
@@ -791,6 +887,7 @@ export default {
       this.showteam = false;
   },
   onClickedTeam: function () {
+      this.changeState(3)
       this.showteam = true;
   },
   onAddedTeam: function (item) {
@@ -800,6 +897,7 @@ export default {
       } else {
         this.search = "";
         this.onRightTeam(str);
+
       }
   },
   onErrorTeam: function () {},
@@ -809,10 +907,30 @@ export default {
       this.showteam = false;
       this.teamlenght += 1;
   },
+  strcheck(){
+      let array = new Array;
+      for(const i of this.inputTS){
+        array.push(i);
+      }
+      if(array.length < 3){
+        this.inputTSMessage = "Por favor não esqueça de preencher todos campos";
+        setTimeout(()=>{
+          this.inputTSMessage = "";
+        },5000)
+      } else {
+        this.backup.team = this.teamcase;
+        console.log(this.backup.team);
+        console.log(this.teamcase);
+        this.backup.structure = this.inputTS;
+        this.change.team = false;
+      }
+  },
+
   //Team ends here
 
   //Profile Starts here
   profileClick(boolean, item){
+    this.changeState(1)
     if(item === 1){
      this.inputP.splice(0,1,boolean)
      this.isDisabledP.splice(0,1,false);
@@ -880,27 +998,21 @@ export default {
           obj.data = this.inputP[i];
           objarray.push(obj);
         }
-        let datas = {
-          profile: objarray,
-          accessibility: "",
-          spot:"",
-        };
-        this.$router.push({
-            name: "Images",
-            params: {datas}
-        })
+        this.backup.profile = objarray;
+        this.change.profile = false;
       }
   },
   //Profille Ends here
 
   //Image starts here
   ondrop: function(event){
-        let limit = 13;
-        let Images = [...event.dataTransfer.files];
-        let cbv = Images.length + this.imagelenght;
-        if(cbv < limit){
-        this.verificateImage(Images);
-        }
+    this.changeState(2)
+    let limit = 13;
+    let Images = [...event.dataTransfer.files];
+    let cbv = Images.length + this.imagelenght;
+    if(cbv < limit){
+     this.verificateImage(Images);
+    }
   },
   onselect: function(){
       const imageInput = this.$refs.imageInput;
@@ -908,6 +1020,7 @@ export default {
       this.verificateImage(Images);
   },
   removeImage: function(item){
+      this.changeState(2)
       var position = this.imageItem.indexOf(item.filename);
       this.imagelenght -= 1;
       this.imageArray.splice(position, 1);
@@ -915,6 +1028,7 @@ export default {
       this.imageFile.splice(position,1);
   },
   imageSelect: function (){
+    this.changeState(2)
     this.$refs.imageInput.click()
   },
   verificateImage: function(Images){
@@ -928,6 +1042,7 @@ export default {
         //Booleans
         var rtype = av.includes(item.type);
         var rsize = item.size < maxsize;
+        var exAn = this.imageItem.indexOf(imgname);
         //Check Requirements
         let img = new Image;
         img.onload = ()=>{
@@ -936,6 +1051,11 @@ export default {
           let height = img.height;
           //Fixing bug, images being upload althought it doesn't apply to the rules
           for(let i = 0; i<1; i++){
+            if(exAn !== -1){
+              this.imageFile.pop();
+              this.errorImage("Por favor não envie Imagens duplicadas"); //Check if it's an image
+              continue;
+            }
             if(!rtype){
               this.errorImage("Tipo de Arquivo não é uma imagem"); //Check if it's an image
               continue;
@@ -965,8 +1085,10 @@ export default {
         imageObj.url = url;
         imageObj.filename = imgname;
         imageObj.filetype = item.type;
+        imageObj.size = item.size;
+        imageObj.lastModified = item.lastModified;
         this.imageArray.push(imageObj);
-        this.imageFile.push(item);
+        this.imageItem.push(imgname);
         this.imagelenght +=1;
   },
   errorImage(msg){
@@ -979,7 +1101,8 @@ export default {
 
   //Logo 
   logoSelect: function (){
-      this.$refs.logoInput.click()
+    this.$refs.logoInput.click()
+    this.changeState(2)
   },
   onlogoselect: function(){
         const logoInput = this.$refs.logoInput;
@@ -1033,9 +1156,10 @@ export default {
       this.logoFile.push(item);
   },
   removeLogo: function(){
-        this.logoItem = [];
-        this.logolenght = 0;
-        this.logoItem.splice(0,1);
+    this.changeState(2)
+    this.logoItem = [];
+    this.logolenght = 0;
+    this.logoItem.splice(0,1);
   },
   sendImageLogo(){
       let isValid = this.imagelenght > 0;
@@ -1043,16 +1167,13 @@ export default {
       if(!isValid){
         this.errormessageI.push("Por favor adicione no minimo uma foto");
       } else if(hsLogo && isValid){
-        let data = this.$route.params.datas;
-        let datas = {
-          profile: data.profile,
-          images: this.imageFile,
-          logo: this.logoFile,
-        }
-        this.$router.push({
-          name: "TeamStructure",
-          params: {datas}
-        })
+        this.backup.logo = this.logoFile;
+        this.backup.images = this.imageFile;
+        this.change.image = false;
+      } else {
+        this.backup.logo = [];
+        this.backup.images = this.imageFile;
+        this.change.image = false;
       }
   },
   //Logo Ends
@@ -1097,6 +1218,80 @@ export default {
         return this.spotlist.filter((item) => item.slug.includes(slug));
       }
   },
+ },
+ mounted(){
+   if(this.$route.params.datas != undefined){ //If are not undefined
+    let datas = this.$route.params.datas;
+
+    //Profille
+    for(let i = 0; i < datas.profile.length; i++){
+      this.inputP.splice(i,1,datas.profile[i].data);
+    }
+
+    //Images
+    this.verificateImage(datas.images);
+    if(datas.logo != undefined){
+      this.verificateLogoImage(datas.logo[0]);
+      this.backup.logo = datas.logo;
+    }
+
+    //Team - Structure
+    setTimeout(()=>{
+      for(const k of datas.team){
+        this.onAddedTeam(k); //Was put in this way because are entering first then created
+      }
+     },5000);
+    this.inputTS = datas.structure;
+
+    //Acessibility - Spot
+     for(const k of datas.accessibility){
+       this.onAddedAcess(k);
+     }
+     for(let i = 0; i < datas.spot.length; i++){ 
+       this.onAddedSpot(datas.spot[i].item); //Pass item to a method
+       if(datas.spot[i].data != 0){ //If this item have a image within
+       this.spotslc = i; // Changing a var to act as are send the index
+       this.verificateSpotImage(datas.spot[i].data); //if have a image act as he selected this image
+      }
+     }
+
+    //Contact
+    this.tel = datas.contact.tel;
+
+    if(datas.contact.website !== ""){
+      this.webs = datas.contact.website;
+      this.backup.contact.website = datas.contact.website
+     }
+    if(datas.contact.tel2 !== ""){
+      this.tel2 = datas.contact.tel2;
+      this.backup.contact.tel2 = datas.contact.tel2;
+     }
+    if(datas.contact.time.initial == "00:00" && datas.contact.time.end == "23:59"){
+      this.srClick();
+    } else {
+      this.srd = datas.contact.time.initial;
+      this.sra = datas.contact.time.end;
+    }
+
+    //Description
+    if(datas.description !== ""){
+      this.description = datas.description;
+      this.backup.description = datas.description;
+    }
+
+    //Fullfilling the Backup
+    this.backup.spot = datas.spot;
+    this.backup.accessibility = datas.accessibility;
+    this.backup.contact.time.initial = datas.contact.time.initial;
+    this.backup.contact.time.end = datas.contact.time.end;
+    this.backup.team = datas.team;
+    this.backup.images = datas.images;
+    this.backup.contact.tel = datas.contact.tel;
+    this.backup.structure = datas.structure;
+    this.backup.profile = datas.profile;
+    console.log(this.backup);
+   }
+
  }
 }
 </script>
@@ -1136,6 +1331,43 @@ export default {
 .contact {
   grid-column: 2/13;
 }
+
+.description {
+  grid-column: 2/13;
+}
+
+/*Description*/
+.description fieldset ul {
+  font-weight: 200;
+  list-style: disc;
+  margin-left: 32px;
+  width: 30%;
+}
+
+.description fieldset ul li:not(:first-of-type){
+  margin-top: 16px;
+}
+
+.description fieldset {
+  display: flex;
+}
+.description article textarea {
+   resize: none;  
+   width: 65%;
+   height: 30vh;
+   border: 1px solid #B9B9B9;
+   border-radius: 5px;
+   padding: 16px;
+   outline: none;
+   font-weight: 200;
+   overflow-y: auto;
+   margin-bottom: 8px;
+}
+
+.description article textarea:focus {
+  border: 1px solid #00a28c;
+}
+/*Description ends here */
 
 /*Contact-Card */
 .contact time input[type="time"]{
@@ -1507,7 +1739,6 @@ export default {
 #image-content .addimg span{
   display: inherit;
   text-align: center;
-  width: 99%;
 }
 
 #image-content .addimg span a{
@@ -1625,7 +1856,7 @@ export default {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  height: 12vmax;
+  height: 13vmax;
   padding-top:13px;
   width: 100%;
   margin-bottom: 16px;
@@ -1778,6 +2009,15 @@ export default {
   margin-left: 8px;
   float: right;
   align-items: center;
+}
+
+.card form[class="sendreset"] a[class="edit"][id="continue"] {
+  background-color: #C5B800;
+}
+
+.card form[class="sendreset"] input[type="reset"][name="cancelar"][class="remove"]{
+  border: 1px solid #c7ba00;
+  color: #c7ba00;
 }
 
 .error{
