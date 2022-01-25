@@ -232,7 +232,7 @@
                   />
                   <label for="number" id="lateral-struc">
                       <span>{{item.name}}</span>
-                      <TheMask mask="##" type="text" id="number" placeholder="1" @keydown.native="changeState(3)" v-model="inputTS[index]" />
+                      <TheMask mask="##" type="text" id="number" placeholder="1" @keydown.native="changeState(3)" :value="inputTS[index]" />
                   </label>
 
                 </label>
@@ -530,10 +530,8 @@ export default {
       teamslug: [],
       teamlenght: 0,
 
-      struclist: [],
       showstruc: false,
       strucitems: [],
-      strucslug: [],
 
       //Profile
       isDisabledP:[false,false,false,false,false,false,false],
@@ -606,6 +604,21 @@ export default {
   },
   methods:{ 
   //Save Edit
+  cancelState(num){
+    if(num === 3){
+      //Reset - Blanking the Paper
+      this.teamitems = []; //Where the v-for render from
+      this.teamslug = []; //Where the Remove take the items
+      this.teamlenght = 0;
+      //Write the Previous Expression
+      for(const k of this.backup.team){
+      this.onAddedTeam(k);
+      }
+      //Reset and Blank + Write the Previous Expression - Substituting
+      this.inputTS = this.backup.structure;
+    }
+
+  },
   changeState(num){
     switch(num){
       case 1:
@@ -1171,15 +1184,6 @@ export default {
       return this.teamlist.filter((item) => item.slug.includes(slug));
     }
   },
-  SearchResultsStruc: function () {
-    if (this.search == "" || this.search == " ") {
-      return this.struclist;
-    } else {
-      const Capitalized = this.search.charAt(0).toUpperCase() + this.search.slice(1);
-      const slug = slugify(Capitalized);
-      return this.struclist.filter((item) => item.slug.includes(slug));
-    }
-  },
   SearchResultsAcess: function () {
       if (this.search == "" || this.search == " ") {
         return this.acesslist;
@@ -1205,6 +1209,7 @@ export default {
    if(this.$route.params.datas != undefined){ //If are not undefined
     let datas = this.$route.params.datas;
     this.backup = datas; //Fullfilling the Backup
+    console.log();
 
     //Profille
     for(let i = 0; i < datas.profile.length; i++){
