@@ -466,25 +466,7 @@ export default {
   data() {
     return {
       //Backup
-      backup:{
-        accessibility: [],
-        contact:{
-          tel:"",
-          tel2:"",
-          time: {
-            initial:"",
-            end:""
-          },
-          website:"",
-        },
-        description:"",
-        images:[],
-        logo:[],
-        profile:[],
-        spot:[],
-        structure:[],
-        team:[],
-      },
+      backup:{},
 
       //Main
       search: "",
@@ -545,8 +527,8 @@ export default {
       teamlist: [],
       showteam: false,
       teamitems: [],
-      teamslug: ["Medicos","Enfermagem"],
-      teamlenght: 2,
+      teamslug: [],
+      teamlenght: 0,
 
       struclist: [],
       showstruc: false,
@@ -1222,6 +1204,7 @@ export default {
  mounted(){
    if(this.$route.params.datas != undefined){ //If are not undefined
     let datas = this.$route.params.datas;
+    this.backup = datas; //Fullfilling the Backup
 
     //Profille
     for(let i = 0; i < datas.profile.length; i++){
@@ -1236,11 +1219,9 @@ export default {
     }
 
     //Team - Structure
-    setTimeout(()=>{
-      for(const k of datas.team){
-        this.onAddedTeam(k); //Was put in this way because are entering first then created
-      }
-     },5000);
+    for(const k of datas.team){
+      this.onAddedTeam(k); //Are being rendering as this option was selected by the user
+    }
     this.inputTS = datas.structure;
 
     //Acessibility - Spot
@@ -1251,6 +1232,7 @@ export default {
        this.onAddedSpot(datas.spot[i].item); //Pass item to a method
        if(datas.spot[i].data != 0){ //If this item have a image within
        this.spotslc = i; // Changing a var to act as are send the index
+       console.log(this.spotslc);
        this.verificateSpotImage(datas.spot[i].data); //if have a image act as he selected this image
       }
      }
@@ -1278,18 +1260,6 @@ export default {
       this.description = datas.description;
       this.backup.description = datas.description;
     }
-
-    //Fullfilling the Backup
-    this.backup.spot = datas.spot;
-    this.backup.accessibility = datas.accessibility;
-    this.backup.contact.time.initial = datas.contact.time.initial;
-    this.backup.contact.time.end = datas.contact.time.end;
-    this.backup.team = datas.team;
-    this.backup.images = datas.images;
-    this.backup.contact.tel = datas.contact.tel;
-    this.backup.structure = datas.structure;
-    this.backup.profile = datas.profile;
-    console.log(this.backup);
    }
 
  }
