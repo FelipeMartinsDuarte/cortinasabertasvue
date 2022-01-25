@@ -618,9 +618,6 @@ export default {
       this.inputTS[0] = this.backup.structure[0];
       this.inputTS[1] = this.backup.structure[1];
       this.inputTS[2] = this.backup.structure[2];
-      console.log(this.backup.structure[0]);
-      console.log(this.backup.structure[1]);
-      console.log(this.backup.structure[2]);
     }
 
   },
@@ -1213,63 +1210,57 @@ export default {
    if(this.$route.params.datas != undefined){ //If are not undefined
     let datas = this.$route.params.datas;
     this.backup = datas; //Fullfilling the Backup
-    console.log();
-
+    
     //Profille
-    for(let i = 0; i < datas.profile.length; i++){
-      this.inputP.splice(i,1,datas.profile[i].data);
+    for(let i = 0; i < this.backup.profile.length; i++){
+      this.inputP.splice(i,1,this.backup.profile[i].data);
     }
 
     //Images
-    this.verificateImage(datas.images);
-    if(datas.logo != undefined){
-      this.verificateLogoImage(datas.logo[0]);
-      this.backup.logo = datas.logo;
+    this.verificateImage(this.backup.images);
+    if(this.backup.logo != undefined){
+      this.verificateLogoImage(this.backup.logo[0]);
     }
 
     //Team - Structure
-    for(const k of datas.team){
+    for(const k of this.backup.team){
       this.onAddedTeam(k); //Are being rendering as this option was selected by the user
     }
-    this.inputTS[0] = datas.structure[0];
-    this.inputTS[1] = datas.structure[1];
-    this.inputTS[2] = datas.structure[2];
+    this.inputTS[0] = this.backup.structure[0];
+    this.inputTS[1] = this.backup.structure[1];
+    this.inputTS[2] = this.backup.structure[2];
 
     //Acessibility - Spot
-     for(const k of datas.accessibility){
+     for(const k of this.backup.accessibility){
        this.onAddedAcess(k);
      }
-     for(let i = 0; i < datas.spot.length; i++){ 
-       this.onAddedSpot(datas.spot[i].item); //Pass item to a method
-       if(datas.spot[i].data != 0){ //If this item have a image within
+     for(let i = 0; i < this.backup.spot.length; i++){ 
+       this.onAddedSpot(this.backup.spot[i].item); //Pass item to a method
+       if(this.backup.spot[i].data != 0){ //If this item have a image within
        this.spotslc = i; // Changing a var to act as are send the index
-       console.log(this.spotslc);
-       this.verificateSpotImage(datas.spot[i].data); //if have a image act as he selected this image
+       this.verificateSpotImage(this.backup.spot[i].data); //if have a image act as he selected this image
       }
      }
 
     //Contact
-    this.tel = datas.contact.tel;
+    this.tel = this.backup.contact.tel;
 
     if(datas.contact.website !== ""){
-      this.webs = datas.contact.website;
-      this.backup.contact.website = datas.contact.website
+      this.webs = this.backup.contact.website;
      }
     if(datas.contact.tel2 !== ""){
-      this.tel2 = datas.contact.tel2;
-      this.backup.contact.tel2 = datas.contact.tel2;
+      this.tel2 = this.backup.contact.tel2;
      }
-    if(datas.contact.time.initial == "00:00" && datas.contact.time.end == "23:59"){
+    if(this.backup.contact.time.initial == "00:00" && this.backup.contact.time.end == "23:59"){
       this.srClick();
     } else {
-      this.srd = datas.contact.time.initial;
-      this.sra = datas.contact.time.end;
+      this.srd = this.backup.contact.time.initial;
+      this.sra = this.backup.contact.time.end;
     }
 
     //Description
-    if(datas.description !== ""){
-      this.description = datas.description;
-      this.backup.description = datas.description;
+    if(this.backup.description !== ""){
+      this.description = this.backup.description;
     }
    }
 
