@@ -232,7 +232,7 @@
                   />
                   <label for="number" id="lateral-struc">
                       <span>{{item.name}}</span>
-                      <TheMask mask="##" type="text" id="number" placeholder="1" @keydown.native="changeState(3)" :value="inputTS[index]" />
+                      <TheMask mask="##" type="text" id="number" placeholder="1" @keydown.native="changeState(3)" v-model="inputTS[index]" />
                   </label>
 
                 </label>
@@ -615,7 +615,12 @@ export default {
       this.onAddedTeam(k);
       }
       //Reset and Blank + Write the Previous Expression - Substituting
-      this.inputTS = this.backup.structure;
+      this.inputTS[0] = this.backup.structure[0];
+      this.inputTS[1] = this.backup.structure[1];
+      this.inputTS[2] = this.backup.structure[2];
+      console.log(this.backup.structure[0]);
+      console.log(this.backup.structure[1]);
+      console.log(this.backup.structure[2]);
     }
 
   },
@@ -916,7 +921,6 @@ export default {
         this.backup.team = this.teamcase;
         console.log(this.backup.team);
         console.log(this.teamcase);
-        this.backup.structure = this.inputTS;
         this.change.team = false;
       }
   },
@@ -1227,7 +1231,9 @@ export default {
     for(const k of datas.team){
       this.onAddedTeam(k); //Are being rendering as this option was selected by the user
     }
-    this.inputTS = datas.structure;
+    this.inputTS[0] = datas.structure[0];
+    this.inputTS[1] = datas.structure[1];
+    this.inputTS[2] = datas.structure[2];
 
     //Acessibility - Spot
      for(const k of datas.accessibility){
