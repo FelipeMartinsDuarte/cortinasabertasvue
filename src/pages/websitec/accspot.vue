@@ -209,7 +209,7 @@ export default {
         let array = [];
         let datas = this.$route.params.data;
 
-        for(let i = 0; i < this.spotlist.length; i++){
+        for(let i = 0; i < this.spotslug.length; i++){
           let obj = new Object;
           obj.item = this.spotlist[i];
           obj.data = this.spotImgFl[i];

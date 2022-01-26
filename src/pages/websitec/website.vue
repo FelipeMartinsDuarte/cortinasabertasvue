@@ -517,8 +517,8 @@ export default {
       spotlenght: 0,
 
       spotslc:0,
-      spotfiles:[],
-      spotImgFl:[],
+      spotfiles:[0,0,0,0,0,0,0,0,0,0,0,0,0],
+      spotImgFl:[0,0,0,0,0,0,0,0,0,0,0,0,0],
 
       //Team - Structure
       inputTS:[],
@@ -1235,11 +1235,11 @@ export default {
       this.onAddedAcess(k);
     }
 
-    for(const k of this.backup.spot){
-      this.spotfiles.push(k.url);
-      this.spotImgFl.push(k.data);
-      this.spotslug.push(k.slug);
-      this.spotitems.push(k.item); 
+    for(let i = 0; i < this.backup.spot.length; i++){
+      this.spotfiles.splice(i,1,this.backup.spot[i].url);
+      this.spotImgFl.splice(i,1,this.backup.spot[i].data);
+      this.spotslug.push(this.backup.spot[i].slug);
+      this.spotitems.push(this.backup.spot[i].item); 
     }
 
     //Contact
