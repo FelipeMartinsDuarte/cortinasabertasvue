@@ -606,7 +606,22 @@ export default {
   //Save Edit
   cancelState(num){
     if(num === 2){
-      
+      //Reset - Blanking the Paper;
+      this.imageFile = [];
+      this.imageArray = [];
+      this.imageItem = [];
+      this.imagelenght = 0;
+      //Write the previous expression
+      this.verificateImage(this.backup.images);
+      //Reset - Blanking the Paper
+      this.logoFile = [];
+      this.imageFile = [];
+      this.logoItem = [];
+      this.logolenght = 0;
+      //Write the previous expression
+      if(this.backup.logo.length != 0){
+      this.verificateLogoImage(this.backup.logo[0]);
+      }
     }
     if(num === 3){
       //Reset - Blanking the Paper
@@ -1107,8 +1122,6 @@ export default {
         imageObj.url = url;
         imageObj.filename = imgname;
         imageObj.filetype = item.type;
-        imageObj.size = item.size;
-        imageObj.lastModified = item.lastModified;
         this.imageArray.push(imageObj);
         this.imageItem.push(imgname);
         this.imagelenght +=1;

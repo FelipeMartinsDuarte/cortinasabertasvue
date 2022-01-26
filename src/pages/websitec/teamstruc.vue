@@ -175,15 +175,10 @@ export default {
       } else {
         let obj = this.$route.params.datas;
         let data = new Object;
-        
-        if(obj.logo == undefined){
-          data.profile = obj.profile;
-          data.images = obj.images;
-        } else {
-          data.profile = obj.profile;
-          data.images = obj.images;
-          data.logo = obj.logo;
-        }
+
+        data.profile = obj.profile;
+        data.images = obj.images;
+        data.logo = obj.logo;
         data.team = this.teamlist;
         data.structure = this.inputTS;
 

@@ -277,26 +277,17 @@ export default {
     //Logo Ends
     sendImageLogo(){
       let isValid = this.imagelenght > 0;
-      let hsLogo = this.logolenght > 0;
       if(!isValid){
         this.errormessageI.push("Por favor adicione no minimo uma foto");
-      } else if(hsLogo && isValid){
+      } else {
         let data = this.$route.params.datas;
+
         let datas = {
           profile: data.profile,
           images: this.imageFile,
           logo: this.logoFile,
         }
-        this.$router.push({
-          name: "TeamStructure",
-          params: {datas}
-        })
-      } else {
-        let data = this.$route.params.datas;
-        let datas = {
-          profile: data.profile,
-          images: this.imageFile,
-        }
+        
         this.$router.push({
           name: "TeamStructure",
           params: {datas}
