@@ -677,10 +677,10 @@ export default {
       this.webs = ""; //Website Reset
       //Rewriting the Previous Expression
       this.tel = this.backup.contact.tel; //Cellphone Writing
-      if(datas.contact.tel2 !== ""){
+      if(this.backup.contact.tel2 !== ""){
       this.tel2 = this.backup.contact.tel2;
       }
-      if(datas.contact.website !== ""){ //Website Writing
+      if(this.backup.contact.website !== ""){ //Website Writing
       this.webs = this.backup.contact.website;
       }
       if(this.backup.contact.time.initial == "00:00" 
@@ -1317,10 +1317,10 @@ export default {
     //Contact
     this.tel = this.backup.contact.tel;
 
-    if(datas.contact.website !== ""){
+    if(this.backup.contact.website !== ""){
       this.webs = this.backup.contact.website;
      }
-    if(datas.contact.tel2 !== ""){
+    if(this.backup.contact.tel2 !== ""){
       this.tel2 = this.backup.contact.tel2;
      }
     if(this.backup.contact.time.initial == "00:00" && this.backup.contact.time.end == "23:59"){
