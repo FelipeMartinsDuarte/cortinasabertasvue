@@ -605,6 +605,9 @@ export default {
   methods:{ 
   //Save Edit
   cancelState(num){
+    if(num === 2){
+      
+    }
     if(num === 3){
       //Reset - Blanking the Paper
       this.teamitems = []; //Where the v-for render from
@@ -619,8 +622,31 @@ export default {
       this.inputTS[1] = this.backup.structure[1];
       this.inputTS[2] = this.backup.structure[2];
     }
+    if(num === 4){
+      //Reset - Blanking the Paper 
+      this.spotfiles = [0,0,0,0,0,0,0,0,0,0,0,0,0];
+      this.spotImgFl = [0,0,0,0,0,0,0,0,0,0,0,0,0];
+      this.spotslug = [];
+      this.spotitems = [];
+      //Write the previous Expession
+      for(let i = 0; i < this.backup.spot.length; i++){
+        this.spotfiles.splice(i,1,this.backup.spot[i].url);
+        this.spotImgFl.splice(i,1,this.backup.spot[i].data);
+        this.spotslug.push(this.backup.spot[i].slug);
+        this.spotitems.push(this.backup.spot[i].item); 
+      }
+      //Reset - Blanking the Paper
+      this.acessitems = []; //Where the V-FOR Render From
+      this.acessslug = []; //Where the Remove use to find
+      this.acesslenght = 0; //Used in V-IF
+      //Write the Previous Expression
+      for(const k of this.backup.accessibility){
+      this.onAddedAcess(k);
+      }
+    }
 
   },
+
   changeState(num){
     switch(num){
       case 1:
