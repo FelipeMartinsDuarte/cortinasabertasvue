@@ -1252,7 +1252,9 @@ export default {
       this.tel2 = this.backup.contact.tel2;
      }
     if(this.backup.contact.time.initial == "00:00" && this.backup.contact.time.end == "23:59"){
-      this.srClick();
+      this.srdisabled = true;
+      this.srd = "00:00";
+      this.sra = "23:59";
     } else {
       this.srd = this.backup.contact.time.initial;
       this.sra = this.backup.contact.time.end;

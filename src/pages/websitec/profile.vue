@@ -21,7 +21,7 @@
             <div class="wrapprofile">
 
               <fieldset class="columnprofile">
-                <span :class="errorstyleP[0]">Aceitam Longa estadia?</span>
+                <span :class="errorstyleP[1]">Aceitam Longa estadia?</span>
                 <div class="option">
                 <input type="radio" name="yesnot" id="yesnot1" value="true"  hidden >
                   <label for="yesnot1" @click="profileClick(true,1)"><a>Sim</a></label>
@@ -31,17 +31,17 @@
               </fieldset>
 
               <fieldset class="columnprofile">
-                <span :class="errorstyleP[5]">Aceitam Curta estadia?</span>
+                <span :class="errorstyleP[2]">Aceitam Curta estadia?</span>
                 <div class="option">
                   <input type="radio" name="yesnot6" id="yesnot11" value="true" hidden>
-                  <label for="yesnot11" @click="profileClick(true,6)"><a>Sim</a></label>
+                  <label for="yesnot11" @click="profileClick(true,2)"><a>Sim</a></label>
                   <input type="radio" name="yesnot6" id="yesnot12" value="false" hidden>
-                  <label for="yesnot12" @click="profileClick(false,6)"><a>Não</a></label>
+                  <label for="yesnot12" @click="profileClick(false,2)"><a>Não</a></label>
                 </div>
               </fieldset>
 
               <fieldset class="columnprofile">
-                <span :class="errorstyleP[2]">Possuem Quartos Coletivos?</span>
+                <span :class="errorstyleP[3]">Possuem Quartos Coletivos?</span>
                 <div class="option">
                   <input type="radio" name="yesnot3" id="yesnot5" value="true" hidden>
                   <label for="yesnot5" @click="profileClick(true,3)"><a>Sim</a></label>
@@ -51,42 +51,42 @@
               </fieldset>
 
               <fieldset class="columnprofile">
-                <span :class="errorstyleP[6]">Possuem Quartos Individuais?</span>
+                <span :class="errorstyleP[4]">Possuem Quartos Individuais?</span>
                 <div class="option">
                   <input type="radio" name="yesnot7" id="yesnot13" value="true" hidden>
-                  <label for="yesnot13" @click="profileClick(true,7)"><a>Sim</a></label>
+                  <label for="yesnot13" @click="profileClick(true,4)"><a>Sim</a></label>
                   <input type="radio" name="yesnot7" id="yesnot14" value="false" hidden>
-                  <label for="yesnot14" @click="profileClick(false,7)"><a>Não</a></label>
+                  <label for="yesnot14" @click="profileClick(false,4)"><a>Não</a></label>
                 </div>
               </fieldset>
 
               <fieldset class="columnprofile">
-                <span :class="errorstyleP[3]">Aceitam pessoas Dependentes?</span>
+                <span :class="errorstyleP[5]">Aceitam pessoas Dependentes?</span>
                 <div class="option">
                   <input type="radio" name="yesnot4" id="yesnot7" value="true" hidden>
-                  <label for="yesnot7" @click="profileClick(true,4)"><a>Sim</a></label>
+                  <label for="yesnot7" @click="profileClick(true,5)"><a>Sim</a></label>
                   <input type="radio" name="yesnot4" id="yesnot8" value="false" hidden>
-                  <label for="yesnot8" @click="profileClick(false,4)"><a>Não</a></label>
+                  <label for="yesnot8" @click="profileClick(false,5)"><a>Não</a></label>
                 </div>
               </fieldset>
 
               <fieldset class="columnprofile">
-                <span :class="errorstyleP[1]">Aceitam pessoas Independentes?</span>
+                <span :class="errorstyleP[6]">Aceitam pessoas Independentes?</span>
                 <div class="option">
                   <input type="radio" name="yesnot2" id="yesnot3" value="true" hidden>
-                  <label for="yesnot3" @click="profileClick(true,2)"><a>Sim</a></label>
+                  <label for="yesnot3" @click="profileClick(true,6)"><a>Sim</a></label>
                   <input type="radio" name="yesnot2" id="yesnot4" value="false"  hidden>
-                  <label for="yesnot4" @click="profileClick(false,2)"><a>Não</a></label>
+                  <label for="yesnot4" @click="profileClick(false,6)"><a>Não</a></label>
                 </div>
               </fieldset>
 
               <fieldset class="columnprofile">
-                <span :class="errorstyleP[4]">Aceitam pessoas Semi-Dependentes?</span>
+                <span :class="errorstyleP[7]">Aceitam pessoas Semi-Dependentes?</span>
                 <div class="option">
                   <input type="radio" name="yesnot5" id="yesnot9" value="true" hidden>
-                  <label for="yesnot9" @click="profileClick(true,5)"><a>Sim</a></label>
+                  <label for="yesnot9" @click="profileClick(true,7)"><a>Sim</a></label>
                   <input type="radio" name="yesnot5" id="yesnot10" value="false" hidden>
-                  <label for="yesnot10" @click="profileClick(false,5)"><a>Não</a></label>
+                  <label for="yesnot10" @click="profileClick(false,7)"><a>Não</a></label>
                 </div>
               </fieldset>
 
