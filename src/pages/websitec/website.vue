@@ -689,7 +689,7 @@ export default {
         this.srd = "00:00";
         this.sra = "23:59";
       } else {
-        this.srd = this.backup.contact.time.initial; //Check if it wasn't disabled and keep it previous values
+        this.srd = this.backup.contact.time.initial; //Check if it wasn't disabled and keep it
         this.sra = this.backup.contact.time.end;
       }
     }
@@ -1317,10 +1317,10 @@ export default {
     //Contact
     this.tel = this.backup.contact.tel;
 
-    if(this.backup.contact.website !== ""){
+    if(datas.contact.website !== ""){
       this.webs = this.backup.contact.website;
      }
-    if(this.backup.contact.tel2 !== ""){
+    if(datas.contact.tel2 !== ""){
       this.tel2 = this.backup.contact.tel2;
      }
     if(this.backup.contact.time.initial == "00:00" && this.backup.contact.time.end == "23:59"){
