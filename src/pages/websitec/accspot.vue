@@ -208,10 +208,13 @@ export default {
       } else{
         let array = [];
         let datas = this.$route.params.data;
+
         for(let i = 0; i < this.spotlist.length; i++){
           let obj = new Object;
           obj.item = this.spotlist[i];
           obj.data = this.spotImgFl[i];
+          obj.url = this.spotfiles[i];
+          obj.slug = this.spotslug[i];
           array.push(obj);
         }
         datas.accessibility = this.acesslist;

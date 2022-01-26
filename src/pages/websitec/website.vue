@@ -517,8 +517,8 @@ export default {
       spotlenght: 0,
 
       spotslc:0,
-      spotfiles:[0,0,0,0,0,0,0,0,0,0,0,0,0],
-      spotImgFl:[0,0,0,0,0,0,0,0,0,0,0,0,0],
+      spotfiles:[],
+      spotImgFl:[],
 
       //Team - Structure
       inputTS:[],
@@ -1231,16 +1231,16 @@ export default {
     this.inputTS[2] = this.backup.structure[2];
 
     //Acessibility - Spot
-     for(const k of this.backup.accessibility){
-       this.onAddedAcess(k);
-     }
-     for(let i = 0; i < this.backup.spot.length; i++){ 
-       this.onAddedSpot(this.backup.spot[i].item); //Pass item to a method
-       if(this.backup.spot[i].data != 0){ //If this item have a image within
-       this.spotslc = i; // Changing a var to act as are send the index
-       this.verificateSpotImage(this.backup.spot[i].data); //if have a image act as he selected this image
-      }
-     }
+    for(const k of this.backup.accessibility){
+      this.onAddedAcess(k);
+    }
+
+    for(const k of this.backup.spot){
+      this.spotfiles.push(k.url);
+      this.spotImgFl.push(k.data);
+      this.spotslug.push(k.slug);
+      this.spotitems.push(k.item); 
+    }
 
     //Contact
     this.tel = this.backup.contact.tel;
