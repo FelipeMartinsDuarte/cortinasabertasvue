@@ -605,6 +605,13 @@ export default {
   methods:{ 
   //Save Edit
   cancelState(num){
+    if(num === 1){
+    //Reset - Blanking the Paper and Rewriting the Previous Expression
+    for(let i = 0; i < this.backup.profile.length; i++){
+    //Subtituting item by item for be reactive
+    this.inputP.splice(i,1,this.backup.profile[i].data);
+    }
+    }
     if(num === 2){
       //Reset - Blanking the Paper;
       this.imageFile = [];
@@ -659,7 +666,33 @@ export default {
       this.onAddedAcess(k);
       }
     }
-
+    if(num === 5){
+      //Blanking the Paper - Reset
+      this.sr = false; //Time Input Reset
+      this.srdisabled = false;
+      this.srd = "";
+      this. sra = "";
+      this.tel = "";  //Cellphone Reset
+      this.tel2 = "";
+      this.webs = ""; //Website Reset
+      //Rewriting the Previous Expression
+      this.tel = this.backup.contact.tel; //Cellphone Writing
+      if(datas.contact.tel2 !== ""){
+      this.tel2 = this.backup.contact.tel2;
+      }
+      if(datas.contact.website !== ""){ //Website Writing
+      this.webs = this.backup.contact.website;
+      }
+      if(this.backup.contact.time.initial == "00:00" 
+      && this.backup.contact.time.end == "23:59"){ //Time Writing
+        this.srdisabled = true; //Check if it was disabled when sent and keep it
+        this.srd = "00:00";
+        this.sra = "23:59";
+      } else {
+        this.srd = this.backup.contact.time.initial; //Check if it wasn't disabled and keep it previous values
+        this.sra = this.backup.contact.time.end;
+      }
+    }
   },
 
   changeState(num){
