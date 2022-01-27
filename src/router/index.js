@@ -19,6 +19,7 @@ import TeamStructure from '../pages/websitec/teamstruc.vue'
 import AcessSpot from '../pages/websitec/accspot.vue'
 import Contact from '../pages/websitec/contact.vue'
 import Description from  '../pages/websitec/description.vue'
+import PricePlans from  '../pages/websitec/priceplans.vue'
 
 
 Vue.use(Router)
@@ -80,6 +81,11 @@ export default new Router({
         path:'/website/7',
         name: 'WebsiteVerificator',
         component: WebsiteVerificator
+      },
+      {
+        path:'/website/8',
+        name: 'PricePlans',
+        component: PricePlans
       },
       {
         path:'/email',
