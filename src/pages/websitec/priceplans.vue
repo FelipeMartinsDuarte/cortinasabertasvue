@@ -29,7 +29,7 @@
 
     <h2 id="plans">Selecione o tipo de ánuncio</h2>
 
-    <section class="plan free">
+    <section :class="styleFre">
       <figure>
         <img src="../../assets/Illustrations/free.svg" alt="Plano Gratuito para Divulgar">
         <figcaption><h2>Gratuito</h2></figcaption>
@@ -51,10 +51,10 @@
       </ul>
       <h3>R$:0,00</h3>
       <p>Pelo serviço</p>
-      <a>Escolher gratuito</a>
+      <a v-if="review.arp" @click="slPlan">Escolher gratuito</a>
     </section>
 
-    <section class="plan premium">
+    <section :class="stylePre">
       <figure>
         <img src="../../assets/Illustrations/premium.svg" alt="Plano Premium para Divulgar">
         <figcaption><h2>Premium</h2></figcaption>
@@ -76,7 +76,7 @@
       </ul>
       <h3>R$:50,00</h3>
       <p>Pelo serviço</p>
-      <a>Escolher premium</a>
+      <a v-if="!review.arp" @click="slPlan">Escolher premium</a>
     </section>
 
     <section class="pay">
@@ -84,8 +84,8 @@
         <h1>Revisão pedido</h1>
         <hr>
         <div class="flexitem">
-          <p>Premium</p>
-          <h4>R$50,00</h4>
+          <p>{{review.title}}</p>
+          <h4>{{review.price}}</h4>
         </div>
         <p class="description">
           Sem juros, sem taxas e sua instituição deixando se ser fantasma e sendo encontrada por 
@@ -100,11 +100,15 @@
             <img src="../../assets/Illustrations/have.svg" alt="Plans">
             <span>Relatórios semanais</span>
           </li>
-          <li>
+          <li v-if="review.qualities.three">
             <img src="../../assets/Illustrations/have.svg" alt="Plans">
             <span>Serviço de propaganda</span>
           </li>
-          <li>
+          <li v-else>
+            <img src="../../assets/Illustrations/donthave.svg" alt="Plans">
+            <span>Serviço de propaganda</span>
+          </li>
+          <li >
             <img src="../../assets/Illustrations/have.svg" alt="Plans">
             <span>Duração 30 dias</span>
           </li>
@@ -129,7 +133,39 @@ export default {
  },
  data(){
     return{
+      review:{
+        arp:true, //Are premium
+        title:"Premium",
+        price:"R$:50,00",
+        qualities:{
+          one: true,
+          two: true,
+          three: true,
+          four:true,
+        }
+      },
+      stylePre:"plan premium selected",
+      styleFre:"plan free",
      }
+ },
+ methods:{
+   slPlan(){
+     if(this.review.arp){ //IF TRUE IT CHANGE TO FREE
+       this.review.arp = false;
+       this.review.title = "Gratuito";
+       this.review.price = "R$:0,00";
+       this.review.qualities.three = false;
+       this.styleFre = "plan free selected";
+       this.stylePre = "plan premium";
+     } else {
+       this.review.arp = true; //IF FALSE IT CHANGE TO PREMIUM
+       this.review.title = "Premium";
+       this.review.price = "R$:50,00";
+       this.review.qualities.three = true;
+       this.stylePre = "plan premium selected";
+       this.styleFre = "plan free"
+     }
+   }
  }
 }
 </script>
@@ -245,6 +281,10 @@ h2[id="plans"]{
   margin: 32px 0 8px 0;
 }
 
+.plan a:hover{
+  text-decoration: underline;
+}
+
 
 /*Pay*/
 .pay #payinfo{
@@ -319,18 +359,12 @@ h2[id="plans"]{
   color: white;
   border-radius: 30px;
   text-align: center;
-  
 }
 
-
-
-
-
-
-
-
-
-
+/*Style*/
+.selected{
+  border-bottom: 4px solid #16D9F2;
+}
 
 
 /*Send Reset*/
